@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 
-// Motor de iconos simplificado (Tipo inferido automáticamente para evitar error JSX)
+// Motor de iconos simplificado (Tipo inferido automáticamente)
 const Icon = ({ name }: { name: string }) => {
   const icons: Record<string, React.ReactNode> = {
     carpentery: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M20.5 14.5l-8.5-8.5L2 16l8.5 8.5L20.5 14.5z"/><path d="M12 2l4 4-4 4-4-4 4-4z"/></svg>,
@@ -35,13 +35,13 @@ export default function Servicios() {
   const [expandedClaim, setExpandedClaim] = useState<string | null>("01");
 
   return (
-    <main className="min-h-screen bg-slate-900 text-slate-200 selection:bg-orange-600 selection:text-white font-sans overflow-x-hidden relative">
+    <main className="min-h-screen bg-slate-900 text-slate-200 selection:bg-orange-600 selection:text-white font-sans overflow-x-hidden relative antialiased">
       
-      {/* Textura de Fondo Global Técnica */}
-      <div className="fixed inset-0 z-0 opacity-[0.02] pointer-events-none" style={{ backgroundImage: "url('/img/fotos/texture-servicios.jpg')", backgroundSize: 'cover' }} />
+      {/* NUEVA Textura de Fondo Técnica (Construcción, no electrónica) */}
+      <div className="fixed inset-0 z-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: "url('/img/fotos/texture-construccion.jpg')", backgroundSize: 'cover' }} />
 
-      {/* 1. NAV TÉCNICO */}
-      <nav className="fixed w-full z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-800">
+      {/* 1. NAV TÉCNICO (Aumentada opacidad para contraste) */}
+      <nav className="fixed w-full z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <Link href="/" className="font-bold text-2xl tracking-tighter text-white">
             TOTAL<span className="text-orange-600">REPAIR</span>
@@ -57,8 +57,8 @@ export default function Servicios() {
         </div>
       </nav>
 
-      {/* 2. HERO DIVIDIDO (Split Layout) */}
-      <section className="relative pt-20 border-b border-slate-800 bg-slate-950">
+      {/* 2. HERO DIVIDIDO (Estrategia Anti-Marca de agua aplicada) */}
+      <section className="relative pt-20 border-b border-slate-800 bg-slate-950 z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 items-center">
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
@@ -67,7 +67,6 @@ export default function Servicios() {
             className="p-10 md:p-20 lg:p-32"
           >
             <div className="flex items-center gap-4 mb-6">
-              {/* Actualizado a h-0.5 */}
               <div className="h-0.5 w-12 bg-orange-600" />
               <span className="uppercase tracking-[0.2em] text-xs font-bold text-slate-400">Catálogo Técnico</span>
             </div>
@@ -79,16 +78,15 @@ export default function Servicios() {
             </p>
           </motion.div>
           
-          {/* Actualizado min-h a sintaxis canónica */}
+          {/* Contenedor con overflow-hidden y scale para evadir marcas de agua */}
           <div className="relative h-full min-h-100 md:min-h-150 overflow-hidden border-l border-slate-800">
             <Image 
-              src="/img/fotos/split-servicios.jpg" 
+              src="/img/fotos/arquitectura-B2B.jpg" 
               alt="Arquitectura Moderna Industrial" 
               fill 
-              className="object-cover grayscale-30 opacity-60"
+              className="object-cover grayscale-30 opacity-60 scale-105" // Aplicado scale-105
               priority
             />
-            {/* Actualizado bg-linear-to-t */}
             <div className="absolute inset-0 bg-linear-to-t from-slate-950 via-slate-950/20 to-transparent" />
           </div>
         </div>
@@ -109,7 +107,6 @@ export default function Servicios() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
-              /* Actualizado a h-55 */
               className="group border border-slate-800 bg-slate-950 p-8 flex flex-col justify-between h-55 transition-all duration-300 hover:border-slate-600"
             >
               <div className="flex justify-between items-start">
@@ -140,8 +137,9 @@ export default function Servicios() {
               className="border-b border-slate-800 last:border-b-0 cursor-pointer relative group"
               onClick={() => setExpandedClaim(expandedClaim === claim.id ? null : claim.id)}
             >
-              <div className="absolute inset-0 z-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500">
-                <Image src={`/img/fotos/${claim.prompt}`} alt={claim.title} fill className="object-cover" />
+              {/* Imagen de fondo sutil al hover ( Anti-marca de agua aplicada) */}
+              <div className="absolute inset-0 z-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500 overflow-hidden">
+                <Image src={`/img/fotos/${claim.prompt}`} alt={claim.title} fill className="object-cover scale-105" />
               </div>
 
               <div className="p-8 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">

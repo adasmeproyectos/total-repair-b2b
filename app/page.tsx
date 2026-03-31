@@ -66,25 +66,25 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 3. MARQUEE INFINITO (Framer Motion Component) */}
-      <section className="border-y border-slate-800 bg-slate-900 py-10 relative overflow-hidden flex items-center">
+      {/* 3. MARQUEE INFINITO (Dirección de Arte Corregida: Color + Grayscale + Gap ancho) */}
+      <section className="border-y border-slate-800 bg-slate-950 py-12 relative overflow-hidden flex items-center">
         {/* Máscaras de gradiente para difuminar los bordes */}
-        <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-slate-900 to-transparent z-10 pointer-events-none" />
-        <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-slate-900 to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-y-0 left-0 w-32 bg-linear-to-r from-slate-950 to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-y-0 right-0 w-32 bg-linear-to-l from-slate-950 to-transparent z-10 pointer-events-none" />
         
         <motion.div 
-          className="flex gap-24 whitespace-nowrap items-center w-max"
+          className="flex gap-32 whitespace-nowrap items-center w-max" // Aumentado gap a 32
           animate={{ x: ["0%", "-50%"] }}
-          transition={{ repeat: Infinity, ease: "linear", duration: 30 }}
+          transition={{ repeat: Infinity, ease: "linear", duration: 35 }} // Un poco más lento para mejor lectura
         >
-          {/* Loop de logos unificados en tamaño (h-10) y forzados a blanco */}
+          {/* Loop de logos en color original, con grayscale y opacity por defecto */}
           {[...Array(2)].map((_, index) => (
-            <div key={index} className="flex gap-24 items-center">
-              <img src="/img/logos/claro.png" alt="Claro" className="h-10 w-auto object-contain brightness-0 invert opacity-40 hover:opacity-100 transition-opacity duration-300 cursor-pointer" />
-              <img src="/img/logos/wom.png" alt="Wom" className="h-10 w-auto object-contain brightness-0 invert opacity-40 hover:opacity-100 transition-opacity duration-300 cursor-pointer" />
-              <img src="/img/logos/enjoy.png" alt="Enjoy" className="h-10 w-auto object-contain brightness-0 invert opacity-40 hover:opacity-100 transition-opacity duration-300 cursor-pointer" />
-              <img src="/img/logos/usm.png" alt="USM" className="h-10 w-auto object-contain brightness-0 invert opacity-40 hover:opacity-100 transition-opacity duration-300 cursor-pointer" />
-              <img src="/img/logos/duoc.png" alt="Duoc" className="h-10 w-auto object-contain brightness-0 invert opacity-40 hover:opacity-100 transition-opacity duration-300 cursor-pointer" />
+            <div key={index} className="flex gap-32 items-center">
+              <img src="/img/logos/claro.png" alt="Claro" className="h-10 w-auto object-contain grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300 cursor-pointer" />
+              <img src="/img/logos/wom.png" alt="Wom" className="h-10 w-auto object-contain grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300 cursor-pointer" />
+              <img src="/img/logos/enjoy.png" alt="Enjoy" className="h-10 w-auto object-contain grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300 cursor-pointer" />
+              <img src="/img/logos/usm.png" alt="USM" className="h-12 w-auto object-contain grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300 cursor-pointer" />
+              <img src="/img/logos/duoc.png" alt="Duoc" className="h-10 w-auto object-contain grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300 cursor-pointer" />
             </div>
           ))}
         </motion.div>
