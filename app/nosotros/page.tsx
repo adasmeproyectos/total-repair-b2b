@@ -8,7 +8,7 @@ export default function Nosotros() {
   return (
     <main className="min-h-screen bg-slate-900 text-slate-200 selection:bg-orange-600 selection:text-white font-sans overflow-x-hidden">
       
-      {/* 1. NAV TÉCNICO (Navegación compartida) */}
+      {/* 1. NAV TÉCNICO */}
       <nav className="fixed w-full z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-800">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <Link href="/" className="font-bold text-2xl tracking-tighter text-white">
@@ -33,7 +33,7 @@ export default function Nosotros() {
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <div className="flex items-center gap-4 mb-6">
-            <div className="h-[2px] w-12 bg-orange-600" />
+            <div className="h-0.5 w-12 bg-orange-600" />
             <span className="uppercase tracking-[0.2em] text-xs font-bold text-slate-400">Filosofía Corporativa</span>
           </div>
           <h1 className="text-5xl md:text-7xl font-black text-white leading-tight mb-8 tracking-tighter">
@@ -45,20 +45,18 @@ export default function Nosotros() {
         </motion.div>
       </section>
 
-      {/* 3. HITO 27/F (Glassmorphism Asimétrico) */}
-      <section className="relative h-auto md:h-[80vh] min-h-[600px] flex items-center mb-32 border-y border-slate-800">
-        {/* Imagen de Fondo (Asset 4) */}
+      {/* 3. HITO 27/F */}
+      <section className="relative h-auto md:h-[80vh] min-h-150 flex items-center mb-32 border-y border-slate-800 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image 
             src="/img/fotos/historia-27f.jpg" 
             alt="Ingeniería bajo presión" 
             fill 
-            className="object-cover opacity-30 grayscale-[50%]"
+            className="object-cover opacity-30 grayscale-50 scale-105"
             priority
           />
         </div>
 
-        {/* Panel de Cristal (Glassmorphism) */}
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6">
           <motion.div 
             initial={{ opacity: 0, x: -50 }}
@@ -78,7 +76,7 @@ export default function Nosotros() {
         </div>
       </section>
 
-      {/* 4. GARANTÍAS (Bento Grid Monolítico) */}
+      {/* 4. GARANTÍAS */}
       <section className="pb-32 px-6 max-w-7xl mx-auto">
         <div className="mb-16">
           <h2 className="text-3xl font-bold text-white mb-4 tracking-tight">Seguridad Certificada</h2>

@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-slate-900 text-slate-200 selection:bg-orange-600 selection:text-white font-sans overflow-hidden">
       
-      {/* 1. NAV TÉCNICO (Glassmorphism + Bordes rectos) */}
+      {/* 1. NAV TÉCNICO */}
       <nav className="fixed w-full z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-800">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <div className="font-bold text-2xl tracking-tighter text-white">
@@ -27,16 +27,15 @@ export default function Home() {
 
       {/* 2. HERO INMERSIVO */}
       <section className="relative h-[90vh] flex items-center">
-        {/* Imagen de fondo (Asset 1) con Overlay degradado técnico */}
         <div className="absolute inset-0 z-0">
           <Image 
             src="/img/fotos/hero-corporativo.jpg" 
             alt="Oficina Corporativa en Construcción" 
             fill 
-            className="object-cover opacity-40 grayscale-[20%]"
+            className="object-cover opacity-40 grayscale-20"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/80 to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-r from-slate-900 via-slate-900/80 to-transparent" />
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
@@ -47,7 +46,7 @@ export default function Home() {
             className="max-w-3xl"
           >
             <div className="flex items-center gap-4 mb-6">
-              <div className="h-[2px] w-12 bg-orange-600" />
+              <div className="h-0.5 w-12 bg-orange-600" />
               <span className="uppercase tracking-[0.2em] text-xs font-bold text-slate-400">División Empresas e Instituciones</span>
             </div>
             <h1 className="text-5xl md:text-7xl font-black text-white leading-[1.1] mb-8 tracking-tight">
@@ -66,18 +65,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 3. MARQUEE INFINITO (Dirección de Arte Corregida: Color + Grayscale + Gap ancho) */}
+      {/* 3. MARQUEE INFINITO */}
       <section className="border-y border-slate-800 bg-slate-950 py-12 relative overflow-hidden flex items-center">
-        {/* Máscaras de gradiente para difuminar los bordes */}
         <div className="absolute inset-y-0 left-0 w-32 bg-linear-to-r from-slate-950 to-transparent z-10 pointer-events-none" />
         <div className="absolute inset-y-0 right-0 w-32 bg-linear-to-l from-slate-950 to-transparent z-10 pointer-events-none" />
         
         <motion.div 
-          className="flex gap-32 whitespace-nowrap items-center w-max" // Aumentado gap a 32
+          className="flex gap-32 whitespace-nowrap items-center w-max"
           animate={{ x: ["0%", "-50%"] }}
-          transition={{ repeat: Infinity, ease: "linear", duration: 35 }} // Un poco más lento para mejor lectura
+          transition={{ repeat: Infinity, ease: "linear", duration: 35 }}
         >
-          {/* Loop de logos en color original, con grayscale y opacity por defecto */}
           {[...Array(2)].map((_, index) => (
             <div key={index} className="flex gap-32 items-center">
               <img src="/img/logos/claro.png" alt="Claro" className="h-10 w-auto object-contain grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300 cursor-pointer" />
@@ -97,9 +94,8 @@ export default function Home() {
           <p className="text-slate-400">Soluciones eficaces adaptadas a proyectos de gran escala.</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-6 h-auto md:h-[600px]">
+        <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-6 h-auto md:h-150">
           
-          {/* Card 1: Span 2 (Remodelación) */}
           <motion.div 
             whileHover={{ borderColor: "#EA580C" }}
             className="md:col-span-2 md:row-span-2 relative border border-slate-800 bg-slate-800/50 overflow-hidden group p-10 flex flex-col justify-end transition-colors duration-500"
@@ -110,7 +106,7 @@ export default function Home() {
               fill 
               className="object-cover opacity-20 group-hover:opacity-30 group-hover:scale-105 transition-all duration-700" 
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-t from-slate-900 via-slate-900/60 to-transparent" />
             <div className="relative z-10">
               <span className="text-orange-500 text-xs font-bold uppercase tracking-widest mb-4 block">Especialidad Principal</span>
               <h3 className="text-3xl font-bold text-white mb-4">Centros Comerciales y Habilitación</h3>
@@ -118,13 +114,11 @@ export default function Home() {
             </div>
           </motion.div>
 
-          {/* Card 2: Square (Construcción) */}
           <motion.div 
             whileHover={{ borderColor: "#475569" }}
             className="border border-slate-800 bg-slate-800/30 p-8 flex flex-col justify-between transition-colors duration-500"
           >
             <div className="w-12 h-12 bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-300">
-              {/* Usando un placeholder SVG limpio */}
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M2 22L22 2"/><path d="M12 2v20"/><path d="M2 12h20"/></svg>
             </div>
             <div>
@@ -133,7 +127,6 @@ export default function Home() {
             </div>
           </motion.div>
 
-          {/* Card 3: Vertical Emergencias (Glow Industrial) */}
           <motion.div 
             whileHover={{ borderColor: "#EA580C", boxShadow: "inset 0 0 40px rgba(234, 88, 12, 0.1)" }}
             className="relative border border-slate-800 bg-slate-900 p-8 flex flex-col justify-between overflow-hidden transition-all duration-500"
