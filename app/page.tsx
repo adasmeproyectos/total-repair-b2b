@@ -67,24 +67,24 @@ export default function Home() {
       </section>
 
       {/* 3. MARQUEE INFINITO (Framer Motion Component) */}
-      <section className="border-y border-slate-800 bg-slate-900/50 py-8 relative overflow-hidden">
+      <section className="border-y border-slate-800 bg-slate-900 py-10 relative overflow-hidden flex items-center">
         {/* Máscaras de gradiente para difuminar los bordes */}
-        <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-slate-900 to-transparent z-10" />
-        <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-slate-900 to-transparent z-10" />
+        <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-slate-900 to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-slate-900 to-transparent z-10 pointer-events-none" />
         
         <motion.div 
           className="flex gap-24 whitespace-nowrap items-center w-max"
           animate={{ x: ["0%", "-50%"] }}
-          transition={{ repeat: Infinity, ease: "linear", duration: 25 }}
+          transition={{ repeat: Infinity, ease: "linear", duration: 30 }}
         >
-          {/* Duplicamos los logos para el loop perfecto */}
+          {/* Loop de logos unificados en tamaño (h-10) y forzados a blanco */}
           {[...Array(2)].map((_, index) => (
             <div key={index} className="flex gap-24 items-center">
-              <img src="/img/logos/claro.png" alt="Claro" className="h-8 opacity-40 grayscale hover:grayscale-0 hover:opacity-100 transition-all" />
-              <img src="/img/logos/wom.png" alt="Wom" className="h-8 opacity-40 grayscale hover:grayscale-0 hover:opacity-100 transition-all" />
-              <img src="/img/logos/enjoy.png" alt="Enjoy" className="h-8 opacity-40 grayscale hover:grayscale-0 hover:opacity-100 transition-all" />
-              <img src="/img/logos/usm.png" alt="USM" className="h-10 opacity-40 grayscale hover:grayscale-0 hover:opacity-100 transition-all" />
-              <img src="/img/logos/duoc.png" alt="Duoc" className="h-8 opacity-40 grayscale hover:grayscale-0 hover:opacity-100 transition-all" />
+              <img src="/img/logos/claro.png" alt="Claro" className="h-10 w-auto object-contain brightness-0 invert opacity-40 hover:opacity-100 transition-opacity duration-300 cursor-pointer" />
+              <img src="/img/logos/wom.png" alt="Wom" className="h-10 w-auto object-contain brightness-0 invert opacity-40 hover:opacity-100 transition-opacity duration-300 cursor-pointer" />
+              <img src="/img/logos/enjoy.png" alt="Enjoy" className="h-10 w-auto object-contain brightness-0 invert opacity-40 hover:opacity-100 transition-opacity duration-300 cursor-pointer" />
+              <img src="/img/logos/usm.png" alt="USM" className="h-10 w-auto object-contain brightness-0 invert opacity-40 hover:opacity-100 transition-opacity duration-300 cursor-pointer" />
+              <img src="/img/logos/duoc.png" alt="Duoc" className="h-10 w-auto object-contain brightness-0 invert opacity-40 hover:opacity-100 transition-opacity duration-300 cursor-pointer" />
             </div>
           ))}
         </motion.div>
