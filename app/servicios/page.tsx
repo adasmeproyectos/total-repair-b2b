@@ -13,7 +13,7 @@ const Icon = ({ name }: { name: string }) => {
     sec: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>,
     data: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M4 6h16M4 10h16M4 14h16M4 18h16"/><path d="M7 6v12M11 6v12M15 6v12M19 6v12"/></svg>,
   };
-  return <div className="w-8 h-8 text-slate-500 group-hover:text-orange-500 transition-colors">{icons[name] || icons.data}</div>;
+  return <div className="w-8 h-8 text-zinc-400 group-hover:text-orange-500 transition-colors">{icons[name] || icons.data}</div>;
 };
 
 // Datos técnicos de especialidades
@@ -35,20 +35,20 @@ export default function Servicios() {
   const [expandedClaim, setExpandedClaim] = useState<string | null>("01");
 
   return (
-    <main className="min-h-screen bg-slate-900 text-slate-200 selection:bg-orange-600 selection:text-white font-sans overflow-x-hidden relative antialiased">
+    <main className="min-h-screen bg-white text-zinc-900 selection:bg-orange-600 selection:text-white font-sans overflow-x-hidden relative antialiased">
       
       {/* NUEVA Textura de Fondo Técnica (Construcción, no electrónica) */}
       <div className="fixed inset-0 z-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: "url('/img/fotos/texture-construccion.jpg')", backgroundSize: 'cover' }} />
 
       {/* 1. NAV TÉCNICO (Aumentada opacidad para contraste) */}
-      <nav className="fixed w-full z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
+      <nav className="fixed w-full z-50 bg-white/95 backdrop-blur-md border-b border-zinc-200">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <Link href="/" className="font-bold text-2xl tracking-tighter text-white">
             TOTAL<span className="text-orange-600">REPAIR</span>
           </Link>
           <div className="hidden md:flex items-center gap-8 text-sm font-medium tracking-wide">
-            <Link href="/" className="text-slate-400 hover:text-white transition-colors">Inicio</Link>
-            <Link href="/nosotros" className="text-slate-400 hover:text-white transition-colors">Sobre Nosotros</Link>
+            <Link href="/" className="text-zinc-500 hover:text-white transition-colors">Inicio</Link>
+            <Link href="/nosotros" className="text-zinc-500 hover:text-white transition-colors">Sobre Nosotros</Link>
             <Link href="/servicios" className="text-white border-b-2 border-orange-600 pb-1">Servicios</Link>
             <Link href="/contacto" className="bg-orange-600 text-white px-6 py-3 uppercase tracking-widest text-xs font-bold hover:bg-orange-700 transition-colors">
               Cotizar Proyecto
@@ -58,7 +58,7 @@ export default function Servicios() {
       </nav>
 
       {/* 2. HERO DIVIDIDO (Estrategia Anti-Marca de agua aplicada) */}
-      <section className="relative pt-20 border-b border-slate-800 bg-slate-950 z-10">
+      <section className="relative pt-20 border-b border-zinc-200 bg-zinc-50 z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 items-center">
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
@@ -68,18 +68,18 @@ export default function Servicios() {
           >
             <div className="flex items-center gap-4 mb-6">
               <div className="h-0.5 w-12 bg-orange-600" />
-              <span className="uppercase tracking-[0.2em] text-xs font-bold text-slate-400">Catálogo Técnico</span>
+              <span className="uppercase tracking-[0.2em] text-xs font-bold text-zinc-500">Catálogo Técnico</span>
             </div>
             <h1 className="text-5xl md:text-6xl font-black text-white leading-tight mb-8 tracking-tighter">
               SOLUCIONES <br /> ESTRUCTURALES <br /> <span className="text-orange-600">B2B.</span>
             </h1>
-            <p className="text-lg text-slate-400 font-light leading-relaxed max-w-md">
+            <p className="text-lg text-zinc-500 font-light leading-relaxed max-w-md">
               Abarcamos toda la gama de servicios, desde la planificación del proyecto arquitectónico hasta su construcción final, operando bajo estándares industriales rígidos.
             </p>
           </motion.div>
           
           {/* Contenedor con overflow-hidden y scale para evadir marcas de agua */}
-          <div className="relative h-full min-h-100 md:min-h-150 overflow-hidden border-l border-slate-800">
+          <div className="relative h-full min-h-100 md:min-h-150 overflow-hidden border-l border-zinc-200">
             <Image 
               src="/img/fotos/arquitectura-B2B.jpg" 
               alt="Arquitectura Moderna Industrial" 
@@ -87,7 +87,7 @@ export default function Servicios() {
               className="object-cover grayscale-30 opacity-60 scale-105" // Aplicado scale-105
               priority
             />
-            <div className="absolute inset-0 bg-linear-to-t from-slate-950 via-slate-950/20 to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-t from-zinc-950/90 via-zinc-900/10 to-transparent" />
           </div>
         </div>
       </section>
@@ -95,8 +95,8 @@ export default function Servicios() {
       {/* 3. GRID TÉCNICO DE ESPECIALIDADES */}
       <section className="py-32 max-w-7xl mx-auto px-6 relative z-10">
         <div className="mb-20 text-center max-w-2xl mx-auto">
-          <h2 className="text-3xl font-bold text-white mb-4 tracking-tight">Especialidades de Ejecución</h2>
-          <p className="text-slate-400 font-light">Coordinamos todos los gremios bajo una misma supervisión logística y administrativa para garantizar cumplimiento.</p>
+          <h2 className="text-3xl font-bold text-zinc-900 mb-4 tracking-tight">Especialidades de Ejecución</h2>
+          <p className="text-zinc-500 font-light">Coordinamos todos los gremios bajo una misma supervisión logística y administrativa para garantizar cumplimiento.</p>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -107,11 +107,11 @@ export default function Servicios() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
-              className="group border border-slate-800 bg-slate-950 p-8 flex flex-col justify-between h-55 transition-all duration-300 hover:border-slate-600"
+              className="group border border-zinc-200 bg-zinc-50 p-8 flex flex-col justify-between h-55 transition-all duration-300 hover:border-zinc-400"
             >
               <div className="flex justify-between items-start">
                 <Icon name={spec.icon} />
-                <span className="text-xs font-mono text-slate-700 tracking-wider group-hover:text-slate-500">{spec.code}</span>
+                <span className="text-xs font-mono text-zinc-400 tracking-wider group-hover:text-zinc-400">{spec.code}</span>
               </div>
               <h3 className="text-lg font-bold text-white leading-snug tracking-tight group-hover:text-orange-500 transition-colors">
                 {spec.name}
@@ -127,14 +127,14 @@ export default function Servicios() {
           <span className="inline-block bg-orange-600/10 text-orange-500 border border-orange-600/30 px-3 py-1 text-xs font-bold uppercase tracking-widest mb-4">
             Unidad de Reacción Inmediata
           </span>
-          <h2 className="text-3xl font-bold text-white mb-4 tracking-tight">Manejo de Emergencias Corporativas</h2>
+          <h2 className="text-3xl font-bold text-zinc-900 mb-4 tracking-tight">Manejo de Emergencias Corporativas</h2>
         </div>
 
-        <div className="border border-slate-800 bg-slate-950 shadow-2xl overflow-hidden">
+        <div className="border border-zinc-200 bg-zinc-50 shadow-2xl overflow-hidden">
           {claims.map((claim) => (
             <motion.div 
               key={claim.id}
-              className="border-b border-slate-800 last:border-b-0 cursor-pointer relative group"
+              className="border-b border-zinc-200 last:border-b-0 cursor-pointer relative group"
               onClick={() => setExpandedClaim(expandedClaim === claim.id ? null : claim.id)}
             >
               {/* Imagen de fondo sutil al hover ( Anti-marca de agua aplicada) */}
@@ -144,14 +144,14 @@ export default function Servicios() {
 
               <div className="p-8 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
                 <div className="flex items-center gap-6">
-                  <span className="font-mono text-slate-700 text-lg">{claim.id}</span>
-                  <h3 className="text-2xl font-bold text-white tracking-tight group-hover:text-orange-500 transition-colors">
+                  <span className="font-mono text-zinc-400 text-lg">{claim.id}</span>
+                  <h3 className="text-2xl font-bold text-zinc-900 tracking-tight group-hover:text-orange-500 transition-colors">
                     {claim.title}
                   </h3>
                 </div>
                 <motion.div
                   animate={{ rotate: expandedClaim === claim.id ? 180 : 0 }}
-                  className="text-slate-600 group-hover:text-orange-500 w-6 h-6 shrink-0"
+                  className="text-zinc-400 group-hover:text-orange-500 w-6 h-6 shrink-0"
                 >
                   <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path d="M19 9l-7 7-7-7"/></svg>
                 </motion.div>
@@ -165,9 +165,9 @@ export default function Servicios() {
                   collapsed: { opacity: 0, height: 0, visibility: "hidden" }
                 }}
                 transition={{ duration: 0.5, ease: [0.04, 0.62, 0.23, 0.98] }}
-                className="overflow-hidden bg-slate-900/50"
+                className="overflow-hidden bg-zinc-100/50"
               >
-                <div className="px-8 md:px-28 pb-10 pt-2 text-slate-400 font-light leading-relaxed max-w-4xl">
+                <div className="px-8 md:px-28 pb-10 pt-2 text-zinc-500 font-light leading-relaxed max-w-4xl">
                   {claim.desc}
                   <Link href="/contacto" className="text-orange-500 text-sm font-bold uppercase tracking-widest flex items-center gap-2 mt-6 hover:text-orange-400">
                     Solicitar Asistencia Técnica URI <span className="text-lg">→</span>
@@ -180,7 +180,7 @@ export default function Servicios() {
       </section>
 
       {/* FOOTER CORPORATIVO */}
-      <footer className="bg-slate-950 text-slate-400 py-16 text-sm border-t border-slate-800 relative z-10">
+      <footer className="bg-zinc-50 text-zinc-500 py-16 text-sm border-t border-zinc-200 relative z-10">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12">
             <div className="col-span-1 md:col-span-2">
                 <h4 className="text-white font-bold text-xl mb-6">Total Repair Ltda.</h4>
@@ -204,7 +204,7 @@ export default function Servicios() {
                 </ul>
             </div>
         </div>
-        <div className="max-w-7xl mx-auto px-6 mt-12 pt-8 border-t border-slate-800/50 text-center text-xs font-light">
+        <div className="max-w-7xl mx-auto px-6 mt-12 pt-8 border-t border-zinc-200/50 text-center text-xs font-light">
             <p>© 2026 Total Repair Ltda. Todos los derechos reservados.</p>
         </div>
       </footer>

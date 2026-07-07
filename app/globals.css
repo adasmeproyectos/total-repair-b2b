@@ -1,26 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600&display=swap');
 @import "tailwindcss";
 
+/* ─── Design Tokens — Total Repair v2 ───────────────────────────────────────
+   PALETA BASADA EN LOGO REAL:
+   Fondo predominante: Blanco / Crema industrial
+   Acento primario:    Naranja construcción #E85B0C
+   Texto:              Negro industrial #1A1A1A
+   Soporte:            Gris cemento / Antracita industrial
+   ─────────────────────────────────────────────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* ── Naranja Construcción (derivado del logo) */
+  --color-brand-orange:        #E85B0C;
+  --color-brand-orange-hover:  #FF6E1F;
+  --color-brand-orange-dark:   #C4470A;
+  --color-brand-orange-pale:   #FFF0E8;
+
+  /* ── Superficies (fondo predominante blanco/claro) */
+  --color-surface-white:       #FFFFFF;
+  --color-surface-cream:       #FAF9F7;
+  --color-surface-concrete:    #F2F0ED;
+  --color-surface-steel:       #3D4549;   /* Usado solo para secciones CTA oscuras */
+  --color-surface-black:       #1A1A1A;   /* Hero overlays, footer */
+
+  /* ── Tinta / Texto */
+  --color-ink-black:           #1A1A1A;
+  --color-ink-anthracite:      #2D2D2D;
+  --color-ink-mid:             #6B6B6B;
+  --color-ink-light:           #A8A8A8;
+
+  /* ── Separadores */
+  --color-divider:             #E5E2DD;
+  --color-divider-dark:        #C8C4BE;
+
+  /* ── Brand legacy (mantener para compatibilidad inline) */
+  --brand-orange:              #E85B0C;
+  --brand-slate-950:           #1A1A1A;
+  --brand-slate-900:           #2D2D2D;
+  --brand-slate-800:           #3D4549;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans:    "Inter", system-ui, sans-serif;
+  --font-display: "Barlow Condensed", system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ─── Global Base ───────────────────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-surface-white);
+  color: var(--color-ink-black);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Selection ─────────────────────────────────────────────────────────────── */
+::selection {
+  background-color: var(--color-brand-orange);
+  color: #FFFFFF;
+}
+
+/* ─── Scrollbar (Webkit) ────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-surface-concrete); }
+::-webkit-scrollbar-thumb { background: var(--color-ink-light); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-brand-orange); }
+
+/* ─── Logo Carousel — Infinite Scroll (NUNCA se pausa en hover) ─────────────── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+  /* animation-play-state se mantiene SIEMPRE en running — no hay CSS ni JS que lo pause */
+}
+
+/* ─── Focus Ring ────────────────────────────────────────────────────────────── */
+*:focus-visible {
+  outline: 2px solid var(--color-brand-orange);
+  outline-offset: 3px;
+}
+
+/* ─── Utility: Sección oscura (CTA, hero con overlay) ───────────────────────── */
+.section-dark {
+  background-color: var(--color-surface-black);
+  color: #FFFFFF;
+}
+
+.section-steel {
+  background-color: var(--color-surface-steel);
+  color: #FFFFFF;
+}
+
+/* ─── Barlow Condensed para titulares ───────────────────────────────────────── */
+h1, h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
