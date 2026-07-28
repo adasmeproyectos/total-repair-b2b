@@ -42,15 +42,15 @@ export default function Servicios() {
 
       {/* 1. NAV TÉCNICO (Aumentada opacidad para contraste) */}
       <nav className="fixed w-full z-50 bg-white/95 backdrop-blur-md border-b border-zinc-200">
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <Link href="/" className="font-bold text-2xl tracking-tighter text-white">
+        <div className="max-w-full px-8 md:px-16 mx-auto h-20 flex items-center justify-between">
+          <Link href="/" className="font-bold text-2xl tracking-tighter text-zinc-900">
             TOTAL<span className="text-orange-600">REPAIR</span>
           </Link>
           <div className="hidden md:flex items-center gap-8 text-sm font-medium tracking-wide">
-            <Link href="/" className="text-zinc-500 hover:text-white transition-colors">Inicio</Link>
-            <Link href="/nosotros" className="text-zinc-500 hover:text-white transition-colors">Sobre Nosotros</Link>
-            <Link href="/servicios" className="text-white border-b-2 border-orange-600 pb-1">Servicios</Link>
-            <Link href="/contacto" className="bg-orange-600 text-white px-6 py-3 uppercase tracking-widest text-xs font-bold hover:bg-orange-700 transition-colors">
+            <Link href="/" className="text-zinc-500 hover:text-zinc-900 transition-colors">Inicio</Link>
+            <Link href="/nosotros" className="text-zinc-500 hover:text-zinc-900 transition-colors">Sobre Nosotros</Link>
+            <Link href="/servicios" className="text-zinc-900 border-b-2 border-orange-600 pb-1">Servicios</Link>
+            <Link href="/contacto" className="bg-orange-600 text-white px-6 py-3 uppercase tracking-widest text-xs font-bold hover:bg-orange-700 hover:scale-105 active:scale-95 transition-all duration-300">
               Cotizar Proyecto
             </Link>
           </div>
@@ -70,7 +70,7 @@ export default function Servicios() {
               <div className="h-0.5 w-12 bg-orange-600" />
               <span className="uppercase tracking-[0.2em] text-xs font-bold text-zinc-500">Catálogo Técnico</span>
             </div>
-            <h1 className="text-5xl md:text-6xl font-black text-white leading-tight mb-8 tracking-tighter">
+            <h1 className="text-5xl md:text-6xl font-black text-zinc-900 leading-tight mb-8 tracking-tighter">
               SOLUCIONES <br /> ESTRUCTURALES <br /> <span className="text-orange-600">B2B.</span>
             </h1>
             <p className="text-lg text-zinc-500 font-light leading-relaxed max-w-md">
@@ -93,7 +93,7 @@ export default function Servicios() {
       </section>
 
       {/* 3. GRID TÉCNICO DE ESPECIALIDADES */}
-      <section className="py-32 max-w-7xl mx-auto px-6 relative z-10">
+      <section className="py-32 max-w-full px-8 md:px-16 mx-auto relative z-10">
         <div className="mb-20 text-center max-w-2xl mx-auto">
           <h2 className="text-3xl font-bold text-zinc-900 mb-4 tracking-tight">Especialidades de Ejecución</h2>
           <p className="text-zinc-500 font-light">Coordinamos todos los gremios bajo una misma supervisión logística y administrativa para garantizar cumplimiento.</p>
@@ -113,7 +113,7 @@ export default function Servicios() {
                 <Icon name={spec.icon} />
                 <span className="text-xs font-mono text-zinc-400 tracking-wider group-hover:text-zinc-400">{spec.code}</span>
               </div>
-              <h3 className="text-lg font-bold text-white leading-snug tracking-tight group-hover:text-orange-500 transition-colors">
+              <h3 className="text-lg font-bold text-zinc-900 leading-snug tracking-tight group-hover:text-orange-500 transition-colors">
                 {spec.name}
               </h3>
             </motion.div>
@@ -122,7 +122,7 @@ export default function Servicios() {
       </section>
 
       {/* 4. SINIESTROS EXPANDIBLES */}
-      <section className="pb-40 max-w-7xl mx-auto px-6 relative z-10">
+      <section className="pb-40 max-w-full px-8 md:px-16 mx-auto relative z-10">
         <div className="mb-20">
           <span className="inline-block bg-orange-600/10 text-orange-500 border border-orange-600/30 px-3 py-1 text-xs font-bold uppercase tracking-widest mb-4">
             Unidad de Reacción Inmediata
@@ -169,7 +169,7 @@ export default function Servicios() {
               >
                 <div className="px-8 md:px-28 pb-10 pt-2 text-zinc-500 font-light leading-relaxed max-w-4xl">
                   {claim.desc}
-                  <Link href="/contacto" className="text-orange-500 text-sm font-bold uppercase tracking-widest flex items-center gap-2 mt-6 hover:text-orange-400">
+                  <Link href="/contacto" className="text-orange-500 text-sm font-bold uppercase tracking-widest flex items-center gap-2 mt-6 hover:text-orange-400 hover:scale-105 active:scale-95 transition-all duration-300 w-fit">
                     Solicitar Asistencia Técnica URI <span className="text-lg">→</span>
                   </Link>
                 </div>
@@ -181,15 +181,15 @@ export default function Servicios() {
 
       {/* FOOTER CORPORATIVO */}
       <footer className="bg-zinc-50 text-zinc-500 py-16 text-sm border-t border-zinc-200 relative z-10">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12">
+        <div className="max-w-full px-8 md:px-16 mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
             <div className="col-span-1 md:col-span-2">
-                <h4 className="text-white font-bold text-xl mb-6">Total Repair Ltda.</h4>
+                <h4 className="text-zinc-900 font-bold text-xl mb-6">Total Repair Ltda.</h4>
                 <p className="max-w-md leading-relaxed mb-6 font-light">
                     Soluciones constructivas integrales para empresas. Entregamos la administración y supervisión total del proyecto garantizando el cumplimiento logístico y administrativo.
                 </p>
             </div>
             <div>
-                <h4 className="text-white font-bold uppercase tracking-wider mb-6 text-xs">Contacto Directo</h4>
+                <h4 className="text-zinc-900 font-bold uppercase tracking-wider mb-6 text-xs">Contacto Directo</h4>
                 <ul className="space-y-4 font-light">
                     <li className="flex items-start gap-3"><i className="fa-solid fa-location-dot mt-1 text-orange-600"></i> Villasana 1398, Quinta Normal</li>
                     <li className="flex items-center gap-3"><i className="fa-solid fa-phone text-orange-600"></i> (+56) 9 9919 5521</li>
@@ -197,14 +197,14 @@ export default function Servicios() {
                 </ul>
             </div>
             <div>
-                <h4 className="text-white font-bold uppercase tracking-wider mb-6 text-xs">Divisiones</h4>
+                <h4 className="text-zinc-900 font-bold uppercase tracking-wider mb-6 text-xs">Divisiones</h4>
                 <ul className="space-y-3 font-light">
-                    <li><Link href="/" className="text-white transition-colors">Empresas (B2B)</Link></li>
-                    <li><a href="https://www.totalconstruye.cl" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">Hogar (Total Construye) <i className="fa-solid fa-arrow-up-right-from-square text-[10px] ml-1"></i></a></li>
+                    <li><Link href="/" className="text-zinc-500 hover:text-zinc-900 transition-colors">Empresas (B2B)</Link></li>
+                    <li><a href="https://www.totalconstruye.cl" target="_blank" rel="noreferrer" className="text-zinc-500 hover:text-zinc-900 transition-colors">Hogar (Total Construye) <i className="fa-solid fa-arrow-up-right-from-square text-[10px] ml-1"></i></a></li>
                 </ul>
             </div>
         </div>
-        <div className="max-w-7xl mx-auto px-6 mt-12 pt-8 border-t border-zinc-200/50 text-center text-xs font-light">
+        <div className="max-w-full px-8 md:px-16 mx-auto mt-12 pt-8 border-t border-zinc-200/50 text-center text-xs font-light">
             <p>© 2026 Total Repair Ltda. Todos los derechos reservados.</p>
         </div>
       </footer>

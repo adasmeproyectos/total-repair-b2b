@@ -24,7 +24,6 @@ interface ContactPayload {
   Servicio: string;
   Mensaje: string;
   Empresa?: string;
-  turnstileToken: string;
 }
 
 export async function POST(req: NextRequest) {
@@ -38,35 +37,8 @@ export async function POST(req: NextRequest) {
       Servicio,
       Mensaje,
       Empresa,
-      turnstileToken,
     } = body;
 
-    // ── 1. Verificar Cloudflare Turnstile ──────────────────────────────────
-    // Saltear en desarrollo si no hay key configurada
-    const isDev = process.env.NODE_ENV === "development";
-    const secretKey = process.env.TURNSTILE_SECRET_KEY;
-
-    if (!isDev || secretKey) {
-      const turnstileRes = await fetch(
-        "https://challenges.cloudflare.com/turnstile/v0/siteverify",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            secret: secretKey ?? "",
-            response: turnstileToken,
-          }),
-        }
-      );
-      const turnstileData = await turnstileRes.json();
-
-      if (!turnstileData.success) {
-        return NextResponse.json(
-          { error: "Verificación de seguridad fallida. Recarga la página." },
-          { status: 403 }
-        );
-      }
-    }
 
     // ── 2. Validar campos ──────────────────────────────────────────────────
     if (!Nombre || !Email || !Mensaje || !Servicio) {

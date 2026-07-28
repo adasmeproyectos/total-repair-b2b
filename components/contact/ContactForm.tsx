@@ -12,7 +12,6 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { TurnstileWidget } from "./TurnstileWidget";
 
 interface ContactFormProps {
   /** Cambia labels, campos y opciones del select */
@@ -23,20 +22,17 @@ type FormState = "idle" | "submitting" | "success" | "error";
 
 export function ContactForm({ mode }: ContactFormProps) {
   const [formState, setFormState] = useState<FormState>("idle");
-  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    if (!turnstileToken) {
-      alert("Por favor, completa la verificación de seguridad.");
-      return;
-    }
+
 
     setFormState("submitting");
 
     const formData = new FormData(e.currentTarget);
-    const payload: Record<string, string> = { mode, turnstileToken };
+    const payload: Record<string, string> = { mode };
     formData.forEach((value, key) => {
       payload[key] = value.toString();
     });
@@ -92,7 +88,7 @@ export function ContactForm({ mode }: ContactFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-6">
 
       {/* Campos comunes */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -238,11 +234,7 @@ export function ContactForm({ mode }: ContactFormProps) {
         />
       </div>
 
-      {/* Turnstile Bot Protection */}
-      <TurnstileWidget
-        onSuccess={(token) => setTurnstileToken(token)}
-        theme="light"
-      />
+
 
       {/* Error feedback */}
       <AnimatePresence>
@@ -262,7 +254,7 @@ export function ContactForm({ mode }: ContactFormProps) {
       <button
         type="submit"
         disabled={formState === "submitting"}
-        className="w-full py-4 bg-orange-600 text-white font-bold uppercase tracking-[0.2em] text-sm transition-all hover:bg-orange-700 flex items-center justify-center gap-3 group disabled:opacity-60 disabled:cursor-not-allowed"
+        className="w-full py-4 bg-orange-600 text-white font-bold uppercase tracking-[0.2em] text-sm transition-all duration-300 hover:bg-orange-700 hover:scale-105 active:scale-95 flex items-center justify-center gap-3 group disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
       >
         {formState === "submitting" ? (
           <>

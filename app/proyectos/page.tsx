@@ -76,7 +76,7 @@ export default function ProyectosPage() {
     <div className="min-h-screen bg-white text-zinc-800 pt-20">
 
       {/* ── HEADER ─────────────────────────────────────────────────────────── */}
-      <section className="pt-20 pb-16 px-6 max-w-7xl mx-auto border-b border-zinc-100">
+      <section className="pt-20 pb-16 px-8 md:px-16 max-w-full mx-auto border-b border-zinc-100">
         <SectionLabel label="Portafolio de Obras" />
         <h1 className="font-display text-5xl md:text-7xl font-bold text-zinc-900 tracking-tight mb-6">
           PROYECTOS<br />
@@ -89,7 +89,7 @@ export default function ProyectosPage() {
       </section>
 
       {/* ── GRID DE PROYECTOS ──────────────────────────────────────────────── */}
-      <section className="py-20 px-6 max-w-7xl mx-auto">
+      <section className="py-20 px-8 md:px-16 max-w-full mx-auto">
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {proyectos.map((p) => (
@@ -156,13 +156,13 @@ export default function ProyectosPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/contacto"
-              className="bg-[#E85B0C] text-white px-10 py-4 font-bold uppercase tracking-widest text-sm hover:bg-[#C4470A] transition-colors"
+              className="bg-[#E85B0C] text-white px-10 py-4 font-bold uppercase tracking-widest text-sm hover:bg-[#C4470A] hover:scale-105 active:scale-95 transition-all duration-300"
             >
               Solicitar Presupuesto
             </Link>
             <Link
               href="/servicios"
-              className="border-2 border-zinc-300 text-zinc-700 px-10 py-4 font-bold uppercase tracking-widest text-sm hover:border-[#E85B0C] hover:text-[#E85B0C] transition-colors"
+              className="border-2 border-zinc-300 text-zinc-700 px-10 py-4 font-bold uppercase tracking-widest text-sm hover:border-[#E85B0C] hover:text-[#E85B0C] hover:scale-105 active:scale-95 transition-all duration-300"
             >
               Ver Servicios
             </Link>

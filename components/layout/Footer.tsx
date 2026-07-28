@@ -15,7 +15,7 @@ export function Footer({ variant = "full" }: FooterProps) {
   return (
     <footer className="bg-zinc-900 text-zinc-400 border-t border-zinc-800">
       {variant === "full" && (
-        <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-12 gap-12">
+        <div className="max-w-full px-8 md:px-16 mx-auto py-16 grid grid-cols-1 md:grid-cols-12 gap-12">
           {/* Col 1-5: Marca */}
           <div className="md:col-span-5">
             <Link
@@ -29,17 +29,6 @@ export function Footer({ variant = "full" }: FooterProps) {
               Supervisión total del proyecto con 20 años de experiencia en Chile.
             </p>
             <div className="flex gap-3">
-              <a
-                href={COMPANY.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn de Javier Adasme"
-                className="w-9 h-9 border border-zinc-700 flex items-center justify-center text-zinc-500 hover:text-white hover:border-[#E85B0C] transition-all"
-              >
-                <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                </svg>
-              </a>
               <a
                 href={COMPANY.whatsappUrl}
                 target="_blank"
@@ -114,7 +103,7 @@ export function Footer({ variant = "full" }: FooterProps) {
 
       {/* ─── Franja inferior — OBLIGATORIA por Manifiesto §6.1 */}
       <div className="border-t border-zinc-800">
-        <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-light">
+        <div className="max-w-full px-8 md:px-16 mx-auto py-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-light">
           <p>© {new Date().getFullYear()} {COMPANY.name}. Todos los derechos reservados.</p>
           <div className="flex items-center gap-6">
             <Link href="/privacidad" className="hover:text-white transition-colors">Privacidad</Link>

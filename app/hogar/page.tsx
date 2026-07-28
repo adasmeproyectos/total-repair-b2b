@@ -105,7 +105,7 @@ export default function HogarPage() {
           <div className="absolute inset-0 bg-linear-to-r from-zinc-900 via-zinc-900/70 to-transparent" />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
+        <div className="relative z-10 max-w-full px-8 md:px-16 mx-auto w-full">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -124,7 +124,7 @@ export default function HogarPage() {
             <div className="flex flex-wrap gap-4">
               <Link
                 href="/contacto?modo=hogar"
-                className="bg-orange-600 text-white px-8 py-4 text-sm font-bold uppercase tracking-widest hover:bg-orange-700 transition-colors"
+                className="bg-orange-600 text-white px-8 py-4 text-sm font-bold uppercase tracking-widest hover:bg-orange-700 hover:scale-105 active:scale-95 transition-all duration-300"
               >
                 Solicitar Presupuesto
               </Link>
@@ -143,7 +143,7 @@ export default function HogarPage() {
 
       {/* ── STATS HOGAR ──────────────────────────────────────────────────── */}
       <div className="border-y border-zinc-200 bg-zinc-50 py-10">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-3 gap-8 text-center">
+        <div className="max-w-full px-8 md:px-16 mx-auto grid grid-cols-3 gap-8 text-center">
           {[
             { value: COMPANY.yearsExperience, label: "Años de Trayectoria" },
             { value: COMPANY.projectsDelivered, label: "Proyectos en Hogares" },
@@ -158,7 +158,7 @@ export default function HogarPage() {
       </div>
 
       {/* ── SERVICIOS RESIDENCIALES ───────────────────────────────────────── */}
-      <section className="py-32 max-w-7xl mx-auto px-6">
+      <section className="py-32 max-w-full px-8 md:px-16 mx-auto">
         <div className="mb-16">
           <SectionLabel label="Nuestros Servicios" />
           <h2 className="text-3xl font-bold text-zinc-900 mb-4 tracking-tight">
@@ -205,7 +205,7 @@ export default function HogarPage() {
 
       {/* ── GALERÍA DE PROYECTOS ──────────────────────────────────────────── */}
       <section className="py-20 bg-zinc-50 border-y border-zinc-200">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-full px-8 md:px-16 mx-auto">
           <div className="mb-12">
             <SectionLabel label="Portfolio" />
             <h2 className="text-3xl font-bold text-zinc-900 tracking-tight">Proyectos Realizados</h2>

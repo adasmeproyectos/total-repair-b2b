@@ -34,7 +34,7 @@ export default function EmpresasPage() {
           <div className="absolute inset-0 bg-gradient-to-r from-zinc-900 via-zinc-900/80 to-transparent" />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
+        <div className="relative z-10 max-w-full px-8 md:px-16 mx-auto w-full">
           <div className="max-w-3xl">
             <SectionLabel label="División Empresas e Instituciones" dark />
             <h1 className="font-display text-5xl md:text-7xl font-black text-white leading-[1.1] mb-8 tracking-tight">
@@ -48,13 +48,13 @@ export default function EmpresasPage() {
             <div className="flex flex-wrap gap-4">
               <Link
                 href="/contacto"
-                className="bg-white text-zinc-900 px-8 py-4 text-sm font-bold uppercase tracking-widest hover:bg-zinc-100 transition-colors"
+                className="bg-white text-zinc-900 px-8 py-4 text-sm font-bold uppercase tracking-widest hover:bg-zinc-100 hover:scale-105 active:scale-95 transition-all duration-300"
               >
                 Agendar Reunión
               </Link>
               <Link
                 href="/servicios"
-                className="border border-zinc-500 text-white px-8 py-4 text-sm font-bold uppercase tracking-widest hover:border-[#E85B0C] transition-colors"
+                className="border border-zinc-500 text-white px-8 py-4 text-sm font-bold uppercase tracking-widest hover:border-[#E85B0C] hover:scale-105 active:scale-95 transition-all duration-300"
               >
                 Ver Servicios
               </Link>
@@ -67,7 +67,7 @@ export default function EmpresasPage() {
       <LogoCarousel />
 
       {/* ── BENTO GRID SERVICIOS ─────────────────────────────────────────────── */}
-      <section className="py-32 max-w-7xl mx-auto px-6">
+      <section className="py-32 max-w-full px-8 md:px-16 mx-auto">
         <div className="mb-16">
           <SectionLabel label="Especialidades de Ejecución" />
           <h2 className="font-display text-3xl font-bold text-zinc-900 mb-4 tracking-tight">
@@ -132,7 +132,7 @@ export default function EmpresasPage() {
 
       {/* ── GESTIÓN DE SINIESTROS ─────────────────────────────────────────────── */}
       <section className="py-20 bg-zinc-50 border-y border-zinc-200">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-full px-8 md:px-16 mx-auto">
           <div className="mb-12">
             <SectionLabel label="Unidad de Reacción Inmediata (URI)" />
             <h2 className="font-display text-3xl font-bold text-zinc-900 tracking-tight">Gestión de Siniestros Corporativos</h2>

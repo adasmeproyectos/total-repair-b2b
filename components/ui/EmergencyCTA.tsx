@@ -18,7 +18,7 @@ export function EmergencyCTA({ variant }: EmergencyCTAProps) {
   if (variant === "empresas") {
     return (
       <section className="py-24 px-6 bg-zinc-900 border-y border-zinc-800">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-10">
+        <div className="max-w-full px-8 md:px-16 mx-auto flex flex-col md:flex-row items-center justify-between gap-10">
           <div className="flex items-start gap-6">
             <div className="shrink-0 w-16 h-16 border border-[#E85B0C]/40 bg-[#E85B0C]/10 flex items-center justify-center">
               <motion.div
@@ -43,13 +43,13 @@ export function EmergencyCTA({ variant }: EmergencyCTAProps) {
           <div className="flex flex-col sm:flex-row gap-4 shrink-0">
             <a
               href={`tel:${COMPANY.phone}`}
-              className="px-8 py-4 bg-[#E85B0C] text-white font-bold text-sm uppercase tracking-widest hover:bg-[#C4470A] transition-colors text-center"
+              className="px-8 py-4 bg-[#E85B0C] text-white font-bold text-sm uppercase tracking-widest hover:bg-[#C4470A] hover:scale-105 active:scale-95 transition-all duration-300 text-center"
             >
               Llamar Ahora
             </a>
             <Link
               href="/contacto"
-              className="px-8 py-4 border border-zinc-700 text-white font-bold text-sm uppercase tracking-widest hover:border-[#E85B0C] transition-colors text-center"
+              className="px-8 py-4 border border-zinc-700 text-white font-bold text-sm uppercase tracking-widest hover:border-[#E85B0C] hover:scale-105 active:scale-95 transition-all duration-300 text-center"
             >
               Formulario URI
             </Link>
@@ -61,7 +61,7 @@ export function EmergencyCTA({ variant }: EmergencyCTAProps) {
 
   return (
     <section className="py-20 px-6 bg-[#E85B0C]">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
+      <div className="max-w-full px-8 md:px-16 mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
         <div className="flex items-center gap-5">
           <div className="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center shrink-0">
             <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" className="w-7 h-7">
@@ -79,7 +79,7 @@ export function EmergencyCTA({ variant }: EmergencyCTAProps) {
         </div>
         <a
           href={`tel:${COMPANY.phone}`}
-          className="shrink-0 px-8 py-4 bg-white text-[#E85B0C] font-bold text-sm uppercase tracking-widest hover:bg-orange-50 transition-colors"
+          className="shrink-0 px-8 py-4 bg-white text-[#E85B0C] font-bold text-sm uppercase tracking-widest hover:bg-orange-50 hover:scale-105 active:scale-95 transition-all duration-300"
         >
           {COMPANY.phoneDisplay}
         </a>

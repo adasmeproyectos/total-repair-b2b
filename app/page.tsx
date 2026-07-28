@@ -187,7 +187,7 @@ export default function Home() {
         </p>
         <Link
           href="/contacto"
-          className="inline-block bg-[#E85B0C] text-white px-10 py-5 font-bold uppercase tracking-widest text-sm hover:bg-[#C4470A] transition-colors"
+          className="inline-block bg-[#E85B0C] text-white px-10 py-5 font-bold uppercase tracking-widest text-sm hover:bg-[#C4470A] hover:scale-105 active:scale-95 transition-all duration-300"
         >
           Solicitar Presupuesto
         </Link>

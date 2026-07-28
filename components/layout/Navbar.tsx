@@ -37,7 +37,7 @@ export function Navbar() {
             : "bg-white/95 border-b border-zinc-200"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <div className="max-w-full px-8 md:px-16 mx-auto h-20 flex items-center justify-between">
           {/* Logo Wordmark */}
           <Link
             href="/"

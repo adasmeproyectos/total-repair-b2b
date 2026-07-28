@@ -14,7 +14,7 @@ export default function Nosotros() {
     <div className="min-h-screen bg-white text-zinc-900 overflow-x-hidden pt-20">
 
       {/* 1. HEADER */}
-      <section className="pt-28 pb-20 px-6 max-w-7xl mx-auto">
+      <section className="pt-28 pb-20 px-8 md:px-16 max-w-full mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -44,7 +44,7 @@ export default function Nosotros() {
           <div className="absolute inset-0 bg-zinc-900/70" />
         </div>
 
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6">
+        <div className="relative z-10 w-full max-w-full mx-auto px-8 md:px-16">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -69,7 +69,7 @@ export default function Nosotros() {
       </section>
 
       {/* 3. GARANTÍAS — Fondo blanco */}
-      <section className="pb-32 px-6 max-w-7xl mx-auto">
+      <section className="pb-32 px-8 md:px-16 max-w-full mx-auto">
         <div className="mb-16">
           <SectionLabel label="Certificaciones y Garantías" />
           <h2 className="font-display text-3xl font-bold text-zinc-900 mb-4 tracking-tight">Seguridad Certificada</h2>
