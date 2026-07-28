@@ -18,10 +18,10 @@ const Icon = ({ name }: { name: string }) => {
 
 // Datos técnicos de especialidades
 const specialities = [
-  { name: "Carpintería Industrial", icon: "carpentery", code: "SPE-CRP-01" },
-  { name: "Pintura Alta Gama", icon: "paint", code: "SPE-PNT-03" },
-  { name: "Electricidad SEC", icon: "sec", code: "SPE-ELE-02" },
-  { name: "Redes de Datos", icon: "data", code: "SPE-DAT-04" },
+  { name: "Carpintería Industrial", icon: "carpentery" },
+  { name: "Pintura Alta Gama", icon: "paint" },
+  { name: "Electricidad SEC", icon: "sec" },
+  { name: "Redes de Datos", icon: "data" },
 ];
 
 // Datos de siniestros para el acordeón
@@ -102,7 +102,7 @@ export default function Servicios() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {specialities.map((spec, index) => (
             <motion.div 
-              key={spec.code}
+              key={spec.name}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -111,7 +111,6 @@ export default function Servicios() {
             >
               <div className="flex justify-between items-start">
                 <Icon name={spec.icon} />
-                <span className="text-xs font-mono text-zinc-400 tracking-wider group-hover:text-zinc-400">{spec.code}</span>
               </div>
               <h3 className="text-lg font-bold text-zinc-900 leading-snug tracking-tight group-hover:text-orange-500 transition-colors">
                 {spec.name}
