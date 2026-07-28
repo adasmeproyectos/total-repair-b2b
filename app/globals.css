@@ -1,17 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600&display=swap');
 @import "tailwindcss";
 
 /* ─── Design Tokens — Total Repair v2 ───────────────────────────────────────
    PALETA BASADA EN LOGO REAL:
    Fondo predominante: Blanco / Crema industrial
-   Acento primario:    Naranja construcción #E85B0C
+   Acento primario:    Naranja construcción #EA580C
    Texto:              Negro industrial #1A1A1A
    Soporte:            Gris cemento / Antracita industrial
    ─────────────────────────────────────────────────────────────────────────── */
 :root {
   /* ── Naranja Construcción (derivado del logo) */
-  --color-brand-orange:        #E85B0C;
-  --color-brand-orange-hover:  #FF6E1F;
+  --color-brand-orange:        #EA580C;
+  --color-brand-orange-hover:  #F58220;
   --color-brand-orange-dark:   #C4470A;
   --color-brand-orange-pale:   #FFF0E8;
 
@@ -33,15 +32,15 @@
   --color-divider-dark:        #C8C4BE;
 
   /* ── Brand legacy (mantener para compatibilidad inline) */
-  --brand-orange:              #E85B0C;
+  --brand-orange:              #EA580C;
   --brand-slate-950:           #1A1A1A;
   --brand-slate-900:           #2D2D2D;
   --brand-slate-800:           #3D4549;
 }
 
 @theme inline {
-  --font-sans:    "Inter", system-ui, sans-serif;
-  --font-display: "Barlow Condensed", system-ui, sans-serif;
+  --font-sans:    "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-display: "Outfit", system-ui, sans-serif;
 }
 
 /* ─── Global Base ───────────────────────────────────────────────────────────── */

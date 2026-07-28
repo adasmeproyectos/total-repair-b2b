@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
-import { Barlow_Condensed, Inter } from "next/font/google";
+import { Outfit, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppFAB } from "@/components/shared/WhatsAppFAB";
 import { LOCAL_BUSINESS_SCHEMA } from "@/lib/metadata";
 
-const barlowCondensed = Barlow_Condensed({
+const outfit = Outfit({
   subsets: ["latin"],
-  weight: ["600", "700", "800"],
+  weight: ["600", "700", "800", "900"],
   variable: "--font-display",
   display: "swap",
 });
 
-const inter = Inter({
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
@@ -52,7 +52,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${barlowCondensed.variable} ${inter.variable} font-sans antialiased`}
+        className={`${outfit.variable} ${plusJakartaSans.variable} font-sans antialiased`}
       >
         {/* ── Global Navigation ───────────────────────────────────── */}
         <Navbar />

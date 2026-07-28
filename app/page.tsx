@@ -6,6 +6,7 @@
  * Hero oscuro intencional solo para el full-bleed inicial.
  */
 
+import { useState, useEffect } from "react";
 import { motion, type Variants } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -24,6 +25,12 @@ const itemVariants: Variants = {
 };
 
 export default function Home() {
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setIsMounted(true);
+  }, []);
+
   return (
     <div className="min-h-screen bg-white text-zinc-900 overflow-hidden">
 
@@ -38,7 +45,7 @@ export default function Home() {
 
         <motion.div
           variants={containerVariants}
-          initial="hidden"
+          initial={isMounted ? "hidden" : "visible"}
           animate="visible"
           className="relative z-10 max-w-5xl w-full text-center"
         >

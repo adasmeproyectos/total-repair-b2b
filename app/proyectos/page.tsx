@@ -69,7 +69,7 @@ const proyectos = [
   },
 ];
 
-const tags = ["Todos", "B2B", "Hogar", "Emergencia", "Institucional"];
+
 
 export default function ProyectosPage() {
   return (
