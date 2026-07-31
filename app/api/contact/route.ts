@@ -8,10 +8,11 @@
  *   3. Enviar email vía Resend API (free tier: 3.000 emails/mes)
  *
  * Variables de entorno requeridas en .env.local:
- *   TURNSTILE_SECRET_KEY
  *   RESEND_API_KEY
  *   RESEND_FROM_EMAIL
  *   RESEND_TO_EMAIL
+ *   TELEGRAM_BOT_TOKEN
+ *   TELEGRAM_CHAT_ID
  */
 
 import { NextRequest, NextResponse } from "next/server";
@@ -120,28 +121,39 @@ export async function POST(req: NextRequest) {
       }),
     });
 
+    // ── 4. Notificar vía Telegram (asincrónico, no bloquea la respuesta) ────────
     const telegramToken = process.env.TELEGRAM_BOT_TOKEN;
     const telegramChatId = process.env.TELEGRAM_CHAT_ID;
-    
-    if (telegramToken && telegramChatId) {
-      const telegramText = `*Nuevo Requerimiento - ${mode === "empresa" ? "Empresas" : "Hogar"}*
-*Nombre:* ${Nombre}
-${Empresa ? `*Empresa:* ${Empresa}\n` : ""}*Teléfono:* ${Telefono}
-*Email:* ${Email}
-*Servicio:* ${Servicio}${Servicio === "Otro" && ServicioOtro ? ` (${ServicioOtro})` : ""}
-${Mensaje ? `\n*Mensaje:*\n${Mensaje}` : ""}`;
 
-      await fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage`, {
+    if (telegramToken && telegramChatId) {
+      const requerimiento =
+        Servicio === "Otro" && ServicioOtro
+          ? `${Servicio} \u2014 ${ServicioOtro}`
+          : Servicio;
+
+      const telegramText =
+        `\u{1F6A8} *NUEVA COTIZACI\u00d3N WEB \u2014 TOTAL REPAIR*\n` +
+        `\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n` +
+        `\u2022 *Nombre:* ${Nombre}\n` +
+        `\u2022 *Empresa:* ${Empresa ?? "No especificada"}\n` +
+        `\u2022 *Tel\u00e9fono:* ${Telefono}\n` +
+        `\u2022 *Correo:* ${Email}\n` +
+        `\u2022 *Tipo de Requerimiento:* ${requerimiento}\n` +
+        `\u2022 *Especificaciones:* ${Mensaje ?? "Opcional"}\n` +
+        `\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n` +
+        `_Enviado desde totalrepair.cl_`;
+
+      fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           chat_id: telegramChatId,
           text: telegramText,
           parse_mode: "Markdown",
         }),
-      }).catch(err => console.error("[Telegram Error]", err));
+      }).catch((err) =>
+        console.error("[Telegram Error] No se pudo enviar notificaci\u00f3n:", err)
+      );
     }
 
     if (!resendRes.ok) {

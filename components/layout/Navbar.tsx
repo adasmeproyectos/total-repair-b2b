@@ -42,7 +42,7 @@ export function Navbar() {
           {/* Logo */}
           <Link
             href="/"
-            className="hover:opacity-90 transition-opacity"
+            className="flex items-center hover:opacity-90 transition-opacity shrink-0"
             aria-label="Total Repair — Inicio"
           >
             <Image
@@ -50,7 +50,7 @@ export function Navbar() {
               alt="Total Repair Logo"
               width={160}
               height={40}
-              className="object-contain"
+              className="h-8 md:h-10 w-auto object-contain"
               priority
             />
           </Link>

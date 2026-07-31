@@ -28,6 +28,11 @@ export const metadata: Metadata = {
     "Soluciones integrales de construcción, remodelación y reparación para empresas y hogares. 20 años de experiencia en Chile. Atención 24/7.",
   metadataBase: new URL("https://totalrepair.cl"),
   robots: "index, follow",
+  icons: {
+    icon: "/img/logos/logo.png",
+    shortcut: "/img/logos/logo.png",
+    apple: "/img/logos/logo.png",
+  },
   openGraph: {
     siteName: "Total Repair Ltda.",
     locale: "es_CL",

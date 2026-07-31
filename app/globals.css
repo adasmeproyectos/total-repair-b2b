@@ -74,9 +74,20 @@ body {
   to   { transform: translateX(-50%); }
 }
 
+/* Para 3x duplicado: se traslada -33.33% para un loop perfecto */
+@keyframes marquee-triple {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-33.333%); }
+}
+
 .animate-marquee {
   animation: marquee 40s linear infinite;
   /* animation-play-state se mantiene SIEMPRE en running — no hay CSS ni JS que lo pause */
+}
+
+.animate-marquee-triple {
+  animation: marquee-triple 55s linear infinite;
+  /* Velocidad ligeramente mayor para compensar el triple de contenido */
 }
 
 /* ─── Focus Ring ────────────────────────────────────────────────────────────── */

@@ -23,6 +23,7 @@ const proyectos = [
     id: "01",
     category: "Habilitación Comercial",
     title: "Remodelación de Local en Centro Comercial",
+    location: "Las Condes",
     desc: "Habilitación completa de local comercial en horario extendido para no interrumpir operaciones del mall. Carpintería, porcelanato, electricidad y climatización.",
     image: "/img/fotos/hero-corporativo.jpg",
     tags: ["B2B", "Retail"],
@@ -31,6 +32,7 @@ const proyectos = [
     id: "02",
     category: "Remodelación Residencial",
     title: "Renovación Integral de Baño y Cocina",
+    location: "Providencia",
     desc: "Modernización completa de baño y cocina en departamento habitado. Porcelanatos de gran formato, gasfitería certificada SEC y electricidad.",
     image: "/img/fotos/remodelacion-interior.jpg",
     tags: ["Hogar", "Terminaciones"],
@@ -39,6 +41,7 @@ const proyectos = [
     id: "03",
     category: "Siniestro — Daño por Agua",
     title: "Recuperación Post-Inundación Oficina Corporativa",
+    location: "Santiago Centro",
     desc: "Restauración completa de oficina de 800m² tras rotura de matriz principal. Reparación en tiempo récord con lugar operativo. Presupuesto coordinado con aseguradora.",
     image: "/img/fotos/dano-agua.jpg",
     tags: ["B2B", "Emergencia"],
@@ -47,6 +50,7 @@ const proyectos = [
     id: "04",
     category: "Siniestro — Incendio",
     title: "Reconstrucción Pos-Incendio Local Comercial",
+    location: "Maipú",
     desc: "Retiro de escombros, limpieza técnica, recuperación de superficies y reconstrucción completa. Propiedad devuelta como nueva en 21 días hábiles.",
     image: "/img/fotos/dano-incendio.jpg",
     tags: ["B2B", "Emergencia"],
@@ -55,6 +59,7 @@ const proyectos = [
     id: "05",
     category: "Construcción — Salas de Baño",
     title: "Construcción de Baños para Institución Educativa",
+    location: "La Florida",
     desc: "Desarrollo completo de 8 salas de baño para establecimiento educacional. Protocolos de seguridad ACHS, materiales certificados y entrega en plazo Carta Gantt.",
     image: "/img/fotos/gasfiteria-redes.jpg",
     tags: ["Institucional", "Obra Nueva"],
@@ -63,6 +68,7 @@ const proyectos = [
     id: "06",
     category: "Remodelación — Co-working",
     title: "Habilitación de Espacio Co-working Moderno",
+    location: "Vitacura",
     desc: "Transformación de oficina tradicional en espacio de co-working flexible. Diseño de zonas de trabajo colaborativo, terrazas y áreas de descanso.",
     image: "/img/fotos/blueprint-remodelacion.jpg",
     tags: ["B2B", "Diseño Interior"],
@@ -97,20 +103,29 @@ export default function ProyectosPage() {
               key={p.id}
               className="group bg-white border border-zinc-200 overflow-hidden hover:border-[#E85B0C] hover:shadow-lg transition-all duration-400"
             >
-              {/* Imagen */}
-              <div className="relative h-52 overflow-hidden bg-zinc-100">
+              {/* Imagen / Placeholder elegante */}
+              <div className="relative h-56 overflow-hidden bg-gradient-to-br from-zinc-800 to-zinc-900">
                 <Image
                   src={p.image}
                   alt={p.title}
                   fill
-                  className="object-cover scale-105 group-hover:scale-110 transition-transform duration-700"
+                  className="object-cover scale-105 group-hover:scale-110 transition-transform duration-700 opacity-70 group-hover:opacity-85"
                   loading="lazy"
                 />
-                {/* Overlay naranja sutil on hover */}
-                <div className="absolute inset-0 bg-[#E85B0C]/0 group-hover:bg-[#E85B0C]/10 transition-colors duration-500" />
+                {/* Gradiente permanente para legibilidad */}
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/80 via-zinc-900/20 to-transparent" />
+
+                {/* Location tag — siempre visible sobre la imagen */}
+                <div className="absolute bottom-4 left-4 flex items-center gap-1.5">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#EA580C" strokeWidth="2" className="w-3.5 h-3.5 shrink-0">
+                    <path d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                    <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                  </svg>
+                  <span className="text-white/80 text-xs font-semibold tracking-wider">{p.location}</span>
+                </div>
 
                 {/* Número */}
-                <span className="absolute top-4 left-4 bg-white/90 text-zinc-800 font-display font-bold text-sm px-3 py-1 tracking-widest">
+                <span className="absolute top-4 left-4 bg-zinc-900/80 backdrop-blur-sm text-white font-display font-bold text-xs px-3 py-1 tracking-widest border border-zinc-700">
                   {p.id}
                 </span>
               </div>

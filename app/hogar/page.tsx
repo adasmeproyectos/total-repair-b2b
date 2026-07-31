@@ -132,7 +132,7 @@ export default function HogarPage() {
                 href={COMPANY.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="border border-zinc-300 text-zinc-900 px-8 py-4 text-sm font-bold uppercase tracking-widest hover:border-green-500 hover:text-green-600 transition-colors"
+                className="border-2 border-emerald-500 text-emerald-400 px-8 py-4 text-sm font-bold uppercase tracking-widest hover:bg-emerald-500 hover:text-white transition-all duration-300"
               >
                 Cotizar por WhatsApp
               </a>
@@ -253,7 +253,7 @@ export default function HogarPage() {
                 onClick={() => setExpandedFaq(expandedFaq === faq.q ? null : faq.q)}
                 className="w-full flex items-center justify-between p-6 text-left"
               >
-                <span className="font-bold text-white pr-4">{faq.q}</span>
+                <span className="font-bold text-slate-900 pr-4">{faq.q}</span>
                 <motion.span
                   animate={{ rotate: expandedFaq === faq.q ? 180 : 0 }}
                   className="text-zinc-400 shrink-0"

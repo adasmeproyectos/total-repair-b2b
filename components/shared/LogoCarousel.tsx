@@ -19,8 +19,8 @@ interface LogoCarouselProps {
 }
 
 export function LogoCarousel({ speed = 40 }: LogoCarouselProps) {
-  // Duplicar logos para loop infinito sin salto visual
-  const items = [...LOGOS, ...LOGOS];
+  // Triplicar logos para garantizar loop infinito sin salto visual en cualquier resolución
+  const items = [...LOGOS, ...LOGOS, ...LOGOS];
 
   return (
     <section
@@ -31,23 +31,24 @@ export function LogoCarousel({ speed = 40 }: LogoCarouselProps) {
         Empresas que confían en nosotros
       </p>
 
-      {/* Contenedor con mask-image fade en bordes */}
+      {/* Contenedor con mask-image fade en bordes — más amplio para mejor efecto */}
       <div
         className="relative flex"
         style={{
           maskImage:
-            "linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)",
+            "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
           WebkitMaskImage:
-            "linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)",
+            "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
         }}
       >
         {/*
           CRÍTICO: NO hay onMouseEnter/onMouseLeave aquí.
           El track anima de forma continua e indefinida sin interrupción.
           El hover solo afecta al ITEM individual (color reveal).
+          Con 3x logos, translateX(-33.33%) garantiza loop perfecto.
         */}
         <div
-          className="flex items-center w-max animate-marquee"
+          className="flex items-center w-max animate-marquee-triple"
           style={{
             animationDuration: `${speed}s`,
             gap: "6rem", /* gap fijo 96px — evita sobreposición en cualquier resolución */
