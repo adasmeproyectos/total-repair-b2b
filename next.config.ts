@@ -36,7 +36,7 @@ const nextConfig: NextConfig = {
             value: [
               "default-src 'self'",
               "script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com",
-              "frame-src https://challenges.cloudflare.com https://maps.google.com",
+              "frame-src https://challenges.cloudflare.com https://maps.google.com https://www.google.com",
               "img-src 'self' data: blob: https://images.unsplash.com",
               "font-src 'self'",
               "style-src 'self' 'unsafe-inline'",

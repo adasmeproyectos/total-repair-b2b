@@ -59,7 +59,7 @@ export async function POST(req: NextRequest) {
 
     // ── 3. Enviar email vía Resend ─────────────────────────────────────────
     const resendKey = process.env.RESEND_API_KEY;
-    const fromEmail = process.env.RESEND_FROM_EMAIL ?? "noreply@totalrepair.cl";
+    const fromEmail = process.env.RESEND_FROM_EMAIL ?? "onboarding@resend.dev";
     const toEmail = process.env.RESEND_TO_EMAIL ?? "contacto@totalrepair.cl";
 
     if (!resendKey) {
@@ -117,11 +117,16 @@ export async function POST(req: NextRequest) {
     });
 
     if (!resendRes.ok) {
-      const error = await resendRes.json();
-      console.error("[Resend Error]", error);
+      let errorData;
+      try {
+        errorData = await resendRes.json();
+      } catch (e) {
+        errorData = await resendRes.text();
+      }
+      console.error("[Resend Error]", errorData);
       return NextResponse.json(
-        { error: "Error al enviar el correo. Inténtalo de nuevo." },
-        { status: 502 }
+        { error: "Error de configuración en el servidor de correos. Inténtalo de nuevo más tarde.", details: errorData },
+        { status: 400 }
       );
     }
 
