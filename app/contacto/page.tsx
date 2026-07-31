@@ -39,6 +39,15 @@ export default function Contacto() {
             transition={{ duration: 0.8 }}
             className="relative z-10 max-w-md"
           >
+            <div className="mb-6 relative w-full h-16">
+              <Image 
+                src="/img/logos/banner.png" 
+                alt="Total Repair Banner" 
+                fill 
+                className="object-contain object-left" 
+                priority 
+              />
+            </div>
             <SectionLabel label="Recepción de Proyectos" />
             <h1 className="text-4xl md:text-5xl font-black text-white leading-tight mb-12 tracking-tighter">
               INICIAMOS TU <br /> OBRA <span className="text-orange-600">HOY.</span>

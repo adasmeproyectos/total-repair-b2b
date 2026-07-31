@@ -8,6 +8,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { NAV_LINKS } from "@/lib/constants";
 import { MobileMenu } from "./MobileMenu";
@@ -38,13 +39,20 @@ export function Navbar() {
         }`}
       >
         <div className="max-w-full px-8 md:px-16 mx-auto h-20 flex items-center justify-between">
-          {/* Logo Wordmark */}
+          {/* Logo */}
           <Link
             href="/"
-            className="font-display font-bold text-2xl tracking-tight text-zinc-900 hover:opacity-90 transition-opacity"
+            className="hover:opacity-90 transition-opacity"
             aria-label="Total Repair — Inicio"
           >
-            TOTAL<span className="text-[#E85B0C]">REPAIR</span>
+            <Image
+              src="/img/logos/logo.png"
+              alt="Total Repair Logo"
+              width={160}
+              height={40}
+              className="object-contain"
+              priority
+            />
           </Link>
 
           {/* Desktop Links */}

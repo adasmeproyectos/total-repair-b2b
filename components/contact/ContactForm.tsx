@@ -22,6 +22,7 @@ type FormState = "idle" | "submitting" | "success" | "error";
 
 export function ContactForm({ mode }: ContactFormProps) {
   const [formState, setFormState] = useState<FormState>("idle");
+  const [selectedServicio, setSelectedServicio] = useState("");
 
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -61,28 +62,53 @@ export function ContactForm({ mode }: ContactFormProps) {
   if (formState === "success") {
     return (
       <motion.div
-        initial={{ opacity: 0, scale: 0.96 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="py-16 text-center"
+        initial={{ opacity: 0, scale: 0.96, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ type: "spring", stiffness: 200, damping: 20 }}
+        className="py-16 text-center border border-zinc-200 bg-white shadow-xl p-8 relative overflow-hidden"
       >
-        <div className="w-16 h-16 bg-green-900/30 border border-green-600/50 flex items-center justify-center mx-auto mb-6">
+        <div className="absolute top-0 left-0 w-full h-1 bg-[#E85B0C]" />
+        <motion.div 
+          initial={{ scale: 0 }} 
+          animate={{ scale: 1 }} 
+          transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+          className="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6 relative"
+        >
+          <div className="absolute inset-0 bg-green-100 rounded-full animate-ping opacity-50" />
           <svg
             viewBox="0 0 24 24"
             fill="none"
-            stroke="#22C55E"
-            strokeWidth="2"
-            className="w-8 h-8"
+            stroke="#16a34a"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="w-10 h-10 relative z-10"
           >
-            <path d="M5 13l4 4L19 7" />
+            <motion.path 
+              initial={{ pathLength: 0 }} 
+              animate={{ pathLength: 1 }} 
+              transition={{ delay: 0.4, duration: 0.5 }}
+              d="M20 6L9 17l-5-5" 
+            />
           </svg>
-        </div>
-        <h3 className="text-xl font-bold text-zinc-900 mb-3">
-          ¡Requerimiento recibido!
+        </motion.div>
+        
+        <h3 className="text-2xl font-black text-zinc-900 mb-3 tracking-tight">
+          ¡Solicitud enviada con éxito!
         </h3>
-        <p className="text-zinc-500 font-light text-sm max-w-sm mx-auto">
-          Te contactaremos a la brevedad en el número o correo indicado. Tiempo
-          de respuesta habitual: menos de 24 horas hábiles.
+        <p className="text-zinc-500 font-light text-sm max-w-sm mx-auto mb-8">
+          Hemos registrado tu requerimiento. Un ingeniero de cuentas se pondrá en contacto contigo muy pronto.
         </p>
+        
+        <button
+          onClick={() => {
+            setFormState("idle");
+            setSelectedServicio("");
+          }}
+          className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-zinc-900 text-white font-bold uppercase tracking-widest text-xs hover:bg-zinc-800 transition-colors"
+        >
+          Nueva Solicitud
+        </button>
       </motion.div>
     );
   }
@@ -94,7 +120,7 @@ export function ContactForm({ mode }: ContactFormProps) {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label htmlFor="nombre" className={labelClass}>
-            {mode === "empresa" ? "Contacto" : "Nombre y Apellido"} *
+            Nombre *
           </label>
           <input
             type="text"
@@ -108,13 +134,12 @@ export function ContactForm({ mode }: ContactFormProps) {
         {mode === "empresa" && (
           <div>
             <label htmlFor="empresa" className={labelClass}>
-              Empresa *
+              Empresa
             </label>
             <input
               type="text"
               id="empresa"
               name="Empresa"
-              required
               className={inputClass}
               placeholder="Ej: Inmobiliaria Sur"
             />
@@ -155,7 +180,7 @@ export function ContactForm({ mode }: ContactFormProps) {
         )}
         <div>
           <label htmlFor="email" className={labelClass}>
-            {mode === "empresa" ? "Correo Corporativo" : "Correo Electrónico"} *
+            Correo *
           </label>
           <input
             type="email"
@@ -175,12 +200,13 @@ export function ContactForm({ mode }: ContactFormProps) {
         <label htmlFor="servicio" className={labelClass}>
           {mode === "empresa" ? "Tipo de Requerimiento" : "¿Qué necesitas?"} *
         </label>
-        <div className="relative">
+        <div className="relative mb-4">
           <select
             id="servicio"
             name="Servicio"
             required
-            defaultValue=""
+            value={selectedServicio}
+            onChange={(e) => setSelectedServicio(e.target.value)}
             className={`${inputClass} appearance-none cursor-pointer`}
           >
             <option value="" disabled>
@@ -193,6 +219,7 @@ export function ContactForm({ mode }: ContactFormProps) {
                 <option value="Remodelación Estructural">Remodelación Estructural</option>
                 <option value="Mantenimiento Anual">Contrato de Mantenimiento Anual</option>
                 <option value="Co-work / Espacio Flexible">Co-work / Espacio Flexible</option>
+                <option value="Otro">Otro</option>
               </>
             ) : (
               <>
@@ -201,6 +228,7 @@ export function ContactForm({ mode }: ContactFormProps) {
                 <option value="Remodelación Interior">Remodelación Interior</option>
                 <option value="Pintura">Pintura y Terminaciones</option>
                 <option value="Emergencia Hogar">Emergencia en el Hogar</option>
+                <option value="Otro">Otro</option>
               </>
             )}
           </select>
@@ -210,6 +238,29 @@ export function ContactForm({ mode }: ContactFormProps) {
             </svg>
           </div>
         </div>
+
+        {/* Input condicional para "Otro" */}
+        <AnimatePresence>
+          {selectedServicio === "Otro" && (
+            <motion.div
+              initial={{ opacity: 0, height: 0, y: -10 }}
+              animate={{ opacity: 1, height: "auto", y: 0 }}
+              exit={{ opacity: 0, height: 0, y: -10 }}
+            >
+              <label htmlFor="servicioOtro" className={labelClass}>
+                Especifique su requerimiento *
+              </label>
+              <input
+                type="text"
+                id="servicioOtro"
+                name="ServicioOtro"
+                required
+                className={inputClass}
+                placeholder="Ej: Instalación de domótica"
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       {/* Mensaje */}
@@ -217,14 +268,12 @@ export function ContactForm({ mode }: ContactFormProps) {
         <label htmlFor="mensaje" className={labelClass}>
           {mode === "empresa"
             ? "Especificaciones Técnicas"
-            : "Descripción del trabajo"}{" "}
-          *
+            : "Descripción del trabajo"}
         </label>
         <textarea
           id="mensaje"
           name="Mensaje"
           rows={4}
-          required
           className={inputClass}
           placeholder={
             mode === "empresa"

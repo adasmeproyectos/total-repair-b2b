@@ -22,8 +22,9 @@ interface ContactPayload {
   Email: string;
   Telefono: string;
   Servicio: string;
-  Mensaje: string;
+  Mensaje?: string;
   Empresa?: string;
+  ServicioOtro?: string;
 }
 
 export async function POST(req: NextRequest) {
@@ -37,11 +38,12 @@ export async function POST(req: NextRequest) {
       Servicio,
       Mensaje,
       Empresa,
+      ServicioOtro,
     } = body;
 
 
     // ── 2. Validar campos ──────────────────────────────────────────────────
-    if (!Nombre || !Email || !Mensaje || !Servicio) {
+    if (!Nombre || !Email || !Servicio) {
       return NextResponse.json(
         { error: "Faltan campos requeridos." },
         { status: 400 }
@@ -91,9 +93,11 @@ export async function POST(req: NextRequest) {
             <tr><td style="padding: 8px 0; color: #64748b;">Teléfono</td><td style="padding: 8px 0;"><a href="tel:${Telefono}">${Telefono}</a></td></tr>
             <tr><td style="padding: 8px 0; color: #64748b;">Servicio</td><td style="padding: 8px 0;">${Servicio}</td></tr>
           </table>
+          ${Mensaje ? `
           <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 16px 0;" />
           <p style="color: #64748b; font-size: 13px; margin: 0 0 6px;">Mensaje:</p>
           <p style="background: white; padding: 12px; border: 1px solid #e2e8f0; margin: 0; line-height: 1.6;">${Mensaje.replace(/\n/g, "<br>")}</p>
+          ` : ""}
         </div>
         <div style="padding: 16px 24px; background: #f1f5f9; font-size: 12px; color: #94a3b8; text-align: center;">
           Enviado desde totalrepair.cl — ${new Date().toLocaleString("es-CL")}
@@ -115,6 +119,30 @@ export async function POST(req: NextRequest) {
         html: htmlBody,
       }),
     });
+
+    const telegramToken = process.env.TELEGRAM_BOT_TOKEN;
+    const telegramChatId = process.env.TELEGRAM_CHAT_ID;
+    
+    if (telegramToken && telegramChatId) {
+      const telegramText = `*Nuevo Requerimiento - ${mode === "empresa" ? "Empresas" : "Hogar"}*
+*Nombre:* ${Nombre}
+${Empresa ? `*Empresa:* ${Empresa}\n` : ""}*Teléfono:* ${Telefono}
+*Email:* ${Email}
+*Servicio:* ${Servicio}${Servicio === "Otro" && ServicioOtro ? ` (${ServicioOtro})` : ""}
+${Mensaje ? `\n*Mensaje:*\n${Mensaje}` : ""}`;
+
+      await fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          chat_id: telegramChatId,
+          text: telegramText,
+          parse_mode: "Markdown",
+        }),
+      }).catch(err => console.error("[Telegram Error]", err));
+    }
 
     if (!resendRes.ok) {
       let errorData;
