@@ -18,8 +18,8 @@ export const COMPANY = {
   ),
   linkedin: "https://www.linkedin.com/in/javieradasme/",
   author: "Javier Adasme",
-  founded: "2006",
-  yearsExperience: "20+",
+  founded: "2004",
+  yearsExperience: "22+",
   projectsDelivered: "500+",
 } as const;
 

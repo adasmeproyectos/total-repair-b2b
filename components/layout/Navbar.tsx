@@ -68,7 +68,7 @@ export function Navbar() {
                   href={link.href}
                   className={`transition-colors ${
                     isActive
-                      ? "text-[#E85B0C] border-b-2 border-[#E85B0C] pb-1"
+                      ? "text-[#FF5000] border-b-2 border-[#FF5000] pb-1"
                       : "text-zinc-600 hover:text-zinc-900"
                   }`}
                 >
@@ -78,7 +78,7 @@ export function Navbar() {
             })}
             <Link
               href="/contacto"
-              className="bg-[#E85B0C] text-white px-6 py-3 uppercase tracking-widest text-xs font-bold hover:bg-[#C4470A] transition-colors"
+              className="bg-[#FF5000] text-white px-6 py-3 uppercase tracking-widest text-xs font-bold hover:bg-[#CC4000] transition-colors"
             >
               Cotizar Proyecto
             </Link>
@@ -88,7 +88,7 @@ export function Navbar() {
           <button
             onClick={() => setMobileOpen(true)}
             aria-label="Abrir menú"
-            className="md:hidden w-10 h-10 flex items-center justify-center text-zinc-600 hover:text-zinc-900 transition-colors"
+            className="md:hidden w-12 h-12 flex items-center justify-center text-zinc-600 hover:text-zinc-900 transition-colors"
           >
             <svg
               fill="none"

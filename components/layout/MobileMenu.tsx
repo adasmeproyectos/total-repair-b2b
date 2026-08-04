@@ -46,12 +46,12 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 onClick={onClose}
                 className="font-display font-bold text-xl tracking-tight text-zinc-900"
               >
-                TOTAL<span className="text-[#E85B0C]">REPAIR</span>
+                TOTAL<span className="text-[#FF5000]">REPAIR</span>
               </Link>
               <button
                 onClick={onClose}
                 aria-label="Cerrar menú"
-                className="w-10 h-10 flex items-center justify-center text-zinc-500 hover:text-zinc-900 transition-colors"
+                className="w-12 h-12 flex items-center justify-center text-zinc-500 hover:text-zinc-900 transition-colors"
               >
                 <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} className="w-5 h-5">
                   <path d="M6 18L18 6M6 6l12 12" />
@@ -70,7 +70,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                     onClick={onClose}
                     className={`px-4 py-3 text-sm font-medium tracking-wide transition-colors ${
                       isActive
-                        ? "text-[#E85B0C] bg-orange-50 border-l-2 border-[#E85B0C]"
+                        ? "text-[#FF5000] bg-orange-50 border-l-2 border-[#FF5000]"
                         : "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50"
                     }`}
                   >
@@ -82,7 +82,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               <Link
                 href="/contacto"
                 onClick={onClose}
-                className="mt-4 py-4 bg-[#E85B0C] text-white text-center text-xs font-bold uppercase tracking-widest hover:bg-[#C4470A] transition-colors"
+                className="mt-4 py-4 bg-[#FF5000] text-white text-center text-xs font-bold uppercase tracking-widest hover:bg-[#CC4000] transition-colors"
               >
                 Cotizar Proyecto
               </Link>

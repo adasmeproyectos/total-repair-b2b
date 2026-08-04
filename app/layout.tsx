@@ -25,16 +25,19 @@ export const metadata: Metadata = {
     template: "%s | Total Repair Ltda.",
   },
   description:
-    "Soluciones integrales de construcción, remodelación y reparación para empresas y hogares. 20 años de experiencia en Chile. Atención 24/7.",
-  metadataBase: new URL("https://totalrepair.cl"),
+    "Soluciones integrales de construcción, remodelación y reparación para empresas y hogares. Más de 22 años de experiencia en Chile. Atención 24/7.",
+  metadataBase: new URL("https://www.totalrepair.cl"),
   robots: "index, follow",
   icons: {
-    icon: "/img/logos/logo.png",
-    shortcut: "/img/logos/logo.png",
-    apple: "/img/logos/logo.png",
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
   },
   openGraph: {
+    title: "Total Repair | Construcción y Remodelación en Chile",
+    description: "Soluciones integrales de construcción, remodelación y reparación para empresas y hogares. Más de 22 años de experiencia en Chile.",
     siteName: "Total Repair Ltda.",
+    images: [{ url: "/Banner.png" }], // Assuming Banner.png is the OG image since it's large, or /img/logos/logo.png. But let's use the standard openGraph structure.
     locale: "es_CL",
     type: "website",
   },

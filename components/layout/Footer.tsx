@@ -22,7 +22,7 @@ export function Footer({ variant = "full" }: FooterProps) {
               href="/"
               className="font-display font-bold text-xl tracking-tight text-white inline-block mb-6 hover:opacity-90 transition-opacity"
             >
-              TOTAL<span className="text-[#E85B0C]">REPAIR</span>
+              TOTAL<span className="text-[#FF5000]">REPAIR</span>
             </Link>
             <p className="text-sm leading-relaxed font-light max-w-xs mb-6">
               Soluciones constructivas integrales para empresas y hogares.
@@ -74,14 +74,14 @@ export function Footer({ variant = "full" }: FooterProps) {
             </h4>
             <ul className="space-y-4 text-sm font-light">
               <li className="flex items-start gap-3">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#E85B0C" strokeWidth="2" className="w-4 h-4 mt-0.5 shrink-0">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FF5000" strokeWidth="2" className="w-4 h-4 mt-0.5 shrink-0">
                   <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                   <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
                 </svg>
                 <span>{COMPANY.address}</span>
               </li>
               <li className="flex items-center gap-3">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#E85B0C" strokeWidth="2" className="w-4 h-4 shrink-0">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FF5000" strokeWidth="2" className="w-4 h-4 shrink-0">
                   <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
                 </svg>
                 <a href={`tel:${COMPANY.phone}`} className="hover:text-white transition-colors">
@@ -89,7 +89,7 @@ export function Footer({ variant = "full" }: FooterProps) {
                 </a>
               </li>
               <li className="flex items-center gap-3">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#E85B0C" strokeWidth="2" className="w-4 h-4 shrink-0">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#FF5000" strokeWidth="2" className="w-4 h-4 shrink-0">
                   <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                 </svg>
                 <a href={`mailto:${COMPANY.email}`} className="hover:text-white transition-colors">
@@ -110,12 +110,12 @@ export function Footer({ variant = "full" }: FooterProps) {
             <Link href="/terminos" className="hover:text-white transition-colors">Términos</Link>
             <span className="text-zinc-700">·</span>
             <span>
-              Dev{" "}
+              Desarrollado por{" "}
               <a
                 href={COMPANY.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#E85B0C] hover:text-orange-400 font-medium transition-colors"
+                className="text-[#FF5000] hover:text-orange-400 font-medium transition-colors"
               >
                 {COMPANY.author}
               </a>

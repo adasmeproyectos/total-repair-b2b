@@ -60,20 +60,20 @@ export function generateMetadata({
 /** Schemas de structured data (JSON-LD) */
 export const LOCAL_BUSINESS_SCHEMA = {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  name: "Total Repair Ltda.",
+  "@type": ["LocalBusiness", "HomeAndConstructionBusiness"],
+  name: "Total Repair",
+  legalName: "Total Repair y Cía Ltda.",
   description:
     "Soluciones integrales de construcción, remodelación y reparación para empresas y hogares.",
-  url: BASE_URL,
-  telephone: "+56999195521",
+  url: "https://www.totalrepair.cl",
+  telephone: "+569 9919 5521",
   email: "contacto@totalrepair.cl",
   address: {
     "@type": "PostalAddress",
     streetAddress: "Villasana 1398",
     addressLocality: "Quinta Normal",
-    addressRegion: "Región Metropolitana",
-    postalCode: "8550000",
-    addressCountry: "CL",
+    addressRegion: "Santiago",
+    addressCountry: "Chile",
   },
   geo: {
     "@type": "GeoCoordinates",
@@ -81,6 +81,7 @@ export const LOCAL_BUSINESS_SCHEMA = {
     longitude: -70.7001,
   },
   openingHours: "Mo-Fr 08:00-18:00",
-  priceRange: "$$",
+  priceRange: "$$$",
+  foundingDate: "2004",
   areaServed: "Región Metropolitana, Chile",
 };
