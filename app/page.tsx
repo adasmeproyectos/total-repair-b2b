@@ -54,10 +54,14 @@ export default function Home() {
           {/* Headline */}
           <motion.h1
             variants={itemVariants}
-            className="font-display text-5xl md:text-7xl lg:text-8xl font-black text-[#0F172A] tracking-tight leading-[1.0] mb-8"
+            className="font-display font-black tracking-tight leading-none mb-8"
           >
-            CONSTRUIMOS <span className="text-[#FF5000]">CONFIANZA</span><br />
-            DESDE {COMPANY.founded}
+            <span className="block text-6xl md:text-8xl lg:text-9xl text-[#FF5000]">
+              TOTAL REPAIR
+            </span>
+            <span className="block text-2xl md:text-3xl lg:text-4xl text-[#0F172A] font-semibold mt-3">
+              Construimos Confianza Desde 2004
+            </span>
           </motion.h1>
 
           <motion.p

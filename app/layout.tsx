@@ -31,13 +31,13 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
-    apple: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
   },
   openGraph: {
     title: "Total Repair | Construcción y Remodelación en Chile",
     description: "Soluciones integrales de construcción, remodelación y reparación para empresas y hogares. Más de 22 años de experiencia en Chile.",
     siteName: "Total Repair Ltda.",
-    images: [{ url: "/Banner.png" }], // Assuming Banner.png is the OG image since it's large, or /img/logos/logo.png. But let's use the standard openGraph structure.
+    images: [{ url: "/Banner.png", width: 1200, height: 630, alt: "Total Repair Ltda." }],
     locale: "es_CL",
     type: "website",
   },

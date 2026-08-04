@@ -47,7 +47,7 @@ const MILESTONES = [
 export function Timeline() {
   return (
     <section className="py-24 px-6 bg-white overflow-hidden" id="historia">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-6xl xl:max-w-7xl mx-auto">
         <div className="text-center mb-20">
           <SectionLabel label="Nuestra Historia en Obras" className="justify-center" />
           <h2 className="font-display text-4xl md:text-5xl font-black text-zinc-900 tracking-tight mt-6">
@@ -58,51 +58,89 @@ export function Timeline() {
           </p>
         </div>
 
-        <div className="relative border-l-2 border-zinc-100 ml-4 md:mx-auto md:w-1/2">
-          {MILESTONES.map((milestone, index) => {
-            const isLeft = index % 2 !== 0;
-            return (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                key={milestone.year}
-                className={`relative pl-8 md:pl-0 py-6 group md:w-full ${
-                  isLeft ? "md:-left-full md:pr-12 md:text-right" : "md:left-0 md:pl-12 md:text-left"
-                }`}
-              >
-                {/* Timeline dot */}
-                <div
-                  className={`absolute left-[-5px] md:left-auto ${
-                    isLeft ? "md:-right-[5px]" : "md:-left-[5px]"
-                  } top-8 w-3 h-3 rounded-full transition-all duration-300 ${
-                    milestone.isHighlight 
-                      ? "bg-[#FF5000] shadow-[0_0_12px_rgba(255,80,0,0.5)]" 
-                      : "bg-zinc-300 group-hover:bg-[#FF5000]"
-                  }`}
-                />
+        {/* Timeline: single column on mobile, alternating two-column on desktop */}
+        <div className="relative">
+          {/* Centre spine — hidden on mobile, visible md+ */}
+          <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-zinc-100 -translate-x-1/2" />
 
-                <div
-                  className={`bg-[#F8FAFC] p-6 md:p-8 rounded-sm hover:shadow-lg transition-all duration-300 relative border border-zinc-100 ${
-                    milestone.isHighlight ? (isLeft ? "border-r-4 border-r-[#FF5000]" : "border-l-4 border-l-[#FF5000]") : ""
-                  }`}
+          <div className="space-y-8 md:space-y-0">
+            {MILESTONES.map((milestone, index) => {
+              const isLeft = index % 2 === 0;
+              return (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={{ duration: 0.5, delay: index * 0.08 }}
+                  key={milestone.year}
+                  className="relative md:grid md:grid-cols-2 md:gap-x-16 md:mb-8"
                 >
-                  <span className="text-[#FF5000] font-bold tracking-widest text-sm mb-2 block">
-                    {milestone.year}
-                  </span>
-                  <h3 className="font-display text-xl md:text-2xl font-bold text-[#0F172A] mb-3">
-                    {milestone.title}
-                  </h3>
-                  <p className="text-zinc-600 font-light leading-relaxed text-sm md:text-base">
-                    {milestone.description}
-                  </p>
-                </div>
-              </motion.div>
-            );
-          })}
+                  {/* Timeline dot on the centre spine */}
+                  <div
+                    className={`hidden md:block absolute left-1/2 top-8 w-4 h-4 rounded-full border-2 border-white -translate-x-1/2 z-10 transition-all duration-300 ${
+                      milestone.isHighlight
+                        ? "bg-[#FF5000] shadow-[0_0_14px_rgba(255,80,0,0.55)]"
+                        : "bg-zinc-300"
+                    }`}
+                  />
+
+                  {/* Mobile: simple left-border layout */}
+                  <div className="md:hidden pl-6 border-l-2 border-zinc-100 py-4 group">
+                    <MilestoneCard milestone={milestone} align="left" />
+                  </div>
+
+                  {/* Desktop: left column */}
+                  {isLeft ? (
+                    <>
+                      <div className="hidden md:block pr-8 text-right group">
+                        <MilestoneCard milestone={milestone} align="right" />
+                      </div>
+                      <div className="hidden md:block" /> {/* empty right column */}
+                    </>
+                  ) : (
+                    <>
+                      <div className="hidden md:block" /> {/* empty left column */}
+                      <div className="hidden md:block pl-8 text-left group">
+                        <MilestoneCard milestone={milestone} align="left" />
+                      </div>
+                    </>
+                  )}
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
+  );
+}
+
+function MilestoneCard({
+  milestone,
+  align,
+}: {
+  milestone: (typeof MILESTONES)[0];
+  align: "left" | "right";
+}) {
+  return (
+    <div
+      className={`bg-[#F8FAFC] p-6 xl:p-8 hover:shadow-lg transition-all duration-300 border border-zinc-100 ${
+        milestone.isHighlight
+          ? align === "right"
+            ? "border-r-4 border-r-[#FF5000]"
+            : "border-l-4 border-l-[#FF5000]"
+          : ""
+      }`}
+    >
+      <span className="text-[#FF5000] font-bold tracking-widest text-sm mb-2 block">
+        {milestone.year}
+      </span>
+      <h3 className="font-display text-xl xl:text-2xl font-bold text-[#0F172A] mb-3">
+        {milestone.title}
+      </h3>
+      <p className="text-zinc-600 font-light leading-relaxed text-sm xl:text-base">
+        {milestone.description}
+      </p>
+    </div>
   );
 }

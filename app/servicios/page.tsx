@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 
-// Motor de iconos simplificado (Tipo inferido automáticamente)
+// Motor de iconos simplificado
 const Icon = ({ name }: { name: string }) => {
   const icons: Record<string, React.ReactNode> = {
     carpentery: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M20.5 14.5l-8.5-8.5L2 16l8.5 8.5L20.5 14.5z"/><path d="M12 2l4 4-4 4-4-4 4-4z"/></svg>,
@@ -13,10 +13,9 @@ const Icon = ({ name }: { name: string }) => {
     sec: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>,
     data: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M4 6h16M4 10h16M4 14h16M4 18h16"/><path d="M7 6v12M11 6v12M15 6v12M19 6v12"/></svg>,
   };
-  return <div className="w-8 h-8 text-zinc-400 group-hover:text-orange-500 transition-colors">{icons[name] || icons.data}</div>;
+  return <div className="w-8 h-8 text-zinc-400 group-hover:text-[#FF5000] transition-colors">{icons[name] || icons.data}</div>;
 };
 
-// Datos técnicos de especialidades
 const specialities = [
   { name: "Carpintería Industrial", icon: "carpentery" },
   { name: "Pintura Alta Gama", icon: "paint" },
@@ -24,41 +23,20 @@ const specialities = [
   { name: "Redes de Datos", icon: "data" },
 ];
 
-// Datos de siniestros para el acordeón
 const claims = [
-  { id: "01", title: "Inundación y Daño por Agua", desc: "Reparación ultra-rápida de locales operativos y vacíos tras roturas de matrices o temporales.", prompt: "dano-agua.jpg" },
-  { id: "02", title: "Siniestros por Incendio", desc: "Retiro de escombros, limpieza técnica y reconstrucción estructural certificada pos-fuego.", prompt: "dano-incendio.jpg" },
-  { id: "03", title: "Impacto y Daño Estructural", desc: "Evaluación SEC inmediata y reparación de muros, fachadas y techos por sismos o accidentes.", prompt: "otros-siniestros.jpg" },
+  { id: "01", title: "Inundación y Daño por Agua", desc: "Reparación ultra-rápida de locales operativos y vacíos tras roturas de matrices o temporales." },
+  { id: "02", title: "Siniestros por Incendio", desc: "Retiro de escombros, limpieza técnica y reconstrucción estructural certificada pos-fuego." },
+  { id: "03", title: "Impacto y Daño Estructural", desc: "Evaluación SEC inmediata y reparación de muros, fachadas y techos por sismos o accidentes." },
 ];
 
 export default function Servicios() {
   const [expandedClaim, setExpandedClaim] = useState<string | null>("01");
 
   return (
-    <main className="min-h-screen bg-white text-zinc-900 selection:bg-orange-600 selection:text-white font-sans overflow-x-hidden relative antialiased">
+    <div className="min-h-screen bg-white text-zinc-900 overflow-x-hidden pt-20">
       
-      {/* NUEVA Textura de Fondo Técnica (Construcción, no electrónica) */}
-      <div className="fixed inset-0 z-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: "url('/img/fotos/texture-construccion.jpg')", backgroundSize: 'cover' }} />
-
-      {/* 1. NAV TÉCNICO (Aumentada opacidad para contraste) */}
-      <nav className="fixed w-full z-50 bg-white/95 backdrop-blur-md border-b border-zinc-200">
-        <div className="max-w-full px-8 md:px-16 mx-auto h-20 flex items-center justify-between">
-          <Link href="/" className="font-bold text-2xl tracking-tighter text-zinc-900">
-            TOTAL<span className="text-orange-600">REPAIR</span>
-          </Link>
-          <div className="hidden md:flex items-center gap-8 text-sm font-medium tracking-wide">
-            <Link href="/" className="text-zinc-500 hover:text-zinc-900 transition-colors">Inicio</Link>
-            <Link href="/nosotros" className="text-zinc-500 hover:text-zinc-900 transition-colors">Sobre Nosotros</Link>
-            <Link href="/servicios" className="text-zinc-900 border-b-2 border-orange-600 pb-1">Servicios</Link>
-            <Link href="/contacto" className="bg-orange-600 text-white px-6 py-3 uppercase tracking-widest text-xs font-bold hover:bg-orange-700 hover:scale-105 active:scale-95 transition-all duration-300">
-              Cotizar Proyecto
-            </Link>
-          </div>
-        </div>
-      </nav>
-
-      {/* 2. HERO DIVIDIDO (Estrategia Anti-Marca de agua aplicada) */}
-      <section className="relative pt-20 border-b border-zinc-200 bg-zinc-50 z-10">
+      {/* 1. HERO DIVIDIDO */}
+      <section className="relative border-b border-zinc-200 bg-[#F8FAFC] z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 items-center">
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
@@ -67,35 +45,35 @@ export default function Servicios() {
             className="p-10 md:p-20 lg:p-32"
           >
             <div className="flex items-center gap-4 mb-6">
-              <div className="h-0.5 w-12 bg-orange-600" />
+              <div className="h-0.5 w-12 bg-[#FF5000]" />
               <span className="uppercase tracking-[0.2em] text-xs font-bold text-zinc-500">Catálogo Técnico</span>
             </div>
-            <h1 className="text-5xl md:text-6xl font-black text-zinc-900 leading-tight mb-8 tracking-tighter">
-              SOLUCIONES <br /> ESTRUCTURALES <br /> <span className="text-orange-600">B2B.</span>
+            <h1 className="text-5xl md:text-6xl font-black text-[#0F172A] leading-tight mb-8 tracking-tighter font-display">
+              SOLUCIONES <br /> ESTRUCTURALES <br /> <span className="text-[#FF5000]">B2B.</span>
             </h1>
             <p className="text-lg text-zinc-500 font-light leading-relaxed max-w-md">
               Abarcamos toda la gama de servicios, desde la planificación del proyecto arquitectónico hasta su construcción final, operando bajo estándares industriales rígidos.
             </p>
           </motion.div>
           
-          {/* Contenedor con overflow-hidden y scale para evadir marcas de agua */}
-          <div className="relative h-full min-h-100 md:min-h-150 overflow-hidden border-l border-zinc-200">
+          {/* Clean image container with strict aspect ratio */}
+          <div className="relative aspect-[4/3] md:aspect-auto md:h-full min-h-[400px] overflow-hidden border-l border-zinc-200">
             <Image 
-              src="/img/fotos/arquitectura-B2B.jpg" 
-              alt="Arquitectura Moderna Industrial" 
+              src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2070&auto=format&fit=crop"
+              alt="Arquitectura Industrial B2B"
               fill 
-              className="object-cover grayscale-30 opacity-60 scale-105" // Aplicado scale-105
+              className="object-cover"
               priority
             />
-            <div className="absolute inset-0 bg-linear-to-t from-zinc-950/90 via-zinc-900/10 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/60 via-transparent to-transparent" />
           </div>
         </div>
       </section>
 
-      {/* 3. GRID TÉCNICO DE ESPECIALIDADES */}
-      <section className="py-32 max-w-full px-8 md:px-16 mx-auto relative z-10">
+      {/* 2. GRID TÉCNICO DE ESPECIALIDADES */}
+      <section className="py-32 max-w-6xl px-8 md:px-16 mx-auto relative z-10">
         <div className="mb-20 text-center max-w-2xl mx-auto">
-          <h2 className="text-3xl font-bold text-zinc-900 mb-4 tracking-tight">Especialidades de Ejecución</h2>
+          <h2 className="font-display text-3xl font-bold text-[#0F172A] mb-4 tracking-tight">Especialidades de Ejecución</h2>
           <p className="text-zinc-500 font-light">Coordinamos todos los gremios bajo una misma supervisión logística y administrativa para garantizar cumplimiento.</p>
         </div>
 
@@ -107,12 +85,12 @@ export default function Servicios() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
-              className="group border border-zinc-200 bg-zinc-50 p-8 flex flex-col justify-between h-55 transition-all duration-300 hover:border-zinc-400"
+              className="group border border-zinc-200 bg-[#F8FAFC] p-8 flex flex-col justify-between h-52 transition-all duration-300 hover:border-[#FF5000]/50 hover:shadow-lg"
             >
               <div className="flex justify-between items-start">
                 <Icon name={spec.icon} />
               </div>
-              <h3 className="text-lg font-bold text-zinc-900 leading-snug tracking-tight group-hover:text-orange-500 transition-colors">
+              <h3 className="text-lg font-bold text-[#0F172A] leading-snug tracking-tight group-hover:text-[#FF5000] transition-colors">
                 {spec.name}
               </h3>
             </motion.div>
@@ -120,37 +98,32 @@ export default function Servicios() {
         </div>
       </section>
 
-      {/* 4. SINIESTROS EXPANDIBLES */}
-      <section className="pb-40 max-w-full px-8 md:px-16 mx-auto relative z-10">
+      {/* 3. SINIESTROS EXPANDIBLES */}
+      <section className="pb-40 max-w-6xl px-8 md:px-16 mx-auto relative z-10">
         <div className="mb-20">
-          <span className="inline-block bg-orange-600/10 text-orange-500 border border-orange-600/30 px-3 py-1 text-xs font-bold uppercase tracking-widest mb-4">
+          <span className="inline-block bg-[#FF5000]/10 text-[#FF5000] border border-[#FF5000]/30 px-3 py-1 text-xs font-bold uppercase tracking-widest mb-4">
             Unidad de Reacción Inmediata
           </span>
-          <h2 className="text-3xl font-bold text-zinc-900 mb-4 tracking-tight">Manejo de Emergencias Corporativas</h2>
+          <h2 className="font-display text-3xl font-bold text-[#0F172A] mb-4 tracking-tight">Manejo de Emergencias Corporativas</h2>
         </div>
 
-        <div className="border border-zinc-200 bg-zinc-50 shadow-2xl overflow-hidden">
+        <div className="border border-zinc-200 bg-[#F8FAFC] shadow-xl overflow-hidden">
           {claims.map((claim) => (
             <motion.div 
               key={claim.id}
               className="border-b border-zinc-200 last:border-b-0 cursor-pointer relative group"
               onClick={() => setExpandedClaim(expandedClaim === claim.id ? null : claim.id)}
             >
-              {/* Imagen de fondo sutil al hover ( Anti-marca de agua aplicada) */}
-              <div className="absolute inset-0 z-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500 overflow-hidden">
-                <Image src={`/img/fotos/${claim.prompt}`} alt={claim.title} fill className="object-cover scale-105" />
-              </div>
-
               <div className="p-8 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
                 <div className="flex items-center gap-6">
                   <span className="font-mono text-zinc-400 text-lg">{claim.id}</span>
-                  <h3 className="text-2xl font-bold text-zinc-900 tracking-tight group-hover:text-orange-500 transition-colors">
+                  <h3 className="text-2xl font-bold text-[#0F172A] tracking-tight group-hover:text-[#FF5000] transition-colors">
                     {claim.title}
                   </h3>
                 </div>
                 <motion.div
                   animate={{ rotate: expandedClaim === claim.id ? 180 : 0 }}
-                  className="text-zinc-400 group-hover:text-orange-500 w-6 h-6 shrink-0"
+                  className="text-zinc-400 group-hover:text-[#FF5000] w-6 h-6 shrink-0 transition-colors"
                 >
                   <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path d="M19 9l-7 7-7-7"/></svg>
                 </motion.div>
@@ -168,8 +141,8 @@ export default function Servicios() {
               >
                 <div className="px-8 md:px-28 pb-10 pt-2 text-zinc-500 font-light leading-relaxed max-w-4xl">
                   {claim.desc}
-                  <Link href="/contacto" className="text-orange-500 text-sm font-bold uppercase tracking-widest flex items-center gap-2 mt-6 hover:text-orange-400 hover:scale-105 active:scale-95 transition-all duration-300 w-fit">
-                    Solicitar Asistencia Técnica URI <span className="text-lg">→</span>
+                  <Link href="/contacto" className="text-[#FF5000] text-sm font-bold uppercase tracking-widest flex items-center gap-2 mt-6 hover:text-[#CC4000] w-fit transition-colors">
+                    Solicitar Asistencia Técnica <span className="text-lg">→</span>
                   </Link>
                 </div>
               </motion.div>
@@ -177,37 +150,6 @@ export default function Servicios() {
           ))}
         </div>
       </section>
-
-      {/* FOOTER CORPORATIVO */}
-      <footer className="bg-zinc-50 text-zinc-500 py-16 text-sm border-t border-zinc-200 relative z-10">
-        <div className="max-w-full px-8 md:px-16 mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
-            <div className="col-span-1 md:col-span-2">
-                <h4 className="text-zinc-900 font-bold text-xl mb-6">Total Repair Ltda.</h4>
-                <p className="max-w-md leading-relaxed mb-6 font-light">
-                    Soluciones constructivas integrales para empresas. Entregamos la administración y supervisión total del proyecto garantizando el cumplimiento logístico y administrativo.
-                </p>
-            </div>
-            <div>
-                <h4 className="text-zinc-900 font-bold uppercase tracking-wider mb-6 text-xs">Contacto Directo</h4>
-                <ul className="space-y-4 font-light">
-                    <li className="flex items-start gap-3"><i className="fa-solid fa-location-dot mt-1 text-orange-600"></i> Villasana 1398, Quinta Normal</li>
-                    <li className="flex items-center gap-3"><i className="fa-solid fa-phone text-orange-600"></i> (+56) 9 9919 5521</li>
-                    <li className="flex items-center gap-3"><i className="fa-solid fa-envelope text-orange-600"></i> contacto@totalrepair.cl</li>
-                </ul>
-            </div>
-            <div>
-                <h4 className="text-zinc-900 font-bold uppercase tracking-wider mb-6 text-xs">Divisiones</h4>
-                <ul className="space-y-3 font-light">
-                    <li><Link href="/" className="text-zinc-500 hover:text-zinc-900 transition-colors">Empresas (B2B)</Link></li>
-                    <li><a href="https://www.totalconstruye.cl" target="_blank" rel="noreferrer" className="text-zinc-500 hover:text-zinc-900 transition-colors">Hogar (Total Construye) <i className="fa-solid fa-arrow-up-right-from-square text-[10px] ml-1"></i></a></li>
-                </ul>
-            </div>
-        </div>
-        <div className="max-w-full px-8 md:px-16 mx-auto mt-12 pt-8 border-t border-zinc-200/50 text-center text-xs font-light">
-            <p>© 2026 Total Repair Ltda. Todos los derechos reservados.</p>
-        </div>
-      </footer>
-
-    </main>
+    </div>
   );
 }
