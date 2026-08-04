@@ -32,11 +32,8 @@ export default function Home() {
       {/* ── HERO — Light Theme ── */}
       <section className="relative min-h-[90vh] flex flex-col items-center justify-center pt-24 px-6 bg-white overflow-hidden">
         
-        {/* Background elements */}
-        <div className="absolute inset-0 z-0 pointer-events-none">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(255,80,0,0.05)_0%,_transparent_60%)]" />
-          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent" />
-        </div>
+        {/* Clean top divider line only — no AI gradient */}
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent pointer-events-none" />
 
         <motion.div
           variants={containerVariants}
@@ -44,32 +41,34 @@ export default function Home() {
           animate="visible"
           className="relative z-10 max-w-6xl w-full text-center"
         >
-          {/* Eyebrow */}
+          {/* Eyebrow badge */}
           <motion.div variants={itemVariants} className="flex justify-center mb-8">
             <span className="px-4 py-2 border border-[#FF5000]/20 bg-[#FF5000]/5 text-[#FF5000] text-xs font-bold uppercase tracking-widest rounded-full">
-              +{COMPANY.yearsExperience} Años de Experiencia en Chile
+              Más de dos décadas de experiencia en Chile
             </span>
           </motion.div>
 
-          {/* Headline */}
+          {/* H1 — Two-tone dominant brand name */}
           <motion.h1
             variants={itemVariants}
-            className="font-display font-black tracking-tight leading-none mb-8"
+            className="font-display font-black tracking-tight leading-none mb-6"
           >
-            <span className="block text-6xl md:text-8xl lg:text-9xl text-[#FF5000]">
-              TOTAL REPAIR
-            </span>
-            <span className="block text-2xl md:text-3xl lg:text-4xl text-[#0F172A] font-semibold mt-3">
-              Construimos Confianza Desde 2004
+            <span className="block text-7xl md:text-9xl lg:text-[11rem] leading-none">
+              <span className="text-[#0F172A]">TOTAL</span>{" "}
+              <span className="text-[#FF5000]">REPAIR</span>
             </span>
           </motion.h1>
 
-          <motion.p
-            variants={itemVariants}
-            className="text-xl md:text-2xl text-zinc-500 font-light max-w-3xl mx-auto mb-16 leading-relaxed"
-          >
-            Cuando la continuidad de su operación es crítica, <strong className="text-[#0F172A] font-semibold">Total Repair responde.</strong>
-          </motion.p>
+          {/* Subtitle & slogan */}
+          <motion.div variants={itemVariants} className="mb-12">
+            <p className="text-2xl md:text-3xl font-bold text-[#0F172A] mb-4">
+              Construimos Confianza Desde 2004
+            </p>
+            <p className="text-lg md:text-xl text-zinc-500 font-light max-w-2xl mx-auto leading-relaxed">
+              Cuando la continuidad de su operación es crítica,{" "}
+              <strong className="text-[#0F172A] font-semibold">Total Repair responde.</strong>
+            </p>
+          </motion.div>
 
           {/* CTA Buttons */}
           <motion.div variants={itemVariants} className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-20">

@@ -27,6 +27,18 @@ export const metadata: Metadata = {
   description:
     "Soluciones integrales de construcción, remodelación y reparación para empresas y hogares. Más de 22 años de experiencia en Chile. Atención 24/7.",
   metadataBase: new URL("https://www.totalrepair.cl"),
+  alternates: {
+    canonical: "/",
+  },
+  keywords: [
+    "Total Repair",
+    "Construcción Chile",
+    "Remodelación B2B",
+    "Mantenimiento Corporativo",
+    "Reparación de Siniestros",
+    "Obras Comerciales",
+    "Continuidad Operacional",
+  ],
   robots: "index, follow",
   icons: {
     icon: "/favicon.ico",
