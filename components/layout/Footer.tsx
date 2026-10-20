@@ -6,42 +6,42 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-zinc-950 text-zinc-400 border-t border-zinc-800 font-sans">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 py-16 lg:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8">
+    <footer className="bg-white text-zinc-600 border-t border-zinc-200 font-sans">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-16 lg:py-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
           {/* Columna 1: Identidad Corporativa (4 cols) */}
-          <div className="lg:col-span-4 space-y-6">
+          <div className="lg:col-span-4 space-y-5">
             <Link href="/" className="flex items-center gap-3">
-              <div className="relative w-12 h-12 bg-white p-1 rounded-sm flex items-center justify-center shrink-0">
+              <div className="relative w-11 h-11 flex items-center justify-center shrink-0">
                 <Image
                   src="/img/logos/logo.png"
                   alt="Total Repair Ltda. Logo"
                   fill
-                  sizes="48px"
-                  className="object-contain p-0.5"
+                  sizes="44px"
+                  className="object-contain"
                 />
               </div>
               <div className="flex flex-col">
-                <span className="text-white font-extrabold tracking-tight text-xl leading-none font-display uppercase">
+                <span className="text-[#0F172A] font-extrabold tracking-tight text-xl leading-none font-display uppercase">
                   TOTAL <span className="text-[#FF5000]">REPAIR</span>
                 </span>
-                <span className="text-zinc-400 font-mono text-[10px] tracking-[0.2em] uppercase mt-1">
+                <span className="text-zinc-500 font-mono text-[10px] tracking-[0.2em] uppercase mt-1">
                   Construcción & Siniestros
                 </span>
               </div>
             </Link>
 
-            <p className="text-sm text-zinc-400 leading-relaxed max-w-sm">
+            <p className="text-sm text-zinc-600 leading-relaxed max-w-sm font-light">
               Empresa constructora y contratista general con más de 22 años de experiencia en liquidación y reconstrucción de siniestros, obras civiles B2B y remodelaciones residenciales en Chile.
             </p>
 
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-zinc-900 border border-zinc-800 text-xs font-mono text-zinc-300">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#F8FAFC] border border-zinc-200 text-xs font-mono text-[#0F172A]">
               <svg
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
-                className="w-4 h-4 text-[#FF5000]"
+                className="w-4 h-4 text-[#FF5000] shrink-0"
                 aria-hidden="true"
               >
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
@@ -53,7 +53,7 @@ export function Footer() {
 
           {/* Columna 2: Navegación Rápida (2 cols) */}
           <div className="lg:col-span-2 space-y-4">
-            <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-white font-semibold">
+            <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-[#0F172A] font-bold">
               Ecosistema
             </h3>
             <ul className="space-y-2.5 text-sm">
@@ -61,7 +61,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="hover:text-[#FF5000] transition-colors duration-200 inline-block"
+                    className="text-zinc-600 hover:text-[#FF5000] transition-colors duration-200 inline-block"
                   >
                     {link.label}
                   </Link>
@@ -70,7 +70,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/contacto"
-                  className="hover:text-[#FF5000] transition-colors duration-200 inline-block"
+                  className="text-zinc-600 hover:text-[#FF5000] transition-colors duration-200 inline-block"
                 >
                   Contacto
                 </Link>
@@ -80,14 +80,14 @@ export function Footer() {
 
           {/* Columna 3: Especialidades Técnicas (3 cols) */}
           <div className="lg:col-span-3 space-y-4">
-            <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-white font-semibold">
+            <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-[#0F172A] font-bold">
               Líneas de Acción
             </h3>
-            <ul className="space-y-2.5 text-sm text-zinc-400">
+            <ul className="space-y-2.5 text-sm text-zinc-600">
               <li>
                 <Link
                   href="/servicios"
-                  className="hover:text-white transition-colors duration-200"
+                  className="hover:text-[#FF5000] transition-colors duration-200"
                 >
                   Reconstrucción Post-Incendio
                 </Link>
@@ -95,7 +95,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/servicios"
-                  className="hover:text-white transition-colors duration-200"
+                  className="hover:text-[#FF5000] transition-colors duration-200"
                 >
                   Secado Industrial y Daño por Agua
                 </Link>
@@ -103,7 +103,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/empresas"
-                  className="hover:text-white transition-colors duration-200"
+                  className="hover:text-[#FF5000] transition-colors duration-200"
                 >
                   Habilitación de Oficinas y Retail B2B
                 </Link>
@@ -111,7 +111,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/hogar"
-                  className="hover:text-white transition-colors duration-200"
+                  className="hover:text-[#FF5000] transition-colors duration-200"
                 >
                   Remodelación Integral de Viviendas
                 </Link>
@@ -119,7 +119,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/servicios"
-                  className="hover:text-white transition-colors duration-200"
+                  className="hover:text-[#FF5000] transition-colors duration-200"
                 >
                   Instalaciones Eléctricas Certificadas SEC
                 </Link>
@@ -129,10 +129,10 @@ export function Footer() {
 
           {/* Columna 4: Coordenadas Operativas (3 cols) */}
           <div className="lg:col-span-3 space-y-4">
-            <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-white font-semibold">
+            <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-[#0F172A] font-bold">
               Central de Operaciones
             </h3>
-            <ul className="space-y-3 text-sm">
+            <ul className="space-y-3 text-sm text-zinc-600">
               <li className="flex items-start gap-3">
                 <svg
                   viewBox="0 0 24 24"
@@ -160,7 +160,7 @@ export function Footer() {
                 </svg>
                 <a
                   href={`tel:${COMPANY.phoneClean}`}
-                  className="hover:text-white transition-colors duration-200 font-mono"
+                  className="hover:text-[#FF5000] transition-colors duration-200 font-mono"
                 >
                   {COMPANY.phoneDisplay}
                 </a>
@@ -179,7 +179,7 @@ export function Footer() {
                 </svg>
                 <a
                   href={`mailto:${COMPANY.email}`}
-                  className="hover:text-white transition-colors duration-200 font-mono break-all"
+                  className="hover:text-[#FF5000] transition-colors duration-200 font-mono break-all"
                 >
                   {COMPANY.email}
                 </a>
@@ -197,8 +197,8 @@ export function Footer() {
                   <path d="M12 6v6l4 2" />
                 </svg>
                 <div className="text-xs space-y-1">
-                  <p className="text-zinc-300 font-medium">{COMPANY.hours}</p>
-                  <p className="text-[#FF5000] font-mono uppercase">
+                  <p className="text-[#0F172A] font-medium">{COMPANY.hours}</p>
+                  <p className="text-[#FF5000] font-mono font-semibold uppercase">
                     {COMPANY.emergencyHours}
                   </p>
                 </div>
@@ -209,23 +209,23 @@ export function Footer() {
       </div>
 
       {/* Barra Inferior Legal & Créditos */}
-      <div className="border-t border-zinc-900 bg-black/40">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-400">
-          <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-6">
+      <div className="border-t border-zinc-200 bg-[#F8FAFC]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
+          <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-6 text-center sm:text-left">
             <p>
               © {currentYear} {COMPANY.legalName} Todos los derechos reservados.
             </p>
             <div className="flex items-center gap-4">
               <Link
                 href="/privacidad"
-                className="hover:text-zinc-200 transition-colors duration-200"
+                className="hover:text-[#0F172A] transition-colors duration-200"
               >
                 Política de Privacidad
               </Link>
               <span>•</span>
               <Link
                 href="/terminos"
-                className="hover:text-zinc-200 transition-colors duration-200"
+                className="hover:text-[#0F172A] transition-colors duration-200"
               >
                 Términos de Uso
               </Link>
@@ -236,7 +236,7 @@ export function Footer() {
             href={COMPANY.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-zinc-400 hover:text-zinc-200 transition-colors duration-200 font-mono text-[11px]"
+            className="inline-flex items-center gap-1 text-zinc-600 hover:text-[#FF5000] transition-colors duration-200 font-mono text-[11px]"
           >
             <span>Desarrollado por {COMPANY.developerName}</span>
             <svg

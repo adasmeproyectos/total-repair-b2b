@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { SectionLabel } from "@/components/shared/SectionLabel";
 import { EmergencyCTA } from "@/components/ui/EmergencyCTA";
 import { generateMetadata as buildMetadata } from "@/lib/metadata";
 
@@ -100,49 +101,44 @@ const claimsFaqJsonLd = {
 
 export default function ServiciosPage() {
   return (
-    <div className="min-h-screen bg-white text-zinc-900 overflow-x-hidden pt-20">
+    <div className="min-h-screen bg-white text-[#0F172A] overflow-x-hidden pt-20">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(claimsFaqJsonLd) }}
       />
 
       {/* 1. HERO DIVIDIDO */}
-      <section className="relative border-b border-zinc-200 bg-[#F8FAFC] z-10">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center">
-          <div className="p-8 md:p-16 lg:p-20">
-            <div className="flex items-center gap-4 mb-6">
-              <div className="h-0.5 w-12 bg-[#FF5000]" />
-              <span className="uppercase tracking-[0.2em] text-xs font-mono font-bold text-zinc-500">
-                Catálogo Técnico
-              </span>
-            </div>
-            <h1 className="text-5xl md:text-6xl font-black text-[#0F172A] leading-tight mb-8 tracking-tighter font-display">
-              SOLUCIONES <br /> ESTRUCTURALES <br />{" "}
-              <span className="text-[#FF5000]">B2B & HOGAR.</span>
+      <section className="relative border-b border-zinc-200 bg-[#F8FAFC]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-14 sm:py-20 lg:py-24 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+          <div className="lg:col-span-7">
+            <SectionLabel label="Catálogo Técnico" />
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-[#0F172A] leading-[1.08] mb-6 tracking-tight font-display uppercase">
+              SOLUCIONES <br className="hidden sm:inline" /> ESTRUCTURALES{" "}
+              <span className="text-[#FF5000] block sm:inline">B2B & HOGAR.</span>
             </h1>
-            <p className="text-lg text-zinc-600 font-light leading-relaxed max-w-md">
+            <p className="text-base sm:text-lg text-zinc-600 font-light leading-relaxed max-w-xl">
               Abarcamos toda la gama de servicios de ingeniería civil, remodelación y respuesta a siniestros, desde el levantamiento técnico hasta la recepción conforme bajo normativa chilena.
             </p>
           </div>
 
-          <div className="relative aspect-[4/3] md:aspect-auto md:h-full min-h-[420px] overflow-hidden border-l border-zinc-200 bg-zinc-900">
+          <div className="lg:col-span-5 relative aspect-[4/3] w-full overflow-hidden border border-zinc-200 bg-zinc-100 shadow-xs">
             <Image
               src="/img/fotos/arquitectura-B2B.jpg"
               alt="Arquitectura e Ingeniería Industrial B2B — Total Repair Ltda."
               fill
-              sizes="(max-width: 768px) 100vw, 50vw"
+              sizes="(max-width: 1024px) 100vw, 42vw"
               className="object-cover origin-top-left scale-[1.08]"
               priority
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/60 via-transparent to-transparent" />
           </div>
         </div>
       </section>
 
-      {/* 2. GRID TÉCNICO DE ESPECIALIDADES */}
-      <section className="py-28 max-w-7xl px-6 md:px-12 mx-auto relative z-10">
-        <div className="mb-16 text-center max-w-2xl mx-auto">
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-[#0F172A] mb-4 tracking-tight">
+      {/* 2. GRID TÉCNICO DE ESPECIALIDADES (#FFFFFF) */}
+      <section className="py-20 sm:py-24 max-w-7xl px-4 sm:px-6 md:px-12 mx-auto bg-white">
+        <div className="mb-14 text-center max-w-2xl mx-auto">
+          <SectionLabel label="Gremios Integrados" className="justify-center" />
+          <h2 className="font-display text-3xl sm:text-4xl font-black text-[#0F172A] mb-3 tracking-tight uppercase">
             Especialidades de Ejecución
           </h2>
           <p className="text-zinc-600 font-light">
@@ -154,7 +150,7 @@ export default function ServiciosPage() {
           {specialities.map((spec) => (
             <article
               key={spec.name}
-              className="group border border-zinc-200 bg-[#F8FAFC] p-8 flex flex-col justify-between min-h-[240px] transition-colors duration-200 hover:border-[#FF5000] hover:shadow-md"
+              className="group border border-zinc-200 bg-[#F8FAFC] p-6 sm:p-8 flex flex-col justify-between min-h-[220px] transition-colors duration-200 hover:border-[#FF5000] hover:shadow-md"
             >
               <div className="flex justify-between items-start mb-6">
                 <Icon name={spec.icon} />
@@ -163,7 +159,7 @@ export default function ServiciosPage() {
                 <h3 className="text-lg font-bold text-[#0F172A] leading-snug tracking-tight group-hover:text-[#FF5000] transition-colors duration-200 mb-2">
                   {spec.name}
                 </h3>
-                <p className="text-sm text-zinc-600 leading-relaxed">
+                <p className="text-sm text-zinc-600 leading-relaxed font-light">
                   {spec.desc}
                 </p>
               </div>
@@ -172,56 +168,58 @@ export default function ServiciosPage() {
         </div>
       </section>
 
-      {/* 3. SINIESTROS EXPANDIBLES (SSR Native Details/Summary) */}
-      <section className="pb-28 max-w-7xl px-6 md:px-12 mx-auto relative z-10">
-        <div className="mb-12">
-          <span className="inline-block bg-[#FF5000]/10 text-[#FF5000] border border-[#FF5000]/30 px-3 py-1 text-xs font-mono font-bold uppercase tracking-widest mb-4">
-            Unidad de Reacción Inmediata
-          </span>
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-[#0F172A] mb-4 tracking-tight">
-            Manejo de Emergencias y Siniestros
-          </h2>
-        </div>
+      {/* 3. SINIESTROS EXPANDIBLES (#F8FAFC) */}
+      <section className="py-20 sm:py-24 bg-[#F8FAFC] border-t border-zinc-200">
+        <div className="max-w-7xl px-4 sm:px-6 md:px-12 mx-auto">
+          <div className="mb-12">
+            <span className="inline-block bg-[#FF5000]/10 text-[#FF5000] border border-[#FF5000]/30 px-3 py-1 text-xs font-mono font-bold uppercase tracking-widest mb-4">
+              Unidad de Reacción Inmediata
+            </span>
+            <h2 className="font-display text-3xl sm:text-4xl font-black text-[#0F172A] mb-3 tracking-tight uppercase">
+              Manejo de Emergencias y Siniestros
+            </h2>
+          </div>
 
-        <div className="border border-zinc-200 bg-[#F8FAFC] shadow-sm overflow-hidden">
-          {claims.map((claim, index) => (
-            <details
-              key={claim.id}
-              open={index === 0}
-              className="group border-b border-zinc-200 last:border-b-0"
-            >
-              <summary className="p-8 md:p-10 flex items-center justify-between gap-6 cursor-pointer list-none hover:bg-zinc-100/60 transition-colors duration-200">
-                <div className="flex items-center gap-6">
-                  <span className="font-mono text-[#FF5000] font-bold text-lg">
-                    {claim.id}
-                  </span>
-                  <h3 className="text-xl md:text-2xl font-bold text-[#0F172A] tracking-tight group-hover:text-[#FF5000] transition-colors duration-200">
-                    {claim.title}
-                  </h3>
-                </div>
-                <div className="text-zinc-500 group-open:rotate-180 group-open:text-[#FF5000] w-6 h-6 shrink-0 transition-transform duration-200">
-                  <svg
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth="2"
+          <div className="border border-zinc-200 bg-white shadow-xs overflow-hidden">
+            {claims.map((claim, index) => (
+              <details
+                key={claim.id}
+                open={index === 0}
+                className="group border-b border-zinc-200 last:border-b-0"
+              >
+                <summary className="p-6 sm:p-8 md:p-10 flex items-center justify-between gap-4 sm:gap-6 cursor-pointer list-none hover:bg-[#F8FAFC] transition-colors duration-200">
+                  <div className="flex items-center gap-4 sm:gap-6">
+                    <span className="font-mono text-[#FF5000] font-bold text-base sm:text-lg">
+                      {claim.id}
+                    </span>
+                    <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-[#0F172A] tracking-tight group-hover:text-[#FF5000] transition-colors duration-200">
+                      {claim.title}
+                    </h3>
+                  </div>
+                  <div className="text-zinc-500 group-open:rotate-180 group-open:text-[#FF5000] w-6 h-6 shrink-0 transition-transform duration-200">
+                    <svg
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
+                </summary>
+
+                <div className="px-6 sm:px-8 md:px-20 pb-8 sm:pb-10 pt-2 bg-[#F8FAFC] border-t border-zinc-200/60 text-zinc-600 leading-relaxed font-light">
+                  <p className="max-w-4xl pt-4 text-sm sm:text-base">{claim.desc}</p>
+                  <Link
+                    href="/contacto?urgencia=true"
+                    className="text-[#FF5000] text-xs sm:text-sm font-bold uppercase tracking-widest flex items-center gap-2 mt-6 hover:text-[#CC4000] w-fit transition-colors duration-200"
                   >
-                    <path d="M19 9l-7 7-7-7" />
-                  </svg>
+                    Solicitar Asistencia Técnica <span className="text-lg">→</span>
+                  </Link>
                 </div>
-              </summary>
-
-              <div className="px-8 md:px-24 pb-10 pt-2 bg-white border-t border-zinc-200/60 text-zinc-600 leading-relaxed">
-                <p className="max-w-4xl pt-4">{claim.desc}</p>
-                <Link
-                  href="/contacto?urgencia=true"
-                  className="text-[#FF5000] text-sm font-bold uppercase tracking-widest flex items-center gap-2 mt-6 hover:text-[#CC4000] w-fit transition-colors duration-200"
-                >
-                  Solicitar Asistencia Técnica <span className="text-lg">→</span>
-                </Link>
-              </div>
-            </details>
-          ))}
+              </details>
+            ))}
+          </div>
         </div>
       </section>
 

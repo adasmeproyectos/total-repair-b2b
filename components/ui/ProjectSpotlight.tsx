@@ -2,138 +2,101 @@ import Image from "next/image";
 import { SectionLabel } from "@/components/shared/SectionLabel";
 import { ImageWrapper } from "@/components/shared/ImageWrapper";
 
-const FEATURED_PROJECTS = [
+const FLAGSHIP_PROJECTS = [
   {
-    id: "PRJ-01",
-    title: "Recuperación Integral de Propiedad Post-Incendio",
-    category: "Siniestros Complejos",
-    location: "Sector Oriente, RM",
-    clientType: "Compañía de Seguros",
+    title: "Chilevisión Machasa",
+    subtitle: "Proyecto Emblemático",
     description:
-      "Descontaminación de hollín, reconstrucción total de techumbre colapsada, renovación de red eléctrica bajo norma SEC y terminaciones de alto estándar.",
-    image: "/img/fotos/dano-incendio.jpg",
-  },
-  {
-    id: "PRJ-02",
-    title: "Mitigación y Secado Industrial por Rotura de Matriz",
-    category: "Daño por Agua",
-    location: "Providencia, RM",
-    clientType: "Comunidad de Edificio / Liquidador",
-    description:
-      "Extracción de agua, deshumidificación mecánica en 4 niveles afectados, reemplazo de pisos estructurados y pintura general con entrega conforme en tiempo récord.",
-    image: "/img/fotos/dano-agua.jpg",
-  },
-  {
-    id: "PRJ-03",
-    title: "Habilitación y Remodelación de Oficinas Corporativas",
-    category: "Obras Civiles B2B",
-    location: "Santiago Centro, RM",
-    clientType: "Institución Privada",
-    description:
-      "Rediseño de layout operativo, tabiquería acústica, climatización, cielo modular e iluminación LED de alta eficiencia para continuidad operacional.",
+      "Ejecución de terminaciones de alta precisión técnica, revestimientos especializados e interiorismo detallado para estudios de televisión, cumpliendo con los más altos estándares acústicos y visuales de la industria.",
     image: "/img/fotos/remodelacion-interior.jpg",
+    badges: ["Alta Precisión", "Interiorismo", "Estudios TV"],
+    align: "left",
+  },
+  {
+    title: "IntegraMédica Post-27F",
+    subtitle: "Reconstrucción Crítica 24/7",
+    description:
+      "Reconstrucción simultánea de 8 centros médicos post-terremoto operando en turnos 24/7. Destaca la alta coordinación logística en Plaza Norte trabajando en conjunto con constructora Icafal.",
+    image: "/img/fotos/historia-27f.jpg",
+    badges: ["24/7", "Logística Crítica", "Salud"],
+    align: "right",
+  },
+  {
+    title: "Hotel Park Lake",
+    subtitle: "Sobrecubierta a Gran Escala",
+    description:
+      "Intervención mayor consistente en el recambio completo de 3.000 m² de cubierta en pleno invierno en la región lacustre, garantizando impermeabilidad total sin interrumpir la operación del hotel.",
+    image: "/img/fotos/arquitectura-B2B.jpg",
+    badges: ["3.000 m²", "Cubiertas", "Hotelería"],
+    align: "left",
   },
 ];
 
 export function ProjectSpotlight() {
   return (
-    <section className="py-24 bg-white border-t border-zinc-200">
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-          <div>
-            <SectionLabel label="Capacidad Comprobada en Terreno" />
-            <h2 className="text-3xl md:text-5xl font-extrabold text-[#0F172A] tracking-tight font-heading uppercase">
-              Operaciones Recientes
-            </h2>
-          </div>
-          <p className="text-zinc-600 max-w-md text-sm md:text-base border-l-2 border-[#FF5000] pl-4">
-            Cada proyecto es ejecutado bajo estrictos protocolos de trazabilidad, seguridad laboral y cumplimiento normativo chileno.
+    <section className="py-24 px-4 sm:px-6 md:px-12 bg-[#F8FAFC] border-b border-zinc-200">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-20">
+          <SectionLabel label="Proyectos Insignia" className="justify-center" />
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-black text-[#0F172A] tracking-tight mt-4 uppercase">
+            OBRAS QUE DEJAN <span className="text-[#FF5000]">HUELLA</span>
+          </h2>
+          <p className="mt-4 text-zinc-600 font-light max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
+            Nuestra experiencia se forja en proyectos donde la precisión, los plazos críticos y la excelencia técnica son innegociables.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {FEATURED_PROJECTS.map((project) => (
-            <article
-              key={project.id}
-              className="group border border-zinc-200 bg-zinc-50 flex flex-col justify-between overflow-hidden hover:border-zinc-400 transition-colors duration-200 shadow-sm hover:shadow-md"
-            >
-              <div>
-                {/* Imagen del Proyecto con Blindaje de Marca de Agua */}
-                <div className="relative h-64 w-full overflow-hidden bg-zinc-900">
-                  <ImageWrapper className="w-full h-full" overlayOpacity="light">
+        <div className="space-y-20 md:space-y-28">
+          {FLAGSHIP_PROJECTS.map((project) => {
+            const isRight = project.align === "right";
+
+            return (
+              <article
+                key={project.title}
+                className={`flex flex-col ${
+                  isRight ? "md:flex-row-reverse" : "md:flex-row"
+                } gap-8 md:gap-12 lg:gap-16 items-center`}
+              >
+                {/* Image Section */}
+                <div className="w-full md:w-1/2 relative aspect-[4/3] group overflow-hidden border border-zinc-200 bg-zinc-100 shadow-xs">
+                  <ImageWrapper className="w-full h-full" overlayOpacity="none">
                     <Image
                       src={project.image}
                       alt={project.title}
                       fill
-                      sizes="(max-width: 1024px) 100vw, 33vw"
+                      sizes="(max-width: 768px) 100vw, 50vw"
                       className="object-cover"
                     />
                   </ImageWrapper>
-                  <div className="absolute top-4 left-4 z-20 bg-zinc-950/90 text-white text-xs font-mono uppercase px-3 py-1.5 tracking-wider border border-zinc-700">
-                    {project.category}
-                  </div>
                 </div>
 
-                {/* Contenido Técnico */}
-                <div className="p-8">
-                  <div className="flex items-center gap-4 text-xs font-mono text-zinc-500 mb-3">
-                    <span className="flex items-center gap-1">
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        className="w-3.5 h-3.5 text-[#FF5000]"
-                        aria-hidden="true"
-                      >
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
-                        <circle cx="12" cy="10" r="3" />
-                      </svg>
-                      {project.location}
-                    </span>
-                    <span>•</span>
-                    <span className="flex items-center gap-1">
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        className="w-3.5 h-3.5 text-zinc-400"
-                        aria-hidden="true"
-                      >
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                      </svg>
-                      {project.clientType}
-                    </span>
-                  </div>
-
-                  <h3 className="text-xl font-bold text-[#0F172A] mb-3 group-hover:text-[#FF5000] transition-colors duration-200 font-heading">
+                {/* Content Section */}
+                <div className="w-full md:w-1/2">
+                  <span className="text-[#FF5000] font-mono font-bold tracking-widest text-xs uppercase mb-3 block">
+                    {project.subtitle}
+                  </span>
+                  <h3 className="font-display text-2xl sm:text-3xl md:text-4xl font-black text-[#0F172A] mb-5 tracking-tight leading-tight">
                     {project.title}
                   </h3>
-
-                  <p className="text-zinc-600 text-sm leading-relaxed">
+                  <p className="text-zinc-600 font-light leading-relaxed mb-6 text-base sm:text-lg">
                     {project.description}
                   </p>
-                </div>
-              </div>
 
-              {/* Footer de la Tarjeta */}
-              <div className="px-8 py-4 bg-zinc-100 border-t border-zinc-200 flex items-center justify-between text-xs font-mono text-zinc-600">
-                <span>ESTADO: RECEPCIÓN CONFORME</span>
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  className="w-4 h-4 text-emerald-600"
-                  aria-hidden="true"
-                >
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M9 12l2 2 4-4" />
-                </svg>
-              </div>
-            </article>
-          ))}
+                  {/* Badges */}
+                  <div className="flex flex-wrap gap-2.5">
+                    {project.badges.map((badge) => (
+                      <span
+                        key={badge}
+                        className="px-3.5 py-1.5 border border-zinc-200 bg-white text-zinc-700 text-xs font-mono font-semibold tracking-wide"
+                      >
+                        {badge}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>

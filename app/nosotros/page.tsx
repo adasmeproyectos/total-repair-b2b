@@ -14,79 +14,77 @@ export const metadata = buildMetadata({
 
 export default function NosotrosPage() {
   return (
-    <div className="min-h-screen bg-white text-zinc-900 overflow-x-hidden pt-20">
-      {/* 1. HEADER */}
-      <section className="pt-24 pb-20 px-6 md:px-12 max-w-5xl mx-auto text-center">
-        <div>
-          <SectionLabel label="Filosofía Corporativa" className="justify-center" />
-          <h1 className="font-display text-5xl md:text-7xl font-black text-[#0F172A] leading-tight mb-8 tracking-tight">
-            RESPUESTAS BAJO <br /> <span className="text-[#FF5000]">PRESIÓN.</span>
-          </h1>
-          <p className="text-xl text-zinc-600 max-w-3xl mx-auto font-light leading-relaxed">
-            Fundada el 4 de agosto de {COMPANY.founded} por{" "}
-            <strong className="font-semibold text-[#0F172A]">
-              {COMPANY.founder}
-            </strong>
-            ,{" "}
-            <strong className="font-semibold text-[#0F172A]">
-              {COMPANY.legalName}
-            </strong>{" "}
-            nació con la convicción de ofrecer respuestas reales cuando los tiempos apremian. Con más de {COMPANY.yearsExperience} años de trayectoria en Chile, nos especializamos en ejecutar obras complejas en espacios ocupados, garantizando la continuidad operacional de su empresa y la tranquilidad de su hogar.
-          </p>
-        </div>
+    <div className="min-h-screen bg-white text-[#0F172A] overflow-x-hidden pt-20">
+      {/* 1. HEADER (#FFFFFF) */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6 md:px-12 max-w-5xl mx-auto text-center">
+        <SectionLabel label="Filosofía Corporativa" className="justify-center" />
+        <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-black text-[#0F172A] leading-tight mb-6 tracking-tight uppercase">
+          RESPUESTAS BAJO <br className="hidden sm:inline" />{" "}
+          <span className="text-[#FF5000]">PRESIÓN.</span>
+        </h1>
+        <p className="text-base sm:text-lg md:text-xl text-zinc-600 max-w-3xl mx-auto font-light leading-relaxed">
+          Fundada el 4 de agosto de {COMPANY.founded} por{" "}
+          <strong className="font-semibold text-[#0F172A]">
+            {COMPANY.founder}
+          </strong>
+          ,{" "}
+          <strong className="font-semibold text-[#0F172A]">
+            {COMPANY.legalName}
+          </strong>{" "}
+          nació con la convicción de ofrecer respuestas reales cuando los tiempos apremian. Con más de {COMPANY.yearsExperience} años de trayectoria en Chile, nos especializamos en ejecutar obras complejas en espacios ocupados, garantizando la continuidad operacional de su empresa y la tranquilidad de su hogar.
+        </p>
       </section>
 
-      {/* 2. CORE SPECIALIZATION */}
-      <section className="relative h-auto md:h-[70vh] min-h-[560px] flex items-center border-y border-zinc-200 overflow-hidden bg-zinc-950">
-        <div className="absolute inset-0 z-0 overflow-hidden md:w-1/2">
-          <Image
-            src="/img/fotos/historia-27f.jpg"
-            alt="Ingeniería bajo presión en terreno — Total Repair Ltda."
-            fill
-            sizes="(max-width: 768px) 100vw, 50vw"
-            className="object-cover opacity-80 origin-top-left scale-[1.08]"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent to-zinc-950 hidden md:block" />
-        </div>
+      {/* 2. CORE SPECIALIZATION (#F8FAFC — Clean 2-Column Grid) */}
+      <section className="py-16 sm:py-24 border-y border-zinc-200 bg-[#F8FAFC]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <div className="lg:col-span-6 relative aspect-[4/3] w-full overflow-hidden border border-zinc-200 bg-zinc-100 shadow-xs">
+            <Image
+              src="/img/fotos/historia-27f.jpg"
+              alt="Ingeniería bajo presión en terreno — Total Repair Ltda."
+              fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover origin-top-left scale-[1.08]"
+              priority
+            />
+          </div>
 
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 py-16 flex justify-end">
-          <div className="md:w-[55%] bg-white border border-zinc-200 border-l-4 border-l-[#FF5000] p-8 md:p-14 shadow-xl">
+          <div className="lg:col-span-6 bg-white border border-zinc-200 border-l-4 border-l-[#FF5000] p-6 sm:p-10 md:p-12 shadow-sm">
             <svg
               viewBox="0 0 24 24"
               fill="#FF5000"
               opacity="0.2"
-              className="w-16 h-16 mb-6"
+              className="w-12 h-12 sm:w-14 sm:h-14 mb-5"
               aria-hidden="true"
             >
               <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
             </svg>
-            <p className="text-2xl md:text-3xl font-bold text-[#0F172A] leading-snug mb-6">
+            <p className="text-xl sm:text-2xl md:text-3xl font-bold text-[#0F172A] leading-snug mb-5">
               &quot;Nuestra especialidad es operar donde otros se detienen: espacios habitados y recintos críticos.&quot;
             </p>
-            <p className="text-zinc-600 leading-relaxed font-light text-lg">
+            <p className="text-zinc-600 leading-relaxed font-light text-base sm:text-lg">
               Desde reconstrucciones por siniestros graves hasta remodelaciones corporativas y domiciliarias de alta exigencia, entendemos que su vida y su operación no se detienen por una obra. Entregamos la administración y supervisión total del proyecto bajo estándares SEC y OGUC.
             </p>
           </div>
         </div>
       </section>
 
-      {/* 3. TIMELINE CORPORATIVO */}
+      {/* 3. TIMELINE CORPORATIVO (#FFFFFF) */}
       <Timeline />
 
-      {/* 4. GARANTÍAS */}
-      <section className="py-28 px-6 md:px-12 max-w-7xl mx-auto">
-        <div className="mb-16 text-center">
+      {/* 4. GARANTÍAS (#FFFFFF) */}
+      <section className="py-20 sm:py-24 px-4 sm:px-6 md:px-12 max-w-7xl mx-auto bg-white">
+        <div className="mb-14 text-center">
           <SectionLabel label="Certificaciones y Garantías" className="justify-center" />
-          <h2 className="font-display text-4xl font-black text-[#0F172A] mb-4 tracking-tight">
+          <h2 className="font-display text-3xl sm:text-4xl font-black text-[#0F172A] mb-3 tracking-tight uppercase">
             Seguridad Certificada
           </h2>
-          <p className="text-zinc-600 font-light text-lg">
+          <p className="text-zinc-600 font-light text-base sm:text-lg">
             Trabajamos bajo los más altos estándares normativos y de prevención de riesgos en Chile.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           {[
             {
               icon: (
@@ -136,15 +134,15 @@ export default function NosotrosPage() {
           ].map((item) => (
             <article
               key={item.title}
-              className="bg-[#F8FAFC] border border-zinc-200 p-10 transition-colors duration-200 hover:border-[#FF5000] hover:shadow-md"
+              className="bg-[#F8FAFC] border border-zinc-200 p-6 sm:p-10 transition-colors duration-200 hover:border-[#FF5000] hover:shadow-md"
             >
-              <div className="w-16 h-16 bg-white border border-zinc-200 shadow-sm flex items-center justify-center mb-8 text-[#FF5000]">
+              <div className="w-14 h-14 bg-white border border-zinc-200 shadow-2xs flex items-center justify-center mb-6 text-[#FF5000]">
                 {item.icon}
               </div>
-              <h3 className="font-display text-xl font-bold text-[#0F172A] mb-4">
+              <h3 className="font-display text-xl font-bold text-[#0F172A] mb-3">
                 {item.title}
               </h3>
-              <p className="text-zinc-600 text-sm leading-relaxed">
+              <p className="text-zinc-600 text-sm leading-relaxed font-light">
                 {item.desc}
               </p>
             </article>

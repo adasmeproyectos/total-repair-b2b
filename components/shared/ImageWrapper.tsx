@@ -9,21 +9,21 @@ interface ImageWrapperProps {
 export function ImageWrapper({
   children,
   className = "",
-  overlayOpacity = "dark",
+  overlayOpacity = "none",
 }: ImageWrapperProps) {
   const overlays = {
     none: "",
-    light: "bg-zinc-950/20",
-    medium: "bg-zinc-950/40",
-    dark: "bg-zinc-950/60",
-    heavy: "bg-zinc-950/80",
+    light: "bg-slate-900/10",
+    medium: "bg-slate-900/25",
+    dark: "bg-slate-900/45",
+    heavy: "bg-slate-900/65",
   };
 
   return (
     <div
-      className={`relative overflow-hidden bg-zinc-900 [&_img]:origin-top-left [&_img]:scale-[1.08] [&_img]:object-cover ${className}`}
+      className={`relative overflow-hidden bg-zinc-100 [&_img]:origin-top-left [&_img]:scale-[1.08] [&_img]:object-cover ${className}`}
     >
-      <div className="w-full h-full relative z-0 filter contrast-[1.05]">
+      <div className="w-full h-full relative z-0 filter contrast-[1.03]">
         {children}
       </div>
 

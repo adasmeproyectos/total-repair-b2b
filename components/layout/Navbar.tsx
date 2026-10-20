@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { NAV_LINKS, COMPANY } from "@/lib/constants";
-import MobileMenu from "./MobileMenu";
+import { MobileMenu } from "./MobileMenu";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -23,30 +23,30 @@ export function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-40 transition-colors duration-200 ${
+        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-200 ${
           isScrolled
-            ? "bg-zinc-950/95 backdrop-blur-md border-b border-zinc-800 py-3 shadow-lg"
-            : "bg-zinc-950 border-b border-zinc-900 py-4"
+            ? "bg-white/95 backdrop-blur-md border-b border-zinc-200 py-3 shadow-sm"
+            : "bg-white border-b border-zinc-200 py-4"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 flex items-center justify-between">
           {/* Logo Corporativo */}
           <Link href="/" className="flex items-center gap-3 group shrink-0">
-            <div className="relative w-11 h-11 overflow-hidden bg-white p-1 rounded-sm flex items-center justify-center">
+            <div className="relative w-10 h-10 sm:w-11 sm:h-11 overflow-hidden flex items-center justify-center shrink-0">
               <Image
                 src="/img/logos/logo.png"
                 alt="Total Repair Ltda. Logo"
                 fill
                 sizes="44px"
-                className="object-contain p-0.5"
+                className="object-contain"
                 priority
               />
             </div>
             <div className="flex flex-col">
-              <span className="text-white font-extrabold tracking-tight text-xl leading-none font-display uppercase">
+              <span className="text-[#0F172A] font-extrabold tracking-tight text-lg sm:text-xl leading-none font-display uppercase">
                 TOTAL <span className="text-[#FF5000]">REPAIR</span>
               </span>
-              <span className="text-zinc-400 font-mono text-[10px] tracking-[0.2em] uppercase mt-1">
+              <span className="text-zinc-500 font-mono text-[10px] tracking-[0.18em] uppercase mt-1">
                 Construcción & Siniestros
               </span>
             </div>
@@ -58,7 +58,10 @@ export function Navbar() {
             className="hidden lg:flex items-center gap-7"
           >
             {NAV_LINKS.map((link) => {
-              const isActive = pathname === link.href;
+              const isActive =
+                link.href === "/"
+                  ? pathname === "/"
+                  : pathname.startsWith(link.href);
               return (
                 <Link
                   key={link.href}
@@ -66,7 +69,7 @@ export function Navbar() {
                   className={`text-sm font-medium tracking-wide uppercase transition-colors duration-200 relative py-1 ${
                     isActive
                       ? "text-[#FF5000] font-bold"
-                      : "text-zinc-300 hover:text-white"
+                      : "text-zinc-600 hover:text-[#0F172A]"
                   }`}
                 >
                   {link.label}
@@ -78,11 +81,11 @@ export function Navbar() {
             })}
           </nav>
 
-          {/* Acciones Derecha (Emergencia & Contacto) */}
+          {/* Acciones Derecha (Teléfono & Cotizar) */}
           <div className="hidden lg:flex items-center gap-4 shrink-0">
             <a
               href={`tel:${COMPANY.phoneClean}`}
-              className="flex items-center gap-2 text-zinc-300 hover:text-white text-sm font-mono transition-colors duration-200 px-3 py-2"
+              className="flex items-center gap-2 text-zinc-600 hover:text-[#0F172A] text-sm font-mono transition-colors duration-200 px-2 py-2"
             >
               <svg
                 viewBox="0 0 24 24"
@@ -98,21 +101,10 @@ export function Navbar() {
             </a>
 
             <Link
-              href="/contacto?urgencia=true"
-              className="flex items-center gap-2 bg-[#FF5000] hover:bg-[#CC4000] text-white text-xs font-bold uppercase tracking-wider px-5 py-3 transition-colors duration-200 shadow-sm"
+              href="/contacto"
+              className="flex items-center gap-2 bg-[#FF5000] hover:bg-[#CC4000] text-white text-xs font-bold uppercase tracking-wider px-5 py-3 transition-colors duration-200 shadow-xs"
             >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                className="w-4 h-4"
-                aria-hidden="true"
-              >
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                <path d="M12 8v4M12 16h.01" />
-              </svg>
-              <span>Cotizar / Siniestros</span>
+              <span>Cotizar Proyecto</span>
             </Link>
           </div>
 
@@ -120,7 +112,7 @@ export function Navbar() {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(true)}
-            className="lg:hidden p-2 text-zinc-300 hover:text-white focus:outline-none"
+            className="lg:hidden p-2 text-zinc-700 hover:text-[#0F172A] focus:outline-none"
             aria-label="Abrir menú de navegación"
           >
             <svg

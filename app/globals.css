@@ -1,12 +1,5 @@
 @import "tailwindcss";
 
-/* ─── Design Tokens — Total Repair v2 ───────────────────────────────────────
-   PALETA BASADA EN LOGO REAL:
-   Fondo predominante: Blanco / Crema industrial
-   Acento primario:    Naranja construcción #EA580C
-   Texto:              Negro industrial #1A1A1A
-   Soporte:            Gris cemento / Antracita industrial
-   ─────────────────────────────────────────────────────────────────────────── */
 :root {
   /* ── Kodak Institutional Orange */
   --color-brand-orange:        #FF5000;
@@ -18,8 +11,6 @@
   --color-surface-white:       #FFFFFF;
   --color-surface-cream:       #F8FAFC;
   --color-surface-concrete:    #F1F5F9;
-  --color-surface-steel:       #3D4549;   /* Usado solo para secciones CTA oscuras */
-  --color-surface-black:       #1A1A1A;   /* Hero overlays, footer */
 
   /* ── Tinta / Texto */
   --color-ink-black:           #000000;
@@ -31,7 +22,7 @@
   --color-divider:             #E5E2DD;
   --color-divider-dark:        #C8C4BE;
 
-  /* ── Brand legacy (mantener para compatibilidad inline) */
+  /* ── Brand tokens */
   --brand-orange:              #FF5000;
   --brand-slate-950:           #0F172A;
   --brand-slate-900:           #1E293B;
@@ -46,12 +37,14 @@
 /* ─── Global Base ───────────────────────────────────────────────────────────── */
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   background-color: var(--color-surface-white);
-  color: var(--color-ink-black);
+  color: var(--color-ink-anthracite);
   font-family: var(--font-sans);
+  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -68,13 +61,12 @@ body {
 ::-webkit-scrollbar-thumb { background: var(--color-ink-light); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--color-brand-orange); }
 
-/* ─── Logo Carousel — Infinite Scroll (NUNCA se pausa en hover) ─────────────── */
+/* ─── Logo Carousel — Infinite Scroll ───────────────────────────────────────── */
 @keyframes marquee {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
 
-/* Para 3x duplicado: se traslada -33.33% para un loop perfecto */
 @keyframes marquee-triple {
   from { transform: translateX(0); }
   to   { transform: translateX(-33.333%); }
@@ -82,12 +74,10 @@ body {
 
 .animate-marquee {
   animation: marquee 40s linear infinite;
-  /* animation-play-state se mantiene SIEMPRE en running — no hay CSS ni JS que lo pause */
 }
 
 .animate-marquee-triple {
   animation: marquee-triple 55s linear infinite;
-  /* Velocidad ligeramente mayor para compensar el triple de contenido */
 }
 
 /* ─── Focus Ring ────────────────────────────────────────────────────────────── */
@@ -96,18 +86,7 @@ body {
   outline-offset: 3px;
 }
 
-/* ─── Utility: Sección oscura (CTA, hero con overlay) ───────────────────────── */
-.section-dark {
-  background-color: var(--color-surface-black);
-  color: #FFFFFF;
-}
-
-.section-steel {
-  background-color: var(--color-surface-steel);
-  color: #FFFFFF;
-}
-
-/* ─── Barlow Condensed para titulares ───────────────────────────────────────── */
+/* ─── Titulares ─────────────────────────────────────────────────────────────── */
 h1, h2 {
   font-family: var(--font-display);
   font-weight: 700;

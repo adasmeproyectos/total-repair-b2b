@@ -135,41 +135,28 @@ const faqJsonLd = {
 
 export default function HogarPage() {
   return (
-    <div className="min-h-screen bg-white text-zinc-900 overflow-x-hidden pt-20">
+    <div className="min-h-screen bg-white text-[#0F172A] overflow-x-hidden pt-20">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
-      {/* ── HERO RESIDENCIAL ──────────────────────────────────────────────── */}
-      <section className="relative h-[85vh] min-h-[580px] flex items-center bg-zinc-950">
-        <div className="absolute inset-0 z-0 overflow-hidden">
-          <Image
-            src="/img/fotos/hero-hogar.jpg"
-            alt="Remodelación de hogar moderno — Total Repair Ltda."
-            fill
-            sizes="100vw"
-            className="object-cover opacity-55 origin-top-left scale-[1.08]"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-zinc-950 via-zinc-950/75 to-transparent" />
-        </div>
-
-        <div className="relative z-10 max-w-7xl px-6 md:px-12 mx-auto w-full">
-          <div className="max-w-2xl">
-            <SectionLabel label="División Hogar / Total Construye" dark />
-            <h1 className="font-display text-5xl md:text-7xl font-black text-white leading-[1.1] mb-8 tracking-tight">
-              TU HOGAR,
-              <br />
-              <span className="text-[#FF5000]">RENOVADO.</span>
+      {/* ── HERO RESIDENCIAL — Cohesive Light Corporate Split ────────────── */}
+      <section className="relative border-b border-zinc-200 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-14 sm:py-20 lg:py-24 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+          <div className="lg:col-span-7">
+            <SectionLabel label="División Hogar / Total Construye" />
+            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-black text-[#0F172A] leading-[1.08] mb-6 tracking-tight uppercase">
+              TU HOGAR,{" "}
+              <span className="text-[#FF5000] block sm:inline">RENOVADO.</span>
             </h1>
-            <p className="text-lg md:text-xl text-zinc-200 mb-10 max-w-xl font-light leading-relaxed">
-              Gasfitería, electricidad certificada SEC, remodelación de cocinas, baños y siniestros domiciliarios. Materiales de calidad y garantía real en cada trabajo.
+            <p className="text-base sm:text-lg md:text-xl text-zinc-600 mb-8 sm:mb-10 max-w-xl font-light leading-relaxed">
+              Gasfitería, electricidad certificada SEC, remodelación de cocinas, baños y reparación de siniestros domiciliarios. Materiales de calidad y garantía escrita en cada trabajo.
             </p>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-col sm:flex-row gap-3.5 sm:gap-4">
               <Link
                 href="/contacto?modo=hogar"
-                className="bg-[#FF5000] text-white px-8 py-4 text-sm font-bold uppercase tracking-widest hover:bg-[#CC4000] transition-colors duration-200"
+                className="bg-[#FF5000] text-white px-8 py-4 text-xs sm:text-sm font-bold uppercase tracking-widest hover:bg-[#CC4000] transition-colors duration-200 text-center"
               >
                 Solicitar Presupuesto
               </Link>
@@ -177,25 +164,36 @@ export default function HogarPage() {
                 href={COMPANY.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="border-2 border-emerald-500 text-emerald-400 px-8 py-4 text-sm font-bold uppercase tracking-widest hover:bg-emerald-500 hover:text-white transition-colors duration-200"
+                className="border border-emerald-600 bg-emerald-50/50 text-emerald-700 px-8 py-4 text-xs sm:text-sm font-bold uppercase tracking-widest hover:bg-emerald-600 hover:text-white transition-colors duration-200 text-center"
               >
                 Cotizar por WhatsApp
               </a>
             </div>
           </div>
+
+          <div className="lg:col-span-5 relative aspect-[4/3] w-full overflow-hidden border border-zinc-200 bg-zinc-100 shadow-xs">
+            <Image
+              src="/img/fotos/hero-hogar.jpg"
+              alt="Remodelación de hogar moderno — Total Repair Ltda."
+              fill
+              sizes="(max-width: 1024px) 100vw, 42vw"
+              className="object-cover origin-top-left scale-[1.08]"
+              priority
+            />
+          </div>
         </div>
       </section>
 
-      {/* ── STATS HOGAR ──────────────────────────────────────────────────── */}
-      <div className="border-y border-zinc-200 bg-[#F8FAFC] py-10">
-        <div className="max-w-7xl px-6 md:px-12 mx-auto grid grid-cols-3 gap-8 text-center">
+      {/* ── STATS HOGAR (#F8FAFC) ────────────────────────────────────────── */}
+      <div className="border-b border-zinc-200 bg-[#F8FAFC] py-10">
+        <div className="max-w-7xl px-4 sm:px-6 md:px-12 mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 text-center">
           {[
             { value: COMPANY.yearsExperience, label: "Años de Trayectoria" },
             { value: COMPANY.projectsDelivered, label: "Proyectos Ejecutados" },
             { value: "100%", label: "Trabajos con Garantía" },
           ].map((stat) => (
-            <div key={stat.label}>
-              <p className="text-3xl md:text-4xl font-black text-[#FF5000]">
+            <div key={stat.label} className="py-2">
+              <p className="text-3xl md:text-4xl font-black text-[#FF5000] font-display">
                 {stat.value}
               </p>
               <p className="text-xs font-mono text-zinc-600 uppercase tracking-wider mt-1">
@@ -206,14 +204,14 @@ export default function HogarPage() {
         </div>
       </div>
 
-      {/* ── SERVICIOS RESIDENCIALES ───────────────────────────────────────── */}
-      <section className="py-28 max-w-7xl px-6 md:px-12 mx-auto">
-        <div className="mb-16">
+      {/* ── SERVICIOS RESIDENCIALES (#FFFFFF) ─────────────────────────────── */}
+      <section className="py-20 sm:py-24 max-w-7xl px-4 sm:px-6 md:px-12 mx-auto bg-white">
+        <div className="mb-14">
           <SectionLabel label="Nuestros Servicios" />
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-[#0F172A] mb-4 tracking-tight">
+          <h2 className="font-display text-3xl sm:text-4xl font-black text-[#0F172A] mb-3 tracking-tight uppercase">
             Todo lo que tu hogar necesita
           </h2>
-          <p className="text-zinc-600 max-w-xl">
+          <p className="text-zinc-600 max-w-xl font-light">
             Un solo equipo técnico para todas las especialidades. Sin improvisaciones.
           </p>
         </div>
@@ -222,10 +220,9 @@ export default function HogarPage() {
           {services.map((service) => (
             <article
               key={service.id}
-              className="group flex flex-col sm:flex-row gap-6 border border-zinc-200 bg-[#F8FAFC] p-8 hover:border-[#FF5000] transition-colors duration-200"
+              className="group flex flex-col sm:flex-row gap-6 border border-zinc-200 bg-[#F8FAFC] p-6 sm:p-8 hover:border-[#FF5000] transition-colors duration-200"
             >
-              {/* Imagen miniatura */}
-              <div className="relative w-full sm:w-28 h-40 sm:h-28 shrink-0 overflow-hidden bg-zinc-900">
+              <div className="relative w-full sm:w-28 h-44 sm:h-28 shrink-0 overflow-hidden bg-zinc-100 border border-zinc-200">
                 <Image
                   src={service.image}
                   alt={service.title}
@@ -239,7 +236,7 @@ export default function HogarPage() {
                 <h3 className="text-xl font-bold text-[#0F172A] mb-2 group-hover:text-[#FF5000] transition-colors duration-200">
                   {service.title}
                 </h3>
-                <p className="text-sm text-zinc-600 leading-relaxed">
+                <p className="text-sm text-zinc-600 leading-relaxed font-light">
                   {service.desc}
                 </p>
               </div>
@@ -248,34 +245,35 @@ export default function HogarPage() {
         </div>
       </section>
 
-      {/* ── GALERÍA DE PROYECTOS ──────────────────────────────────────────── */}
-      <section className="py-24 bg-[#F8FAFC] border-y border-zinc-200">
-        <div className="max-w-7xl px-6 md:px-12 mx-auto">
+      {/* ── GALERÍA DE PROYECTOS (#F8FAFC) ────────────────────────────────── */}
+      <section className="py-20 sm:py-24 bg-[#F8FAFC] border-y border-zinc-200">
+        <div className="max-w-7xl px-4 sm:px-6 md:px-12 mx-auto">
           <div className="mb-12">
             <SectionLabel label="Portafolio Residencial" />
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-[#0F172A] tracking-tight">
+            <h2 className="font-display text-3xl sm:text-4xl font-black text-[#0F172A] tracking-tight uppercase">
               Proyectos Realizados en Hogares
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             {projects.map((project) => (
               <article
                 key={project.id}
-                className="group relative h-72 overflow-hidden border border-zinc-200 bg-zinc-900"
+                className="group border border-zinc-200 bg-white overflow-hidden hover:border-[#FF5000] hover:shadow-md transition-all duration-200"
               >
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  className="object-cover origin-top-left scale-[1.08]"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/30 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <p className="text-[#FF5000] text-xs font-mono font-bold uppercase tracking-wider mb-1">
+                <div className="relative h-56 overflow-hidden bg-zinc-100 border-b border-zinc-200">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover origin-top-left scale-[1.08]"
+                  />
+                </div>
+                <div className="p-6">
+                  <p className="text-[#FF5000] text-xs font-mono font-bold uppercase tracking-wider mb-1.5">
                     {project.location}
                   </p>
-                  <h3 className="text-white font-bold text-lg">
+                  <h3 className="text-[#0F172A] font-bold text-lg group-hover:text-[#FF5000] transition-colors duration-200">
                     {project.title}
                   </h3>
                 </div>
@@ -285,11 +283,11 @@ export default function HogarPage() {
         </div>
       </section>
 
-      {/* ── FAQ (SSR Native Details/Summary) ──────────────────────────────── */}
-      <section className="py-28 max-w-4xl mx-auto px-6 md:px-12">
-        <div className="mb-16 text-center">
+      {/* ── FAQ (#FFFFFF) ─────────────────────────────────────────────────── */}
+      <section className="py-20 sm:py-24 max-w-4xl mx-auto px-4 sm:px-6 md:px-12 bg-white">
+        <div className="mb-14 text-center">
           <SectionLabel label="Preguntas Frecuentes" className="justify-center" />
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-[#0F172A] tracking-tight">
+          <h2 className="font-display text-3xl sm:text-4xl font-black text-[#0F172A] tracking-tight uppercase">
             Lo que más nos preguntan
           </h2>
         </div>
@@ -300,8 +298,10 @@ export default function HogarPage() {
               open={idx === 0}
               className="group border border-zinc-200 bg-[#F8FAFC] open:border-[#FF5000]/50 transition-colors duration-200"
             >
-              <summary className="w-full flex items-center justify-between p-6 text-left cursor-pointer list-none">
-                <span className="font-bold text-[#0F172A] pr-4">{faq.q}</span>
+              <summary className="w-full flex items-center justify-between p-5 sm:p-6 text-left cursor-pointer list-none">
+                <span className="font-bold text-[#0F172A] pr-4 text-sm sm:text-base">
+                  {faq.q}
+                </span>
                 <span className="text-zinc-500 group-open:rotate-180 group-open:text-[#FF5000] transition-transform duration-200 shrink-0">
                   <svg
                     fill="none"
@@ -314,7 +314,7 @@ export default function HogarPage() {
                   </svg>
                 </span>
               </summary>
-              <div className="px-6 pb-6 text-zinc-600 leading-relaxed border-t border-zinc-200/60 pt-4">
+              <div className="px-5 sm:px-6 pb-6 text-zinc-600 text-sm sm:text-base font-light leading-relaxed border-t border-zinc-200/60 pt-4 bg-white">
                 <p>{faq.a}</p>
               </div>
             </details>
@@ -322,7 +322,7 @@ export default function HogarPage() {
         </div>
       </section>
 
-      {/* ── EMERGENCIAS HOGAR ──────────────────────────────────────────────── */}
+      {/* ── EMERGENCIAS HOGAR (#F8FAFC) ────────────────────────────────────── */}
       <EmergencyCTA variant="hogar" />
     </div>
   );
