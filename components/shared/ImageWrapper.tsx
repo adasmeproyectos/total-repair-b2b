@@ -1,48 +1,40 @@
-"use client";
-
-/**
- * components/shared/ImageWrapper.tsx
- * Wrapper anti-marca de agua (Manifiesto Nano Banana 2).
- *
- * ESTRATEGIA:
- *  - overflow-hidden en el contenedor → recorta bordes de imagen
- *  - scale-105 base en la imagen → desplaza marcas de agua de bordes
- *  - scale-110 en hover (opcional) → efecto Ken Burns
- *
- * Usar como contenedor de TODOS los componentes next/image del proyecto.
- */
-
-import { cn } from "@/lib/utils";
+import React from "react";
 
 interface ImageWrapperProps {
   children: React.ReactNode;
   className?: string;
-  /** Activa escala 1.1 al hover — efecto Ken Burns */
-  hoverScale?: boolean;
-  /** Relación de aspecto CSS, ej: 'aspect-video', 'aspect-square' */
-  aspectRatio?: string;
-  /** Posición relativa (necesaria para next/image fill) */
-  fillMode?: boolean;
+  overlayOpacity?: "light" | "medium" | "dark" | "heavy" | "none";
 }
 
 export function ImageWrapper({
   children,
-  className,
-  hoverScale = false,
-  aspectRatio,
-  fillMode = false,
+  className = "",
+  overlayOpacity = "dark",
 }: ImageWrapperProps) {
+  const overlays = {
+    none: "",
+    light: "bg-zinc-950/20",
+    medium: "bg-zinc-950/40",
+    dark: "bg-zinc-950/60",
+    heavy: "bg-zinc-950/80",
+  };
+
   return (
     <div
-      className={cn(
-        "overflow-hidden",
-        fillMode ? "relative" : "",
-        aspectRatio ?? "",
-        hoverScale && "[&_img]:hover:scale-110 [&_img]:transition-transform [&_img]:duration-700",
-        className
-      )}
+      className={`relative overflow-hidden bg-zinc-900 [&_img]:origin-top-left [&_img]:scale-[1.08] [&_img]:object-cover ${className}`}
     >
-      {children}
+      <div className="w-full h-full relative z-0 filter contrast-[1.05]">
+        {children}
+      </div>
+
+      {overlayOpacity !== "none" && (
+        <div
+          className={`absolute inset-0 pointer-events-none z-10 transition-opacity duration-300 ${overlays[overlayOpacity]}`}
+          aria-hidden="true"
+        />
+      )}
     </div>
   );
 }
+
+export default ImageWrapper;

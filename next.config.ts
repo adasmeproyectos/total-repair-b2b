@@ -54,19 +54,19 @@ const nextConfig: NextConfig = {
       {
         source: "/",
         has: [{ type: "host", value: "total-repair-empresas.vercel.app" }],
-        destination: "https://totalrepair.cl/empresas",
+        destination: "https://www.totalrepair.cl/empresas",
         permanent: true,
       },
       {
         source: "/",
         has: [{ type: "host", value: "total-construye-hogar.vercel.app" }],
-        destination: "https://totalrepair.cl/hogar",
+        destination: "https://www.totalrepair.cl/hogar",
         permanent: true,
       },
       {
         source: "/",
         has: [{ type: "host", value: "total-repair-b2b.vercel.app" }],
-        destination: "https://totalrepair.cl/empresas",
+        destination: "https://www.totalrepair.cl/empresas",
         permanent: true,
       },
     ];

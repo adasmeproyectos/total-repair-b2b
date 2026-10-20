@@ -1,89 +1,104 @@
-/**
- * components/ui/EmergencyCTA.tsx — Paleta v2
- * variant "empresas": fondo zinc-900 oscuro (sección de urgencia = contraste máximo)
- * variant "hogar": fondo naranja (acento marca)
- */
-
-"use client";
-
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { COMPANY } from "@/lib/constants";
 
 interface EmergencyCTAProps {
-  variant: "empresas" | "hogar";
+  variant?: "empresas" | "hogar";
 }
 
-export function EmergencyCTA({ variant }: EmergencyCTAProps) {
-  if (variant === "empresas") {
-    return (
-      <section className="py-24 px-6 bg-zinc-900 border-y border-zinc-800">
-        <div className="max-w-full px-8 md:px-16 mx-auto flex flex-col md:flex-row items-center justify-between gap-10">
-          <div className="flex items-start gap-6">
-            <div className="shrink-0 w-16 h-16 border border-[#E85B0C]/40 bg-[#E85B0C]/10 flex items-center justify-center">
-              <motion.div
-                animate={{ opacity: [1, 0.3, 1] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                className="w-3 h-3 rounded-full bg-[#E85B0C]"
-              />
-            </div>
-            <div>
-              <span className="inline-block border border-[#E85B0C]/40 text-[#E85B0C] bg-[#E85B0C]/10 px-3 py-1 text-xs font-bold uppercase tracking-widest mb-3">
-                Unidad de Reacción Inmediata · 24/7
+export function EmergencyCTA({ variant = "empresas" }: EmergencyCTAProps) {
+  const isHogar = variant === "hogar";
+
+  return (
+    <section className="w-full bg-zinc-950 border-y border-zinc-800 relative overflow-hidden">
+      {/* Indicador de Alerta Superior */}
+      <div className="w-full h-1 bg-gradient-to-r from-[#FF5000] via-amber-500 to-[#FF5000]" />
+
+      <div className="max-w-7xl mx-auto px-6 md:px-12 py-12 lg:py-16">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 z-10 relative">
+          {/* Bloque Izquierdo: Mensaje de Urgencia */}
+          <div className="max-w-2xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-red-950/60 border border-red-800/60 text-red-400 text-xs font-mono uppercase tracking-widest mb-4">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500" />
               </span>
-              <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
-                Siniestros y Emergencias Corporativas
-              </h2>
-              <p className="text-zinc-400 font-light max-w-md">
-                Inundaciones, incendios, daños sísmicos. Coordinación directa
-                con aseguradoras. Respuesta en menos de 2 horas.
-              </p>
+              Unidad de Reacción Inmediata 24/7
             </div>
+
+            <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-3 font-heading uppercase">
+              {isHogar
+                ? "¿Emergencia en tu Hogar o Siniestro Domiciliario?"
+                : "¿Siniestro Activo o Emergencia Estructural?"}
+            </h2>
+
+            <p className="text-zinc-300 text-base md:text-lg leading-relaxed">
+              {isHogar
+                ? "Atendemos filtraciones graves, cortocircuitos, daños por incendio o sismos en viviendas. Emitimos informes y presupuestos técnicos válidos para tu compañía de seguros."
+                : "Desplegamos cuadrillas de contención, extracción de agua, apuntalamiento y mitigación en tiempo récord para detener el daño progresivo y asegurar el recinto para el peritaje."}
+            </p>
           </div>
-          <div className="flex flex-col sm:flex-row gap-4 shrink-0">
+
+          {/* Bloque Derecho: Acciones Directas */}
+          <div className="flex flex-col sm:flex-row w-full lg:w-auto gap-4 shrink-0">
             <a
-              href={`tel:${COMPANY.phone}`}
-              className="px-8 py-4 bg-[#E85B0C] text-white font-bold text-sm uppercase tracking-widest hover:bg-[#C4470A] hover:scale-105 active:scale-95 transition-all duration-300 text-center"
+              href={`tel:${COMPANY.phoneClean}`}
+              className="flex items-center justify-center gap-3 px-8 py-5 bg-[#FF5000] hover:bg-[#CC4000] text-white font-bold tracking-wider uppercase text-sm transition-colors duration-200 shadow-lg group"
             >
-              Llamar Ahora
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                className="w-5 h-5"
+                aria-hidden="true"
+              >
+                <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
+              </svg>
+              <span>Llamar Central ({COMPANY.phone})</span>
             </a>
+
             <Link
-              href="/contacto"
-              className="px-8 py-4 border border-zinc-700 text-white font-bold text-sm uppercase tracking-widest hover:border-[#E85B0C] hover:scale-105 active:scale-95 transition-all duration-300 text-center"
+              href={
+                isHogar
+                  ? "/contacto?modo=hogar&urgencia=true"
+                  : "/contacto?urgencia=true"
+              }
+              className="flex items-center justify-center gap-2 px-6 py-5 bg-zinc-900 hover:bg-zinc-800 text-zinc-200 border border-zinc-700 font-semibold tracking-wider uppercase text-sm transition-colors duration-200 group"
             >
-              Formulario URI
+              <span>Reportar Siniestro</span>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
             </Link>
           </div>
         </div>
-      </section>
-    );
-  }
+      </div>
 
-  return (
-    <section className="py-20 px-6 bg-[#E85B0C]">
-      <div className="max-w-full px-8 md:px-16 mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
-        <div className="flex items-center gap-5">
-          <div className="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center shrink-0">
-            <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" className="w-7 h-7">
-              <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-            </svg>
-          </div>
-          <div>
-            <h2 className="text-xl md:text-2xl font-bold text-white">
-              ¿Emergencia en el Hogar?
-            </h2>
-            <p className="text-orange-100 text-sm font-light mt-1">
-              Gasfitería, electricidad o daños urgentes. Atención inmediata.
-            </p>
-          </div>
-        </div>
-        <a
-          href={`tel:${COMPANY.phone}`}
-          className="shrink-0 px-8 py-4 bg-white text-[#E85B0C] font-bold text-sm uppercase tracking-widest hover:bg-orange-50 hover:scale-105 active:scale-95 transition-all duration-300"
+      {/* Marca de agua geométrica de fondo */}
+      <div
+        className="absolute right-0 bottom-0 opacity-[0.03] pointer-events-none select-none overflow-hidden flex justify-end"
+        aria-hidden="true"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          className="w-96 h-96 -mb-20 -mr-20 text-white"
         >
-          {COMPANY.phoneDisplay}
-        </a>
+          <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+          <path d="M12 9v4M12 17h.01" />
+        </svg>
       </div>
     </section>
   );
 }
+
+export default EmergencyCTA;

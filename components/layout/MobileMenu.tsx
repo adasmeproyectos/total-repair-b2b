@@ -1,11 +1,5 @@
 "use client";
 
-/**
- * components/layout/MobileMenu.tsx — Paleta v2 (Blanco / Naranjo)
- * Drawer sobre fondo blanco, texto oscuro, acento naranja.
- */
-
-import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { NAV_LINKS, COMPANY } from "@/lib/constants";
@@ -18,93 +12,145 @@ interface MobileMenuProps {
 export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const pathname = usePathname();
 
+  if (!isOpen) return null;
+
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <>
-          {/* Backdrop */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={onClose}
-            className="fixed inset-0 z-40 bg-zinc-900/50 backdrop-blur-sm"
-          />
-
-          {/* Drawer */}
-          <motion.div
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="fixed top-0 right-0 bottom-0 z-50 w-72 bg-white border-l border-zinc-200 flex flex-col shadow-xl"
+    <div
+      className="fixed inset-0 z-50 lg:hidden bg-zinc-950 flex flex-col justify-between overflow-y-auto"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Menú de navegación móvil"
+    >
+      {/* Header del Menú */}
+      <div className="p-6 flex items-center justify-between border-b border-zinc-800">
+        <div className="flex flex-col">
+          <span className="text-white font-extrabold tracking-tight text-lg leading-none font-heading uppercase">
+            TOTAL REPAIR LTDA.
+          </span>
+          <span className="text-zinc-400 font-mono text-[10px] tracking-[0.2em] uppercase mt-1">
+            Navegación del Sistema
+          </span>
+        </div>
+        <button
+          type="button"
+          onClick={onClose}
+          className="p-2 text-zinc-400 hover:text-white bg-zinc-900 border border-zinc-800"
+          aria-label="Cerrar menú"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            className="w-6 h-6"
+            aria-hidden="true"
           >
-            {/* Header */}
-            <div className="flex items-center justify-between px-6 h-20 border-b border-zinc-200">
-              <Link
-                href="/"
-                onClick={onClose}
-                className="font-display font-bold text-xl tracking-tight text-zinc-900"
-              >
-                TOTAL<span className="text-[#FF5000]">REPAIR</span>
-              </Link>
-              <button
-                onClick={onClose}
-                aria-label="Cerrar menú"
-                className="w-12 h-12 flex items-center justify-center text-zinc-500 hover:text-zinc-900 transition-colors"
-              >
-                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} className="w-5 h-5">
-                  <path d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
 
-            {/* Links */}
-            <nav className="flex-1 px-6 py-8 flex flex-col gap-1">
-              {NAV_LINKS.map((link) => {
-                const isActive = pathname === link.href;
-                return (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={onClose}
-                    className={`px-4 py-3 text-sm font-medium tracking-wide transition-colors ${
-                      isActive
-                        ? "text-[#FF5000] bg-orange-50 border-l-2 border-[#FF5000]"
-                        : "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50"
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
-                );
-              })}
-
-              <Link
-                href="/contacto"
-                onClick={onClose}
-                className="mt-4 py-4 bg-[#FF5000] text-white text-center text-xs font-bold uppercase tracking-widest hover:bg-[#CC4000] transition-colors"
+      {/* Enlaces de Navegación */}
+      <nav
+        aria-label="Menú móvil"
+        className="p-6 flex-1 flex flex-col justify-center gap-2"
+      >
+        {NAV_LINKS.map((link) => {
+          const isActive = pathname === link.href;
+          return (
+            <Link
+              key={link.href}
+              href={link.href}
+              onClick={onClose}
+              className={`flex items-center justify-between py-4 px-4 border-b border-zinc-900 text-lg font-bold uppercase tracking-wider transition-colors duration-200 ${
+                isActive
+                  ? "text-[#FF5000] bg-zinc-900/50 border-l-4 border-l-[#FF5000]"
+                  : "text-zinc-200 hover:text-white hover:bg-zinc-900/30"
+              }`}
+            >
+              <span>{link.label}</span>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                className={`w-5 h-5 ${
+                  isActive ? "text-[#FF5000]" : "text-zinc-600"
+                }`}
+                aria-hidden="true"
               >
-                Cotizar Proyecto
-              </Link>
-            </nav>
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </Link>
+          );
+        })}
+      </nav>
 
-            {/* Footer del drawer */}
-            <div className="px-6 py-6 border-t border-zinc-200">
-              <a
-                href={`https://wa.me/${COMPANY.phone}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 text-sm text-zinc-600 hover:text-green-600 transition-colors"
-              >
-                <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 text-green-500 shrink-0">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                </svg>
-                {COMPANY.phoneDisplay}
-              </a>
-            </div>
-          </motion.div>
-        </>
-      )}
-    </AnimatePresence>
+      {/* Panel de Contacto Directo Inferior */}
+      <div className="p-6 bg-zinc-900 border-t border-zinc-800 space-y-3">
+        <p className="text-xs font-mono uppercase tracking-widest text-zinc-400 mb-2">
+          Canales de Atención Inmediata
+        </p>
+
+        <Link
+          href="/contacto?urgencia=true"
+          onClick={onClose}
+          className="w-full flex items-center justify-center gap-2 bg-[#FF5000] hover:bg-[#CC4000] text-white font-bold uppercase tracking-wider py-4 text-sm transition-colors duration-200"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            className="w-4 h-4"
+            aria-hidden="true"
+          >
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            <path d="M12 8v4M12 16h.01" />
+          </svg>
+          <span>Reportar Siniestro 24/7</span>
+        </Link>
+
+        <div className="grid grid-cols-2 gap-3 pt-1">
+          <a
+            href={`tel:${COMPANY.phoneClean}`}
+            className="flex items-center justify-center gap-2 bg-zinc-950 border border-zinc-800 text-zinc-200 py-3 text-xs font-mono uppercase hover:border-zinc-700"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              className="w-4 h-4 text-[#FF5000]"
+              aria-hidden="true"
+            >
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
+            </svg>
+            <span>Llamar</span>
+          </a>
+
+          <a
+            href={COMPANY.whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-2 bg-zinc-950 border border-zinc-800 text-zinc-200 py-3 text-xs font-mono uppercase hover:border-zinc-700"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              className="w-4 h-4 text-emerald-500"
+              aria-hidden="true"
+            >
+              <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+            </svg>
+            <span>WhatsApp</span>
+          </a>
+        </div>
+      </div>
+    </div>
   );
 }
+
+export default MobileMenu;

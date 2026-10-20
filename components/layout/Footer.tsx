@@ -1,128 +1,259 @@
-/**
- * components/layout/Footer.tsx — Paleta v2 (Antracita / Naranjo)
- * El footer mantiene fondo oscuro (#1A1A1A) para contraste con el cuerpo blanco —
- * esto es estándar en la industria construcción premium (ej. Bechtel, Turner, Sodimac Pro).
- */
-
 import Link from "next/link";
+import Image from "next/image";
 import { COMPANY, NAV_LINKS } from "@/lib/constants";
 
-interface FooterProps {
-  variant?: "full" | "minimal";
-}
+export function Footer() {
+  const currentYear = new Date().getFullYear();
 
-export function Footer({ variant = "full" }: FooterProps) {
   return (
-    <footer className="bg-zinc-900 text-zinc-400 border-t border-zinc-800">
-      {variant === "full" && (
-        <div className="max-w-full px-8 md:px-16 mx-auto py-16 grid grid-cols-1 md:grid-cols-12 gap-12">
-          {/* Col 1-5: Marca */}
-          <div className="md:col-span-5">
-            <Link
-              href="/"
-              className="font-display font-bold text-xl tracking-tight text-white inline-block mb-6 hover:opacity-90 transition-opacity"
-            >
-              TOTAL<span className="text-[#FF5000]">REPAIR</span>
+    <footer className="bg-zinc-950 text-zinc-400 border-t border-zinc-800 font-sans">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 py-16 lg:py-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8">
+          {/* Columna 1: Identidad Corporativa (4 cols) */}
+          <div className="lg:col-span-4 space-y-6">
+            <Link href="/" className="flex items-center gap-3">
+              <div className="relative w-12 h-12 bg-white p-1 rounded-sm flex items-center justify-center shrink-0">
+                <Image
+                  src="/img/logos/logo.png"
+                  alt="Total Repair Ltda. Logo"
+                  fill
+                  sizes="48px"
+                  className="object-contain p-0.5"
+                />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-white font-extrabold tracking-tight text-xl leading-none font-display uppercase">
+                  TOTAL <span className="text-[#FF5000]">REPAIR</span>
+                </span>
+                <span className="text-zinc-400 font-mono text-[10px] tracking-[0.2em] uppercase mt-1">
+                  Construcción & Siniestros
+                </span>
+              </div>
             </Link>
-            <p className="text-sm leading-relaxed font-light max-w-xs mb-6">
-              Soluciones constructivas integrales para empresas y hogares.
-              Supervisión total del proyecto con 20 años de experiencia en Chile.
+
+            <p className="text-sm text-zinc-400 leading-relaxed max-w-sm">
+              Empresa constructora y contratista general con más de 22 años de experiencia en liquidación y reconstrucción de siniestros, obras civiles B2B y remodelaciones residenciales en Chile.
             </p>
-            <div className="flex gap-3">
-              <a
-                href={COMPANY.whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="WhatsApp"
-                className="w-9 h-9 border border-zinc-700 flex items-center justify-center text-zinc-500 hover:text-green-400 hover:border-green-600/50 transition-all"
+
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-zinc-900 border border-zinc-800 text-xs font-mono text-zinc-300">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                className="w-4 h-4 text-[#FF5000]"
+                aria-hidden="true"
               >
-                <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                </svg>
-              </a>
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                <path d="M9 12l2 2 4-4" />
+              </svg>
+              <span>Cumplimiento Normativo SEC / OGUC</span>
             </div>
           </div>
 
-          {/* Col 6-8: Navegación */}
-          <div className="md:col-span-3">
-            <h4 className="text-white font-bold uppercase tracking-wider mb-6 text-xs">
-              Navegación
-            </h4>
-            <ul className="space-y-3 text-sm font-light">
+          {/* Columna 2: Navegación Rápida (2 cols) */}
+          <div className="lg:col-span-2 space-y-4">
+            <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-white font-semibold">
+              Ecosistema
+            </h3>
+            <ul className="space-y-2.5 text-sm">
               {NAV_LINKS.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="hover:text-white hover:pl-1 transition-all duration-200"
+                    className="hover:text-[#FF5000] transition-colors duration-200 inline-block"
                   >
                     {link.label}
                   </Link>
                 </li>
               ))}
               <li>
-                <Link href="/contacto" className="hover:text-white hover:pl-1 transition-all duration-200">
-                  Cotizar Proyecto
+                <Link
+                  href="/contacto"
+                  className="hover:text-[#FF5000] transition-colors duration-200 inline-block"
+                >
+                  Contacto
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Col 9-12: Contacto */}
-          <div className="md:col-span-4">
-            <h4 className="text-white font-bold uppercase tracking-wider mb-6 text-xs">
-              Contacto Directo
-            </h4>
-            <ul className="space-y-4 text-sm font-light">
+          {/* Columna 3: Especialidades Técnicas (3 cols) */}
+          <div className="lg:col-span-3 space-y-4">
+            <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-white font-semibold">
+              Líneas de Acción
+            </h3>
+            <ul className="space-y-2.5 text-sm text-zinc-400">
+              <li>
+                <Link
+                  href="/servicios"
+                  className="hover:text-white transition-colors duration-200"
+                >
+                  Reconstrucción Post-Incendio
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/servicios"
+                  className="hover:text-white transition-colors duration-200"
+                >
+                  Secado Industrial y Daño por Agua
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/empresas"
+                  className="hover:text-white transition-colors duration-200"
+                >
+                  Habilitación de Oficinas y Retail B2B
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/hogar"
+                  className="hover:text-white transition-colors duration-200"
+                >
+                  Remodelación Integral de Viviendas
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/servicios"
+                  className="hover:text-white transition-colors duration-200"
+                >
+                  Instalaciones Eléctricas Certificadas SEC
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Columna 4: Coordenadas Operativas (3 cols) */}
+          <div className="lg:col-span-3 space-y-4">
+            <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-white font-semibold">
+              Central de Operaciones
+            </h3>
+            <ul className="space-y-3 text-sm">
               <li className="flex items-start gap-3">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#FF5000" strokeWidth="2" className="w-4 h-4 mt-0.5 shrink-0">
-                  <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                  <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  className="w-4 h-4 text-[#FF5000] shrink-0 mt-1"
+                  aria-hidden="true"
+                >
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                  <circle cx="12" cy="10" r="3" />
                 </svg>
                 <span>{COMPANY.address}</span>
               </li>
               <li className="flex items-center gap-3">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#FF5000" strokeWidth="2" className="w-4 h-4 shrink-0">
-                  <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  className="w-4 h-4 text-[#FF5000] shrink-0"
+                  aria-hidden="true"
+                >
+                  <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
                 </svg>
-                <a href={`tel:${COMPANY.phone}`} className="hover:text-white transition-colors">
+                <a
+                  href={`tel:${COMPANY.phoneClean}`}
+                  className="hover:text-white transition-colors duration-200 font-mono"
+                >
                   {COMPANY.phoneDisplay}
                 </a>
               </li>
               <li className="flex items-center gap-3">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#FF5000" strokeWidth="2" className="w-4 h-4 shrink-0">
-                  <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  className="w-4 h-4 text-[#FF5000] shrink-0"
+                  aria-hidden="true"
+                >
+                  <rect x="2" y="4" width="20" height="16" rx="2" />
+                  <path d="M22 7l-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7" />
                 </svg>
-                <a href={`mailto:${COMPANY.email}`} className="hover:text-white transition-colors">
+                <a
+                  href={`mailto:${COMPANY.email}`}
+                  className="hover:text-white transition-colors duration-200 font-mono break-all"
+                >
                   {COMPANY.email}
                 </a>
+              </li>
+              <li className="flex items-start gap-3 pt-1">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  className="w-4 h-4 text-[#FF5000] shrink-0 mt-0.5"
+                  aria-hidden="true"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 6v6l4 2" />
+                </svg>
+                <div className="text-xs space-y-1">
+                  <p className="text-zinc-300 font-medium">{COMPANY.hours}</p>
+                  <p className="text-[#FF5000] font-mono uppercase">
+                    {COMPANY.emergencyHours}
+                  </p>
+                </div>
               </li>
             </ul>
           </div>
         </div>
-      )}
+      </div>
 
-      {/* ─── Franja inferior — OBLIGATORIA por Manifiesto §6.1 */}
-      <div className="border-t border-zinc-800">
-        <div className="max-w-full px-8 md:px-16 mx-auto py-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-light">
-          <p>© {new Date().getFullYear()} {COMPANY.name}. Todos los derechos reservados.</p>
-          <div className="flex items-center gap-6">
-            <Link href="/privacidad" className="hover:text-white transition-colors">Privacidad</Link>
-            <Link href="/terminos" className="hover:text-white transition-colors">Términos</Link>
-            <span className="text-zinc-700">·</span>
-            <span>
-              Desarrollado por{" "}
-              <a
-                href={COMPANY.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[#FF5000] hover:text-orange-400 font-medium transition-colors"
+      {/* Barra Inferior Legal & Créditos */}
+      <div className="border-t border-zinc-900 bg-black/40">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-400">
+          <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-6">
+            <p>
+              © {currentYear} {COMPANY.legalName} Todos los derechos reservados.
+            </p>
+            <div className="flex items-center gap-4">
+              <Link
+                href="/privacidad"
+                className="hover:text-zinc-200 transition-colors duration-200"
               >
-                {COMPANY.author}
-              </a>
-            </span>
+                Política de Privacidad
+              </Link>
+              <span>•</span>
+              <Link
+                href="/terminos"
+                className="hover:text-zinc-200 transition-colors duration-200"
+              >
+                Términos de Uso
+              </Link>
+            </div>
           </div>
+
+          <a
+            href={COMPANY.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 text-zinc-400 hover:text-zinc-200 transition-colors duration-200 font-mono text-[11px]"
+          >
+            <span>Desarrollado por {COMPANY.developerName}</span>
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              className="w-3 h-3"
+              aria-hidden="true"
+            >
+              <path d="M7 17L17 7M7 7h10v10" />
+            </svg>
+          </a>
         </div>
       </div>
     </footer>
   );
 }
+
+export default Footer;

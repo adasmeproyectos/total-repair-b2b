@@ -1,34 +1,29 @@
-/**
- * components/shared/SectionLabel.tsx — Paleta v2
- * Eyebrow label adaptado a fondos claros (default) y oscuros (prop dark).
- */
-
-import { cn } from "@/lib/utils";
-
 interface SectionLabelProps {
-  label: string;
+  label?: string;
+  text?: string;
   className?: string;
-  /** dark=true: texto blanco/gris claro para fondos oscuros (hero, CTA negros) */
   dark?: boolean;
-  /** light=true: deprecated alias de dark=false, mantiene compatibilidad */
-  light?: boolean;
 }
 
-export function SectionLabel({ label, className, dark = false, light }: SectionLabelProps) {
-  // Si light está explícitamente pasado como false en contexto oscuro, tratar como dark
-  const isDark = dark || light === false;
-
+export function SectionLabel({
+  label,
+  text,
+  className = "",
+  dark = false,
+}: SectionLabelProps) {
+  const content = label ?? text ?? "";
   return (
-    <div className={cn("flex items-center gap-4 mb-6", className)}>
-      <div className="h-0.5 w-12 shrink-0 bg-[#E85B0C]" />
+    <div className={`flex items-center gap-3 mb-4 ${className}`}>
+      <div className="w-6 h-[2px] bg-[#FF5000]" aria-hidden="true" />
       <span
-        className={cn(
-          "uppercase tracking-[0.2em] text-xs font-bold",
-          isDark ? "text-zinc-400" : "text-zinc-500"
-        )}
+        className={`text-xs font-mono uppercase tracking-[0.2em] font-semibold ${
+          dark ? "text-zinc-300" : "text-zinc-500"
+        }`}
       >
-        {label}
+        {content}
       </span>
     </div>
   );
 }
+
+export default SectionLabel;

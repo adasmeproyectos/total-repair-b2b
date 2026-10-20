@@ -21,37 +21,61 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: "Total Repair | Construcción y Remodelación en Chile",
+    default: "Total Repair Ltda. | Construcción, Remodelación Corporativa y Siniestros en Chile",
     template: "%s | Total Repair Ltda.",
   },
   description:
-    "Soluciones integrales de construcción, remodelación y reparación para empresas y hogares. Más de 22 años de experiencia en Chile. Atención 24/7.",
+    "Soluciones integrales de construcción, habilitación comercial B2B, remodelación corporativa y reparación de siniestros 24/7 para empresas y hogares. Más de 22 años de experiencia en Chile.",
   metadataBase: new URL("https://www.totalrepair.cl"),
-  alternates: {
-    canonical: "/",
-  },
+  authors: [{ name: "Javier Adasme", url: "https://www.linkedin.com/in/javieradasme/" }],
+  creator: "Javier Adasme",
+  publisher: "Total Repair Ltda.",
   keywords: [
-    "Total Repair",
+    "Total Repair Ltda.",
     "Construcción Chile",
-    "Remodelación B2B",
+    "Remodelación Corporativa B2B",
+    "Habilitación Comercial",
     "Mantenimiento Corporativo",
-    "Reparación de Siniestros",
-    "Obras Comerciales",
+    "Reparación de Siniestros 24/7",
+    "Obras Civiles y Comerciales",
     "Continuidad Operacional",
+    "Electricidad y Gasfitería SEC",
   ],
-  robots: "index, follow",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/img/logos/logo.png", type: "image/png" },
+    ],
+    apple: "/img/logos/logo.png",
     shortcut: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
   },
   openGraph: {
-    title: "Total Repair | Construcción y Remodelación en Chile",
-    description: "Soluciones integrales de construcción, remodelación y reparación para empresas y hogares. Más de 22 años de experiencia en Chile.",
+    title: "Total Repair Ltda. | Construcción, Remodelación B2B y Siniestros en Chile",
+    description:
+      "Soluciones integrales de construcción, remodelación corporativa y atención de siniestros 24/7 para empresas y hogares. Más de 22 años de trayectoria en Chile.",
+    url: "https://www.totalrepair.cl",
     siteName: "Total Repair Ltda.",
-    images: [{ url: "/Banner.png", width: 1200, height: 630, alt: "Total Repair Ltda." }],
+    images: [{ url: "/img/logos/banner.png", width: 1200, height: 630, alt: "Total Repair Ltda." }],
     locale: "es_CL",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Total Repair Ltda. | Construcción, Remodelación B2B y Siniestros en Chile",
+    description:
+      "Soluciones integrales de construcción, remodelación corporativa y atención de siniestros 24/7 en Chile.",
+    images: ["/img/logos/banner.png"],
   },
   verification: {
     google: "UaGe-1nxh97KJ0Cmj6R1kpXPsQBc6s5qpdjlDSZWGHE",
@@ -66,7 +90,7 @@ export default function RootLayout({
   return (
     <html lang="es" className="scroll-smooth">
       <head>
-        {/* JSON-LD Structured Data — Local Business */}
+        {/* JSON-LD Structured Data — Local Business & HomeAndConstructionBusiness */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

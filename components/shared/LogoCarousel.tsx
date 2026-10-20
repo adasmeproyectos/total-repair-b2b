@@ -1,72 +1,29 @@
-"use client";
-
-/**
- * components/shared/LogoCarousel.tsx
- *
- * REGLA DEFINITIVA (Directiva arquitectónica v2):
- *  - El carrusel NO SE DETIENE bajo ninguna circunstancia en hover.
- *  - El hover solo activa el color corporativo del logo (grayscale → color).
- *  - El gap debe ser amplio (gap-24 mínimo) para evitar sobreposición en cualquier resolución.
- *  - Paleta actualizada a fondo blanco/crema (--color-surface-concrete).
- */
-
 import Image from "next/image";
 import { LOGOS } from "@/lib/constants";
 
-interface LogoCarouselProps {
-  /** Duración del loop en segundos (default: 40) */
-  speed?: number;
-}
-
-export function LogoCarousel({ speed = 40 }: LogoCarouselProps) {
-  // Triplicar logos para garantizar loop infinito sin salto visual en cualquier resolución
-  const items = [...LOGOS, ...LOGOS, ...LOGOS];
-
+export function LogoCarousel() {
   return (
     <section
-      className="border-y border-zinc-200 bg-zinc-50 py-14 overflow-hidden"
-      aria-label="Clientes y empresas con las que trabajamos"
+      aria-label="Grandes empresas e instituciones que confían en Total Repair"
+      className="w-full py-12 bg-[#F8FAFC] border-y border-zinc-200"
     >
-      <p className="text-center text-xs font-semibold uppercase tracking-widest text-zinc-400 mb-8">
-        Empresas que confían en nosotros
-      </p>
+      <div className="max-w-7xl mx-auto px-6 md:px-12">
+        <p className="text-center text-xs font-mono uppercase tracking-[0.2em] text-zinc-500 mb-8 font-semibold">
+          Empresas e Instituciones que han confiado en nuestra capacidad técnica
+        </p>
 
-      {/* Contenedor con mask-image fade en bordes — más amplio para mejor efecto */}
-      <div
-        className="relative flex"
-        style={{
-          maskImage:
-            "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
-          WebkitMaskImage:
-            "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
-        }}
-      >
-        {/*
-          CRÍTICO: NO hay onMouseEnter/onMouseLeave aquí.
-          El track anima de forma continua e indefinida sin interrupción.
-          El hover solo afecta al ITEM individual (color reveal).
-          Con 3x logos, translateX(-33.33%) garantiza loop perfecto.
-        */}
-        <div
-          className="flex items-center w-max animate-marquee-triple"
-          style={{
-            animationDuration: `${speed}s`,
-            gap: "6rem", /* gap fijo 96px — evita sobreposición en cualquier resolución */
-          }}
-        >
-          {items.map((logo, index) => (
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 items-center justify-items-center">
+          {LOGOS.map((logo) => (
             <div
-              key={`${logo.alt}-${index}`}
-              className="relative shrink-0 grayscale opacity-35 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-default"
-              /* El cursor-default refuerza que no es clickeable — no genera expectativa de pausa */
+              key={logo.alt}
+              className="relative w-32 h-14 flex items-center justify-center grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-200"
             >
               <Image
                 src={logo.src}
                 alt={logo.alt}
-                width={130}
-                height={52}
-                className={`${logo.height} w-auto object-contain`}
-                loading="lazy"
+                fill
+                sizes="128px"
+                className="object-contain"
               />
             </div>
           ))}
@@ -75,3 +32,5 @@ export function LogoCarousel({ speed = 40 }: LogoCarouselProps) {
     </section>
   );
 }
+
+export default LogoCarousel;

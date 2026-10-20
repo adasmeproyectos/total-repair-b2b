@@ -1,146 +1,69 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { SectionLabel } from "@/components/shared/SectionLabel";
 
 const MILESTONES = [
   {
     year: "2004",
-    title: "Nacimiento de Total Repair",
+    title: "Fundación e Inicio de Operaciones",
     description:
-      "Iniciamos operaciones enfocados en la reparación integral de inmuebles por siniestros, estableciendo nuestro compromiso con la calidad y los tiempos de respuesta.",
-  },
-  {
-    year: "2008",
-    title: "Hotel del Mar Enjoy",
-    description:
-      "Ampliamos nuestra cartera de proyectos corporativos, marcando un estándar premium en el sector hotelero.",
-  },
-  {
-    year: "2009",
-    title: "Hospital Clínico UC",
-    description:
-      "Habilitación e intervenciones en entornos críticos donde la continuidad operacional es vital.",
+      "Fundada el 4 de agosto de 2004 por Patricia Cecilia Gallardo como contratista general especializado en mantenimiento correctivo, obras menores y remodelaciones en la Región Metropolitana.",
   },
   {
     year: "2010",
-    title: "Hito 27F: Reconstrucción",
+    title: "Hito Operativo: Terremoto 27F",
     description:
-      "Reconstrucción post-terremoto trabajando 24/7 en 8 centros IntegraMédica, destacando la coordinación en Plaza Norte junto a Icafal.",
-    isHighlight: true,
+      "Despliegue masivo en reconstrucción estructural y reparación de inmuebles siniestrados. Inicio de alianzas estratégicas con compañías de seguros y liquidadores oficiales.",
   },
   {
-    year: "2013-14",
-    title: "Chilevisión Machasa",
+    year: "2016",
+    title: "Consolidación B2B e Institucional",
     description:
-      "Proyecto emblemático de terminaciones de alta precisión técnica, revestimientos e interiorismo para estudios de televisión.",
-    isHighlight: true,
+      "Adjudicación de contratos de mantenimiento y habilitación para entidades públicas (Sernatur, GORE, MOP) y grandes corporaciones privadas.",
   },
   {
-    year: "2015+",
-    title: "Expansión Nacional",
+    year: "Actualidad",
+    title: "Liderazgo en Respuesta a Siniestros y Obras Civiles",
     description:
-      "Consolidación en retail, telecomunicaciones (WOM), educación (DUOC UC, USM) y proyectos a gran escala como la sobrecubierta del Hotel Park Lake (3.000 m²).",
-  },
-  {
-    year: "2026",
-    title: "Confianza B2B",
-    description:
-      "Más de 22 años consolidando la confianza empresarial en Chile, respondiendo cuando la continuidad de su operación es crítica.",
-    isHighlight: true,
+      "Más de 22 años de trayectoria ininterrumpida, operando bajo estándares de cumplimiento normativo (SEC / OGUC) con cobertura integral para empresas, aseguradoras y propietarios.",
   },
 ];
 
 export function Timeline() {
   return (
-    <section className="py-24 px-6 bg-white overflow-hidden" id="historia">
-      <div className="max-w-6xl xl:max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-20">
-          <SectionLabel label="Nuestra Historia en Obras" className="justify-center" />
-          <h2 className="font-display text-4xl md:text-5xl font-black text-zinc-900 tracking-tight mt-6">
-            CONSTRUIMOS <span className="text-[#FF5000]">CONFIANZA</span> DESDE 2004
+    <section className="py-24 bg-zinc-950 text-white border-y border-zinc-800">
+      <div className="max-w-5xl mx-auto px-6 md:px-12">
+        <div className="text-center mb-16 flex flex-col items-center">
+          <SectionLabel label="Evolución Corporativa" dark />
+          <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight font-heading uppercase text-white">
+            Más de dos décadas de respaldo
           </h2>
-          <p className="mt-4 text-zinc-500 font-light max-w-2xl mx-auto">
-            Un recorrido por nuestros proyectos más emblemáticos, demostrando nuestra
-            capacidad de respuesta y excelencia técnica a lo largo de las décadas.
-          </p>
         </div>
 
-        {/*
-          Single DOM tree — ONE <h3> per milestone.
-          Layout is CSS-driven:
-          - Mobile (<md): left-bordered vertical list
-          - Desktop (md+): true alternating 2-column grid with centred spine
-        */}
-        <div className="relative">
-          {/* Centre spine — visible only md+ */}
-          <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-zinc-100 -translate-x-1/2" />
+        <div className="relative border-l-2 border-zinc-800 ml-4 md:ml-8 pl-8 md:pl-12 space-y-12">
+          {MILESTONES.map((item) => (
+            <div key={item.year} className="relative group">
+              {/* Nodo indicador */}
+              <div
+                className="absolute -left-[41px] md:-left-[57px] top-1.5 w-4 h-4 rounded-full bg-zinc-950 border-2 border-[#FF5000] group-hover:bg-[#FF5000] transition-colors duration-200"
+                aria-hidden="true"
+              />
 
-          {MILESTONES.map((milestone, index) => {
-            const isEven = index % 2 === 0; // even → card on LEFT column
+              <span className="inline-block px-3 py-1 bg-zinc-900 border border-zinc-800 text-[#FF5000] font-mono text-sm font-bold mb-3">
+                {item.year}
+              </span>
 
-            return (
-              <motion.div
-                key={milestone.year}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.5, delay: index * 0.08 }}
-                className="relative mb-8"
-              >
-                {/* ── Centre dot (md+) ── */}
-                <div
-                  className={[
-                    "hidden md:block absolute left-1/2 top-8 w-4 h-4 rounded-full border-2 border-white -translate-x-1/2 z-10 transition-all duration-300",
-                    milestone.isHighlight
-                      ? "bg-[#FF5000] shadow-[0_0_14px_rgba(255,80,0,0.55)]"
-                      : "bg-zinc-300",
-                  ].join(" ")}
-                />
+              <h3 className="text-xl md:text-2xl font-bold text-white mb-2 font-heading">
+                {item.title}
+              </h3>
 
-                {/*
-                  Shared card — single render, positioned via CSS:
-                  • Mobile:  full-width left-border strip
-                  • Desktop: width 50%, pushed left OR right with padding
-                */}
-                <div
-                  className={[
-                    // Mobile: full width + left accent line
-                    "pl-6 border-l-2 border-zinc-100 py-4",
-                    // Desktop overrides: half-width, alternating side
-                    isEven
-                      ? "md:border-l-0 md:pl-0 md:w-1/2 md:ml-0 md:pr-12 md:text-right"
-                      : "md:border-l-0 md:pl-12 md:w-1/2 md:ml-auto md:text-left",
-                  ].join(" ")}
-                >
-                  <div
-                    className={[
-                      "bg-[#F8FAFC] p-6 xl:p-8 hover:shadow-lg transition-all duration-300 border border-zinc-100",
-                      milestone.isHighlight
-                        ? isEven
-                          ? "border-r-4 border-r-[#FF5000]"
-                          : "border-l-4 border-l-[#FF5000]"
-                        : "",
-                    ].join(" ")}
-                  >
-                    <span className="text-[#FF5000] font-bold tracking-widest text-sm mb-2 block">
-                      {milestone.year}
-                    </span>
-                    {/* ONE <h3> per milestone — no duplicates */}
-                    <h3 className="font-display text-xl xl:text-2xl font-bold text-[#0F172A] mb-3">
-                      {milestone.title}
-                    </h3>
-                    <p className="text-zinc-600 font-light leading-relaxed text-sm xl:text-base">
-                      {milestone.description}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            );
-          })}
+              <p className="text-zinc-300 text-sm md:text-base leading-relaxed max-w-2xl">
+                {item.description}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
   );
 }
+
+export default Timeline;

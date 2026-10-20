@@ -1,17 +1,16 @@
-/**
- * app/hogar/layout.tsx
- * Segmento de metadata para /hogar (Server Component).
- * El page.tsx usa "use client" para el FAQ accordion con useState.
- */
+import { generateMetadata as buildMetadata } from "@/lib/metadata";
 
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "División Hogar",
+export const metadata = buildMetadata({
+  title: "División Hogar y Remodelación Residencial",
   description:
-    "Gasfitería, electricidad certificada, remodelación interior y más para tu hogar. Total Construye — 20 años de experiencia en Chile.",
-};
+    "Gasfitería, electricidad certificada SEC, remodelación de cocinas, baños y pintura para tu hogar. Total Construye — más de 22 años de experiencia con garantía en Chile.",
+  path: "/hogar",
+});
 
-export default function HogarLayout({ children }: { children: React.ReactNode }) {
+export default function HogarLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return <>{children}</>;
 }
