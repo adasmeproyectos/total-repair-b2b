@@ -36,6 +36,7 @@ export interface SiteTheme {
 
   brandOrange: string;
   brandOrangeDark: string;
+  heroDarkBg: string;
   inkAnthracite: string;
   inkMid: string;
   surfaceWhite: string;

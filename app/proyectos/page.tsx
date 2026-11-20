@@ -25,21 +25,18 @@ export default async function ProyectosPage() {
     <div
       style={{
         backgroundColor: "var(--color-surface-white, #FFFFFF)",
-        color: "var(--color-ink-anthracite, #0F172A)",
+        color: "var(--color-ink-anthracite, #141413)",
       }}
-      className="min-h-screen overflow-x-hidden pt-20"
+      className="min-h-screen overflow-x-hidden pt-[72px] sm:pt-[104px]"
     >
-      {/* ── HEADER ───────────────────────────────────────────────── */}
+      {/* ── HEADER OSCURO ────────────────────────────────────────── */}
       <section
-        style={{ backgroundColor: "var(--color-surface-cream, #F8FAFC)" }}
-        className="py-16 sm:py-20 px-4 sm:px-6 md:px-12 tr-divider-b"
+        style={{ backgroundColor: "var(--color-surface-dark, #141413)" }}
+        className="py-16 sm:py-20 px-4 sm:px-6 md:px-12 text-white tr-blueprint-grid"
       >
         <div className="tr-container">
-          <SectionLabel label={p.eyebrow} />
-          <h1
-            style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
-            className="font-display tr-heading-page font-black tracking-tight mb-6 uppercase"
-          >
+          <SectionLabel label={p.eyebrow} dark />
+          <h1 className="font-display tr-heading-page font-black text-white tracking-tight mb-6 uppercase">
             {p.title}{" "}
             <span
               style={{ color: "var(--color-brand-orange, #FF5000)" }}
@@ -48,10 +45,7 @@ export default async function ProyectosPage() {
               {p.titleHighlight}
             </span>
           </h1>
-          <p
-            style={{ color: "var(--color-ink-mid, #52525B)" }}
-            className="text-base sm:text-lg max-w-2xl font-light leading-relaxed"
-          >
+          <p className="text-base sm:text-lg text-zinc-300 max-w-2xl font-light leading-relaxed">
             {p.description}
           </p>
         </div>
@@ -65,7 +59,7 @@ export default async function ProyectosPage() {
         <div className="mt-20 text-center tr-divider-t pt-16">
           <SectionLabel label={p.ctaEyebrow} className="justify-center" />
           <h2
-            style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
+            style={{ color: "var(--color-ink-anthracite, #141413)" }}
             className="font-display tr-heading-section font-black mb-4 uppercase"
           >
             {p.ctaTitle}
@@ -90,8 +84,8 @@ export default async function ProyectosPage() {
             <Link
               href="/servicios"
               style={{
-                backgroundColor: "var(--color-surface-cream, #F8FAFC)",
-                color: "var(--color-ink-anthracite, #0F172A)",
+                backgroundColor: "var(--color-surface-cream, #F5F3EE)",
+                color: "var(--color-ink-anthracite, #141413)",
                 borderRadius: "var(--tr-btn-radius, 2px)",
               }}
               className="border border-zinc-300 px-10 py-4 font-bold uppercase tracking-widest text-xs sm:text-sm hover:border-[#FF5000] hover:text-[#FF5000] transition-colors duration-200"

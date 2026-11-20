@@ -399,6 +399,11 @@ export function DesignStudio({ initialConfig, userEmail }: DesignStudioProps) {
               onChange={(v) => setTheme((p) => ({ ...p, brandOrange: v }))}
             />
             <ColorField
+              label="Carbón Oscuro (Portadas y Footer)"
+              value={theme.heroDarkBg}
+              onChange={(v) => setTheme((p) => ({ ...p, heroDarkBg: v }))}
+            />
+            <ColorField
               label="Color de Títulos"
               value={theme.inkAnthracite}
               onChange={(v) => setTheme((p) => ({ ...p, inkAnthracite: v }))}

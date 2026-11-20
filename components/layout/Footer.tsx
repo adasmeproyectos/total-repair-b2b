@@ -19,55 +19,45 @@ export function Footer({
   return (
     <footer
       style={{
-        backgroundColor: "var(--color-surface-white, #FFFFFF)",
-        color: "var(--color-ink-mid, #52525B)",
+        backgroundColor: "var(--color-surface-dark, #141413)",
       }}
-      className="tr-divider-t font-sans"
+      className="text-zinc-400 border-t-4 border-[#FF5000] font-sans tr-blueprint-grid"
     >
       <div className="tr-container px-4 sm:px-6 md:px-12 py-16 lg:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
           {/* Columna 1: Identidad Corporativa */}
           <div className="lg:col-span-4 space-y-5">
             <Link href="/" className="flex items-center gap-3">
-              <div className="relative w-11 h-11 flex items-center justify-center shrink-0">
+              <div className="relative w-11 h-11 flex items-center justify-center shrink-0 bg-white/95 p-1 rounded-xs">
                 <Image
                   src={company.logoUrl || "/img/logos/logo.png"}
                   alt={`${company.legalName} Logo`}
                   fill
                   sizes="44px"
-                  className="object-contain"
+                  className="object-contain p-0.5"
                 />
               </div>
               <div className="flex flex-col">
-                <span
-                  style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
-                  className="font-extrabold tracking-tight text-xl leading-none font-display uppercase"
-                >
+                <span className="text-white font-extrabold tracking-tight text-xl leading-none font-display uppercase">
                   {firstWord}{" "}
                   <span style={{ color: "var(--color-brand-orange, #FF5000)" }}>
                     {restWords}
                   </span>
                 </span>
-                <span className="text-zinc-500 font-mono text-[10px] tracking-[0.2em] uppercase mt-1">
+                <span className="text-zinc-400 font-mono text-[10px] tracking-[0.2em] uppercase mt-1">
                   {company.tagline}
                 </span>
               </div>
             </Link>
 
-            <p className="text-sm leading-relaxed max-w-sm font-light">
+            <p className="text-sm text-zinc-300 leading-relaxed max-w-sm font-light">
               Empresa constructora y contratista general con más de{" "}
               {company.yearsExperience.replace("+", "")} años de experiencia en
               liquidación y reconstrucción de siniestros, obras civiles B2B y
               remodelaciones residenciales en Chile.
             </p>
 
-            <div
-              style={{
-                backgroundColor: "var(--color-surface-cream, #F8FAFC)",
-                color: "var(--color-ink-anthracite, #0F172A)",
-              }}
-              className="inline-flex items-center gap-2 px-3 py-1.5 tr-card text-xs font-mono"
-            >
+            <div className="inline-flex items-center gap-2 px-3.5 py-2 bg-white/5 border border-white/15 text-xs font-mono text-zinc-200">
               <svg
                 viewBox="0 0 24 24"
                 fill="none"
@@ -86,10 +76,7 @@ export function Footer({
 
           {/* Columna 2: Navegación Rápida */}
           <div className="lg:col-span-2 space-y-4">
-            <h3
-              style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
-              className="text-xs font-mono uppercase tracking-[0.2em] font-bold"
-            >
+            <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-white font-bold">
               Ecosistema
             </h3>
             <ul className="space-y-2.5 text-sm">
@@ -97,7 +84,7 @@ export function Footer({
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="hover:text-[#FF5000] transition-colors duration-200 inline-block"
+                    className="text-zinc-300 hover:text-[#FF5000] transition-colors duration-200 inline-block"
                   >
                     {link.label}
                   </Link>
@@ -106,7 +93,7 @@ export function Footer({
               <li>
                 <Link
                   href="/contacto"
-                  className="hover:text-[#FF5000] transition-colors duration-200 inline-block"
+                  className="text-zinc-300 hover:text-[#FF5000] transition-colors duration-200 inline-block"
                 >
                   Contacto
                 </Link>
@@ -116,13 +103,10 @@ export function Footer({
 
           {/* Columna 3: Especialidades Técnicas */}
           <div className="lg:col-span-3 space-y-4">
-            <h3
-              style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
-              className="text-xs font-mono uppercase tracking-[0.2em] font-bold"
-            >
+            <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-white font-bold">
               Líneas de Acción
             </h3>
-            <ul className="space-y-2.5 text-sm">
+            <ul className="space-y-2.5 text-sm text-zinc-300">
               <li>
                 <Link
                   href="/servicios"
@@ -168,13 +152,10 @@ export function Footer({
 
           {/* Columna 4: Coordenadas Operativas */}
           <div className="lg:col-span-3 space-y-4">
-            <h3
-              style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
-              className="text-xs font-mono uppercase tracking-[0.2em] font-bold"
-            >
+            <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-white font-bold">
               Central de Operaciones
             </h3>
-            <ul className="space-y-3 text-sm">
+            <ul className="space-y-3 text-sm text-zinc-300">
               <li className="flex items-start gap-3">
                 <svg
                   viewBox="0 0 24 24"
@@ -204,7 +185,7 @@ export function Footer({
                 </svg>
                 <a
                   href={`tel:${company.phoneClean}`}
-                  className="hover:text-[#FF5000] transition-colors duration-200 font-mono"
+                  className="hover:text-[#FF5000] transition-colors duration-200 font-mono text-white"
                 >
                   {company.phoneDisplay}
                 </a>
@@ -243,12 +224,7 @@ export function Footer({
                   <path d="M12 6v6l4 2" />
                 </svg>
                 <div className="text-xs space-y-1">
-                  <p
-                    style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
-                    className="font-medium"
-                  >
-                    {company.hours}
-                  </p>
+                  <p className="text-zinc-200 font-medium">{company.hours}</p>
                   <p
                     style={{ color: "var(--color-brand-orange, #FF5000)" }}
                     className="font-mono font-semibold uppercase"
@@ -263,11 +239,8 @@ export function Footer({
       </div>
 
       {/* Barra Inferior Legal & Créditos */}
-      <div
-        style={{ backgroundColor: "var(--color-surface-cream, #F8FAFC)" }}
-        className="tr-divider-t"
-      >
-        <div className="tr-container px-4 sm:px-6 md:px-12 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
+      <div className="border-t border-white/10 bg-black/30">
+        <div className="tr-container px-4 sm:px-6 md:px-12 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-400">
           <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-6 text-center sm:text-left">
             <p>
               © {currentYear} {company.legalName} Todos los derechos reservados.
@@ -275,14 +248,14 @@ export function Footer({
             <div className="flex items-center gap-4">
               <Link
                 href="/privacidad"
-                className="hover:text-[#0F172A] transition-colors duration-200"
+                className="hover:text-white transition-colors duration-200"
               >
                 Política de Privacidad
               </Link>
               <span>•</span>
               <Link
                 href="/terminos"
-                className="hover:text-[#0F172A] transition-colors duration-200"
+                className="hover:text-white transition-colors duration-200"
               >
                 Términos de Uso
               </Link>
@@ -293,7 +266,7 @@ export function Footer({
             href={COMPANY.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-zinc-600 hover:text-[#FF5000] transition-colors duration-200 font-mono text-[11px]"
+            className="inline-flex items-center gap-1 text-zinc-300 hover:text-[#FF5000] transition-colors duration-200 font-mono text-[11px]"
           >
             <span>Desarrollado por {COMPANY.developerName}</span>
             <svg

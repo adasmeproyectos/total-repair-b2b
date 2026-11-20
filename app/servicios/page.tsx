@@ -40,7 +40,7 @@ const Icon = ({ name }: { name: string }) => {
     ),
   };
   return (
-    <div className="w-8 h-8 text-zinc-500 group-hover:text-[#FF5000] transition-colors duration-200">
+    <div className="w-8 h-8 text-[#FF5000] transition-colors duration-200">
       {icons[name] || icons.data}
     </div>
   );
@@ -67,27 +67,24 @@ export default async function ServiciosPage() {
     <div
       style={{
         backgroundColor: "var(--color-surface-white, #FFFFFF)",
-        color: "var(--color-ink-anthracite, #0F172A)",
+        color: "var(--color-ink-anthracite, #141413)",
       }}
-      className="min-h-screen overflow-x-hidden pt-20"
+      className="min-h-screen overflow-x-hidden pt-[72px] sm:pt-[104px]"
     >
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(claimsFaqJsonLd) }}
       />
 
-      {/* 1. HERO DIVIDIDO */}
+      {/* 1. HERO DIVIDIDO OSCURO */}
       <section
-        style={{ backgroundColor: "var(--color-surface-cream, #F8FAFC)" }}
-        className="relative tr-divider-b"
+        style={{ backgroundColor: "var(--color-surface-dark, #141413)" }}
+        className="relative text-white tr-blueprint-grid"
       >
         <div className="tr-container px-4 sm:px-6 md:px-12 py-14 sm:py-20 lg:py-24 grid grid-cols-1 lg:grid-cols-12 tr-grid items-center">
           <div className="lg:col-span-7">
-            <SectionLabel label={s.eyebrow} />
-            <h1
-              style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
-              className="tr-heading-page font-black leading-[1.08] mb-6 tracking-tight font-display uppercase"
-            >
+            <SectionLabel label={s.eyebrow} dark />
+            <h1 className="tr-heading-page font-black text-white leading-[1.06] mb-6 tracking-tight font-display uppercase">
               {s.title}{" "}
               <span
                 style={{ color: "var(--color-brand-orange, #FF5000)" }}
@@ -96,15 +93,31 @@ export default async function ServiciosPage() {
                 {s.titleHighlight}
               </span>
             </h1>
-            <p
-              style={{ color: "var(--color-ink-mid, #52525B)" }}
-              className="text-base sm:text-lg font-light leading-relaxed max-w-xl"
-            >
+            <p className="text-base sm:text-lg text-zinc-300 font-light leading-relaxed max-w-xl mb-8">
               {s.description}
             </p>
+            <div className="flex flex-wrap gap-3">
+              <Link
+                href="/contacto"
+                style={{
+                  backgroundColor: "var(--color-brand-orange, #FF5000)",
+                  borderRadius: "var(--tr-btn-radius, 2px)",
+                }}
+                className="text-white px-7 py-3.5 text-xs sm:text-sm font-bold uppercase tracking-widest hover:opacity-90"
+              >
+                Cotizar Servicio
+              </Link>
+              <Link
+                href="/contacto?urgencia=true"
+                style={{ borderRadius: "var(--tr-btn-radius, 2px)" }}
+                className="border border-white/30 bg-white/10 hover:bg-white hover:text-[#141413] text-white px-7 py-3.5 text-xs sm:text-sm font-bold uppercase tracking-widest transition-colors"
+              >
+                🚨 Siniestro 24/7
+              </Link>
+            </div>
           </div>
 
-          <div className="lg:col-span-5 relative aspect-[4/3] w-full overflow-hidden tr-card bg-zinc-100">
+          <div className="lg:col-span-5 relative aspect-[4/3] w-full overflow-hidden border border-white/15 bg-black/40 shadow-2xl">
             <Image
               src={s.heroImage || "/img/fotos/arquitectura-B2B.jpg"}
               alt="Arquitectura e Ingeniería Industrial B2B — Total Repair Ltda."
@@ -122,7 +135,7 @@ export default async function ServiciosPage() {
         <div className="mb-14 text-center max-w-2xl mx-auto">
           <SectionLabel label={s.specEyebrow} className="justify-center" />
           <h2
-            style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
+            style={{ color: "var(--color-ink-anthracite, #141413)" }}
             className="font-display tr-heading-section font-black mb-3 tracking-tight uppercase"
           >
             {s.specTitle}
@@ -139,15 +152,15 @@ export default async function ServiciosPage() {
           {s.specialities.map((spec) => (
             <article
               key={spec.id}
-              style={{ backgroundColor: "var(--color-surface-cream, #F8FAFC)" }}
+              style={{ backgroundColor: "var(--color-surface-cream, #F5F3EE)" }}
               className="group tr-card tr-card-pad flex flex-col justify-between min-h-[220px] transition-colors duration-200 hover:border-[#FF5000]"
             >
-              <div className="flex justify-between items-start mb-6">
+              <div className="w-12 h-12 bg-white border border-zinc-200 flex items-center justify-center mb-6">
                 <Icon name={spec.icon} />
               </div>
               <div>
                 <h3
-                  style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
+                  style={{ color: "var(--color-ink-anthracite, #141413)" }}
                   className="text-lg font-bold leading-snug tracking-tight group-hover:text-[#FF5000] transition-colors duration-200 mb-2"
                 >
                   {spec.name}
@@ -166,7 +179,7 @@ export default async function ServiciosPage() {
 
       {/* 3. SINIESTROS EXPANDIBLES */}
       <section
-        style={{ backgroundColor: "var(--color-surface-cream, #F8FAFC)" }}
+        style={{ backgroundColor: "var(--color-surface-cream, #F5F3EE)" }}
         className="tr-section tr-divider-t"
       >
         <div className="tr-container px-4 sm:px-6 md:px-12">
@@ -178,7 +191,7 @@ export default async function ServiciosPage() {
               {s.claimsBadge}
             </span>
             <h2
-              style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
+              style={{ color: "var(--color-ink-anthracite, #141413)" }}
               className="font-display tr-heading-section font-black mb-3 tracking-tight uppercase"
             >
               {s.claimsTitle}
@@ -195,7 +208,7 @@ export default async function ServiciosPage() {
                 open={index === 0}
                 className="group tr-divider-b last:border-b-0"
               >
-                <summary className="p-6 sm:p-8 md:p-10 flex items-center justify-between gap-4 sm:gap-6 cursor-pointer list-none hover:bg-[#F8FAFC] transition-colors duration-200">
+                <summary className="p-6 sm:p-8 md:p-10 flex items-center justify-between gap-4 sm:gap-6 cursor-pointer list-none hover:bg-[#F5F3EE]/60 transition-colors duration-200">
                   <div className="flex items-center gap-4 sm:gap-6">
                     <span
                       style={{ color: "var(--color-brand-orange, #FF5000)" }}
@@ -204,7 +217,7 @@ export default async function ServiciosPage() {
                       {claim.code}
                     </span>
                     <h3
-                      style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
+                      style={{ color: "var(--color-ink-anthracite, #141413)" }}
                       className="text-lg sm:text-xl md:text-2xl font-bold tracking-tight group-hover:text-[#FF5000] transition-colors duration-200"
                     >
                       {claim.title}
@@ -224,7 +237,7 @@ export default async function ServiciosPage() {
 
                 <div
                   style={{
-                    backgroundColor: "var(--color-surface-cream, #F8FAFC)",
+                    backgroundColor: "var(--color-surface-cream, #F5F3EE)",
                     color: "var(--color-ink-mid, #52525B)",
                   }}
                   className="px-6 sm:px-8 md:px-20 pb-8 sm:pb-10 pt-2 tr-divider-t leading-relaxed font-light"

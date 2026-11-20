@@ -21,19 +21,19 @@ export default async function EmpresasPage() {
     <div
       style={{
         backgroundColor: "var(--color-surface-white, #FFFFFF)",
-        color: "var(--color-ink-anthracite, #0F172A)",
+        color: "var(--color-ink-anthracite, #141413)",
       }}
-      className="min-h-screen overflow-x-hidden pt-20"
+      className="min-h-screen overflow-x-hidden pt-[72px] sm:pt-[104px]"
     >
-      {/* ── HERO ──────────────────────────────────────────────────── */}
-      <section className="relative tr-divider-b">
+      {/* ── HERO EDITORIAL OSCURO (#141413) ─────────────────────────── */}
+      <section
+        style={{ backgroundColor: "var(--color-surface-dark, #141413)" }}
+        className="relative text-white tr-blueprint-grid border-b border-white/10"
+      >
         <div className="tr-container px-4 sm:px-6 md:px-12 py-14 sm:py-20 lg:py-24 grid grid-cols-1 lg:grid-cols-12 tr-grid items-center">
           <div className="lg:col-span-7">
-            <SectionLabel label={e.eyebrow} />
-            <h1
-              style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
-              className="font-display tr-heading-page font-black leading-[1.08] mb-6 tracking-tight uppercase"
-            >
+            <SectionLabel label={e.eyebrow} dark />
+            <h1 className="font-display tr-heading-page font-black text-white leading-[1.05] mb-6 tracking-tight uppercase">
               {e.titleLine1}{" "}
               <span
                 style={{ color: "var(--color-brand-orange, #FF5000)" }}
@@ -42,10 +42,7 @@ export default async function EmpresasPage() {
                 {e.titleHighlight}
               </span>
             </h1>
-            <p
-              style={{ color: "var(--color-ink-mid, #52525B)" }}
-              className="text-base sm:text-lg md:text-xl mb-8 sm:mb-10 max-w-xl font-light leading-relaxed"
-            >
+            <p className="text-base sm:text-lg md:text-xl text-zinc-300 mb-8 sm:mb-10 max-w-xl font-light leading-relaxed">
               {e.description}
             </p>
             <div className="flex flex-col sm:flex-row gap-3.5 sm:gap-4">
@@ -61,19 +58,15 @@ export default async function EmpresasPage() {
               </Link>
               <Link
                 href="/servicios"
-                style={{
-                  backgroundColor: "var(--color-surface-cream, #F8FAFC)",
-                  color: "var(--color-ink-anthracite, #0F172A)",
-                  borderRadius: "var(--tr-btn-radius, 2px)",
-                }}
-                className="border border-zinc-300 px-8 py-4 text-xs sm:text-sm font-bold uppercase tracking-widest hover:border-[#FF5000] hover:text-[#FF5000] transition-colors duration-200 text-center"
+                style={{ borderRadius: "var(--tr-btn-radius, 2px)" }}
+                className="border border-white/30 bg-white/10 hover:bg-white hover:text-[#141413] text-white px-8 py-4 text-xs sm:text-sm font-bold uppercase tracking-widest transition-colors duration-200 text-center"
               >
                 {e.ctaSecondary}
               </Link>
             </div>
           </div>
 
-          <div className="lg:col-span-5 relative aspect-[4/3] w-full overflow-hidden tr-card bg-zinc-100">
+          <div className="lg:col-span-5 relative aspect-[4/3] w-full overflow-hidden border border-white/15 bg-black/40 shadow-2xl">
             <Image
               src={e.heroImage || "/img/fotos/hero-corporativo.jpg"}
               alt="Oficina Corporativa en Construcción — Total Repair Ltda."
@@ -86,14 +79,18 @@ export default async function EmpresasPage() {
         </div>
       </section>
 
-      <LogoCarousel title={content.logosTitle} logos={content.logos} />
+      <LogoCarousel
+        title={content.logosTitle}
+        logos={content.logos}
+        surface="cream"
+      />
 
       {/* ── BENTO GRID SERVICIOS ───────────────────────────────────── */}
       <section className="tr-section tr-container px-4 sm:px-6 md:px-12">
         <div className="mb-14">
           <SectionLabel label={e.bentoEyebrow} />
           <h2
-            style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
+            style={{ color: "var(--color-ink-anthracite, #141413)" }}
             className="font-display tr-heading-section font-black mb-3 tracking-tight uppercase"
           >
             {e.bentoTitle}
@@ -108,7 +105,7 @@ export default async function EmpresasPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 tr-grid">
           <article
-            style={{ backgroundColor: "var(--color-surface-cream, #F8FAFC)" }}
+            style={{ backgroundColor: "var(--color-surface-cream, #F5F3EE)" }}
             className="lg:col-span-2 tr-card overflow-hidden flex flex-col justify-between hover:border-[#FF5000] transition-colors duration-200"
           >
             <div className="relative h-64 sm:h-80 w-full overflow-hidden bg-zinc-100 tr-divider-b">
@@ -128,7 +125,7 @@ export default async function EmpresasPage() {
                 {e.featuredLabel}
               </span>
               <h3
-                style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
+                style={{ color: "var(--color-ink-anthracite, #141413)" }}
                 className="font-display text-2xl sm:text-3xl font-bold mb-3"
               >
                 {e.featuredTitle}
@@ -144,7 +141,7 @@ export default async function EmpresasPage() {
 
           <div className="flex flex-col tr-grid">
             <article
-              style={{ backgroundColor: "var(--color-surface-cream, #F8FAFC)" }}
+              style={{ backgroundColor: "var(--color-surface-cream, #F5F3EE)" }}
               className="flex-1 tr-card tr-card-pad flex flex-col justify-between hover:border-[#FF5000] transition-colors duration-200"
             >
               <div
@@ -164,7 +161,7 @@ export default async function EmpresasPage() {
               </div>
               <div>
                 <h3
-                  style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
+                  style={{ color: "var(--color-ink-anthracite, #141413)" }}
                   className="font-display text-xl font-bold mb-2"
                 >
                   {e.maintTitle}
@@ -180,28 +177,23 @@ export default async function EmpresasPage() {
 
             <article
               style={{
-                backgroundColor: "var(--color-surface-white, #FFFFFF)",
+                backgroundColor: "var(--color-surface-dark, #141413)",
                 borderLeft: "4px solid var(--color-brand-orange, #FF5000)",
+                borderRadius: "var(--tr-card-radius, 4px)",
               }}
-              className="flex-1 tr-card tr-card-pad flex flex-col justify-between hover:border-[#FF5000] transition-colors duration-200"
+              className="flex-1 tr-card-pad flex flex-col justify-between text-white"
             >
               <div>
                 <span
                   style={{ color: "var(--color-brand-orange, #FF5000)" }}
-                  className="inline-block bg-[#FF5000]/10 border border-[#FF5000]/30 px-3 py-1 text-xs font-mono font-bold uppercase tracking-widest mb-5"
+                  className="inline-block bg-[#FF5000]/15 border border-[#FF5000]/40 px-3 py-1 text-xs font-mono font-bold uppercase tracking-widest mb-5"
                 >
                   {e.claimsBadge}
                 </span>
-                <h3
-                  style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
-                  className="font-display text-xl font-bold mb-2"
-                >
+                <h3 className="font-display text-xl font-bold text-white mb-2">
                   {e.claimsTitle}
                 </h3>
-                <p
-                  style={{ color: "var(--color-ink-mid, #52525B)" }}
-                  className="text-sm leading-relaxed font-light"
-                >
+                <p className="text-sm text-zinc-300 leading-relaxed font-light">
                   {e.claimsDescription}
                 </p>
               </div>
@@ -219,14 +211,14 @@ export default async function EmpresasPage() {
 
       {/* ── GESTIÓN DE SINIESTROS ─────────────────────────────────── */}
       <section
-        style={{ backgroundColor: "var(--color-surface-cream, #F8FAFC)" }}
+        style={{ backgroundColor: "var(--color-surface-cream, #F5F3EE)" }}
         className="tr-section tr-divider-t"
       >
         <div className="tr-container px-4 sm:px-6 md:px-12">
           <div className="mb-12">
             <SectionLabel label={e.uriEyebrow} />
             <h2
-              style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
+              style={{ color: "var(--color-ink-anthracite, #141413)" }}
               className="font-display tr-heading-section font-black tracking-tight uppercase"
             >
               {e.uriTitle}
@@ -256,7 +248,7 @@ export default async function EmpresasPage() {
                     PROTOCOLO {claim.code}
                   </span>
                   <h3
-                    style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
+                    style={{ color: "var(--color-ink-anthracite, #141413)" }}
                     className="text-xl font-bold mb-3"
                   >
                     {claim.title}

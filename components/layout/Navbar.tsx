@@ -37,17 +37,67 @@ export function Navbar({
       <header
         style={{
           borderBottom:
-            "var(--tr-divider-width, 1px) solid var(--color-divider, #E4E4E7)",
+            "var(--tr-divider-width, 1px) solid var(--color-divider, #E2DFD7)",
           backgroundColor: isScrolled
-            ? "color-mix(in srgb, var(--color-surface-white, #FFFFFF) 95%, transparent)"
+            ? "color-mix(in srgb, var(--color-surface-white, #FFFFFF) 96%, transparent)"
             : "var(--color-surface-white, #FFFFFF)",
         }}
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-200 ${
-          isScrolled ? "backdrop-blur-md py-3 shadow-sm" : "py-4"
+          isScrolled ? "backdrop-blur-md shadow-sm" : ""
         }`}
       >
-        <div className="tr-container px-4 sm:px-6 md:px-12 flex items-center justify-between">
-          {/* Logo Corporativo */}
+        {/* Franja superior de Emergencias 24/7 */}
+        <div
+          style={{
+            backgroundColor: "var(--color-surface-dark, #141413)",
+          }}
+          className="hidden sm:block text-white border-b border-white/10"
+        >
+          <div className="tr-container px-4 sm:px-6 md:px-12 h-8 flex items-center justify-between text-[11px] font-mono">
+            <div className="flex items-center gap-2.5 text-zinc-300">
+              <span className="relative flex h-2 w-2">
+                <span
+                  style={{ backgroundColor: "var(--color-brand-orange, #FF5000)" }}
+                  className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
+                />
+                <span
+                  style={{ backgroundColor: "var(--color-brand-orange, #FF5000)" }}
+                  className="relative inline-flex rounded-full h-2 w-2"
+                />
+              </span>
+              <span className="uppercase tracking-wider font-semibold text-white">
+                {company.emergencyHours}
+              </span>
+              <span className="text-zinc-500 hidden md:inline">·</span>
+              <span className="text-zinc-400 hidden md:inline">
+                {company.addressShort}
+              </span>
+            </div>
+
+            <div className="flex items-center gap-4">
+              <a
+                href={`tel:${company.phoneClean}`}
+                className="text-zinc-300 hover:text-white transition-colors"
+              >
+                Llamar: <strong className="text-white">{company.phoneDisplay}</strong>
+              </a>
+              <Link
+                href="/contacto?urgencia=true"
+                style={{ color: "var(--color-brand-orange, #FF5000)" }}
+                className="font-bold uppercase tracking-wider hover:underline"
+              >
+                Reportar Urgencia →
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Barra principal de navegación */}
+        <div
+          className={`tr-container px-4 sm:px-6 md:px-12 flex items-center justify-between transition-all duration-200 ${
+            isScrolled ? "py-2.5" : "py-3.5"
+          }`}
+        >
           <Link href="/" className="flex items-center gap-3 group shrink-0">
             <div className="relative w-10 h-10 sm:w-11 sm:h-11 overflow-hidden flex items-center justify-center shrink-0">
               <Image
@@ -61,7 +111,7 @@ export function Navbar({
             </div>
             <div className="flex flex-col">
               <span
-                style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
+                style={{ color: "var(--color-ink-anthracite, #141413)" }}
                 className="font-extrabold tracking-tight text-lg sm:text-xl leading-none font-display uppercase"
               >
                 {firstWord}{" "}
@@ -78,7 +128,6 @@ export function Navbar({
             </div>
           </Link>
 
-          {/* Navegación Desktop */}
           <nav
             aria-label="Navegación principal"
             className="hidden lg:flex items-center gap-7"
@@ -95,10 +144,10 @@ export function Navbar({
                   style={{
                     color: isActive
                       ? "var(--color-brand-orange, #FF5000)"
-                      : "var(--color-ink-mid, #52525B)",
+                      : "var(--color-ink-anthracite, #141413)",
                   }}
                   className={`text-sm tracking-wide uppercase transition-colors duration-200 relative py-1 hover:opacity-100 ${
-                    isActive ? "font-bold" : "font-medium opacity-90"
+                    isActive ? "font-bold" : "font-semibold opacity-75"
                   }`}
                 >
                   {link.label}
@@ -115,26 +164,18 @@ export function Navbar({
             })}
           </nav>
 
-          {/* Acciones Derecha (Teléfono & Cotizar) */}
-          <div className="hidden lg:flex items-center gap-4 shrink-0">
-            <a
-              href={`tel:${company.phoneClean}`}
-              style={{ color: "var(--color-ink-mid, #52525B)" }}
-              className="flex items-center gap-2 text-sm font-mono transition-colors duration-200 px-2 py-2 hover:opacity-100"
+          <div className="hidden lg:flex items-center gap-3 shrink-0">
+            <Link
+              href="/contacto?urgencia=true"
+              style={{
+                borderRadius: "var(--tr-btn-radius, 2px)",
+                borderColor: "var(--color-ink-anthracite, #141413)",
+                color: "var(--color-ink-anthracite, #141413)",
+              }}
+              className="border px-4 py-2.5 text-xs font-bold uppercase tracking-wider hover:bg-[#141413] hover:text-white transition-colors"
             >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                style={{ color: "var(--color-brand-orange, #FF5000)" }}
-                className="w-4 h-4"
-                aria-hidden="true"
-              >
-                <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
-              </svg>
-              <span>{company.phoneDisplay}</span>
-            </a>
+              Siniestros 24/7
+            </Link>
 
             <Link
               href="/contacto"
@@ -148,11 +189,10 @@ export function Navbar({
             </Link>
           </div>
 
-          {/* Botón Menú Móvil */}
           <button
             type="button"
             onClick={() => setMobileMenuOpen(true)}
-            style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
+            style={{ color: "var(--color-ink-anthracite, #141413)" }}
             className="lg:hidden p-2 focus:outline-none"
             aria-label="Abrir menú de navegación"
           >

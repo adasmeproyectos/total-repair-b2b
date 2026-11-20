@@ -6,7 +6,7 @@ import { requireAdmin } from "@/lib/supabase/server";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Panel de Administración | Total Repair Ltda.",
+  title: "Panel de Administración",
   robots: { index: false, follow: false },
 };
 

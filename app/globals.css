@@ -8,15 +8,16 @@
   --color-brand-orange-pale:   #FFF2EB;
 
   --color-surface-white:       #FFFFFF;
-  --color-surface-cream:       #F8FAFC;
-  --color-surface-concrete:    #F1F5F9;
+  --color-surface-cream:       #F5F3EE;
+  --color-surface-concrete:    #ECE9E1;
+  --color-surface-dark:        #141413;
 
   --color-ink-black:           #000000;
-  --color-ink-anthracite:      #0F172A;
+  --color-ink-anthracite:      #141413;
   --color-ink-mid:             #52525B;
   --color-ink-light:           #A8A8A8;
 
-  --color-divider:             #E4E4E7;
+  --color-divider:             #E2DFD7;
   --color-divider-dark:        #C8C4BE;
 
   --brand-orange:              #FF5000;
@@ -111,6 +112,18 @@ body {
 
 .tr-btn {
   border-radius: var(--tr-btn-radius, 2px);
+}
+
+.tr-dark-surface {
+  background-color: var(--color-surface-dark, #141413);
+  color: #FFFFFF;
+}
+
+.tr-blueprint-grid {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
 }
 
 .tr-heading-hero {

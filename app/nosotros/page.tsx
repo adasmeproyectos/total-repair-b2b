@@ -43,33 +43,32 @@ export default async function NosotrosPage() {
     <div
       style={{
         backgroundColor: "var(--color-surface-white, #FFFFFF)",
-        color: "var(--color-ink-anthracite, #0F172A)",
+        color: "var(--color-ink-anthracite, #141413)",
       }}
-      className="min-h-screen overflow-x-hidden pt-20"
+      className="min-h-screen overflow-x-hidden pt-[72px] sm:pt-[104px]"
     >
-      {/* 1. HEADER */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 md:px-12 max-w-5xl mx-auto text-center">
-        <SectionLabel label={n.eyebrow} className="justify-center" />
-        <h1
-          style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
-          className="font-display tr-heading-page font-black leading-tight mb-6 tracking-tight uppercase"
-        >
-          {n.title} <br className="hidden sm:inline" />{" "}
-          <span style={{ color: "var(--color-brand-orange, #FF5000)" }}>
-            {n.titleHighlight}
-          </span>
-        </h1>
-        <p
-          style={{ color: "var(--color-ink-mid, #52525B)" }}
-          className="text-base sm:text-lg md:text-xl max-w-3xl mx-auto font-light leading-relaxed"
-        >
-          {n.description}
-        </p>
+      {/* 1. HEADER OSCURO */}
+      <section
+        style={{ backgroundColor: "var(--color-surface-dark, #141413)" }}
+        className="py-16 sm:py-24 px-4 sm:px-6 md:px-12 text-center text-white tr-blueprint-grid"
+      >
+        <div className="max-w-5xl mx-auto">
+          <SectionLabel label={n.eyebrow} className="justify-center" dark />
+          <h1 className="font-display tr-heading-page font-black text-white leading-tight mb-6 tracking-tight uppercase">
+            {n.title} <br className="hidden sm:inline" />{" "}
+            <span style={{ color: "var(--color-brand-orange, #FF5000)" }}>
+              {n.titleHighlight}
+            </span>
+          </h1>
+          <p className="text-base sm:text-lg md:text-xl text-zinc-300 max-w-3xl mx-auto font-light leading-relaxed">
+            {n.description}
+          </p>
+        </div>
       </section>
 
       {/* 2. CORE SPECIALIZATION */}
       <section
-        style={{ backgroundColor: "var(--color-surface-cream, #F8FAFC)" }}
+        style={{ backgroundColor: "var(--color-surface-cream, #F5F3EE)" }}
         className="tr-section tr-divider-y"
       >
         <div className="tr-container px-4 sm:px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 tr-grid items-center">
@@ -102,7 +101,7 @@ export default async function NosotrosPage() {
               <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
             </svg>
             <p
-              style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
+              style={{ color: "var(--color-ink-anthracite, #141413)" }}
               className="text-xl sm:text-2xl md:text-3xl font-bold leading-snug mb-5"
             >
               {n.coreQuote}
@@ -125,7 +124,7 @@ export default async function NosotrosPage() {
         <div className="mb-14 text-center">
           <SectionLabel label={n.guaranteesEyebrow} className="justify-center" />
           <h2
-            style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
+            style={{ color: "var(--color-ink-anthracite, #141413)" }}
             className="font-display tr-heading-section font-black mb-3 tracking-tight uppercase"
           >
             {n.guaranteesTitle}
@@ -142,7 +141,7 @@ export default async function NosotrosPage() {
           {n.guarantees.map((item) => (
             <article
               key={item.id}
-              style={{ backgroundColor: "var(--color-surface-cream, #F8FAFC)" }}
+              style={{ backgroundColor: "var(--color-surface-cream, #F5F3EE)" }}
               className="tr-card tr-card-pad transition-colors duration-200 hover:border-[#FF5000]"
             >
               <div
@@ -152,7 +151,7 @@ export default async function NosotrosPage() {
                 <GuaranteeIcon kind={item.icon} />
               </div>
               <h3
-                style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
+                style={{ color: "var(--color-ink-anthracite, #141413)" }}
                 className="font-display text-xl font-bold mb-3"
               >
                 {item.title}

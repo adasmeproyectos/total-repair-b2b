@@ -93,11 +93,12 @@ export function buildThemeCssVars(theme: SiteTheme): Record<string, string> {
 
   const brandOrange = sanitizeHex(theme.brandOrange, "#FF5000");
   const brandOrangeDark = sanitizeHex(theme.brandOrangeDark, "#CC4000");
-  const inkAnthracite = sanitizeHex(theme.inkAnthracite, "#0F172A");
+  const heroDarkBg = sanitizeHex(theme.heroDarkBg, "#141413");
+  const inkAnthracite = sanitizeHex(theme.inkAnthracite, "#141413");
   const inkMid = sanitizeHex(theme.inkMid, "#52525B");
   const surfaceWhite = sanitizeHex(theme.surfaceWhite, "#FFFFFF");
-  const surfaceCream = sanitizeHex(theme.surfaceCream, "#F8FAFC");
-  const dividerColor = sanitizeHex(theme.dividerColor, "#E4E4E7");
+  const surfaceCream = sanitizeHex(theme.surfaceCream, "#F5F3EE");
+  const dividerColor = sanitizeHex(theme.dividerColor, "#E2DFD7");
 
   const textScale = clamp(theme.textScale, 0.85, 1.35, 1);
   const headingScale = clamp(theme.headingScale, 0.8, 1.35, 1);
@@ -107,7 +108,7 @@ export function buildThemeCssVars(theme: SiteTheme): Record<string, string> {
   const containerMax = clamp(theme.containerMax, 960, 1480, 1280);
   const borderWidth = clamp(theme.borderWidth, 0, 4, 1);
   const dividerWidth = clamp(theme.dividerWidth, 0, 4, 1);
-  const cardRadius = clamp(theme.cardRadius, 0, 28, 2);
+  const cardRadius = clamp(theme.cardRadius, 0, 28, 4);
   const cardPadding = clamp(theme.cardPadding, 14, 48, 28);
   const btnRadius = clamp(theme.btnRadius, 0, 999, 2);
   const cardShadow = SHADOW_MAP[theme.cardShadow] ?? SHADOW_MAP.sm;
@@ -116,6 +117,7 @@ export function buildThemeCssVars(theme: SiteTheme): Record<string, string> {
     "--color-brand-orange": brandOrange,
     "--color-brand-orange-hover": brandOrange,
     "--color-brand-orange-dark": brandOrangeDark,
+    "--color-surface-dark": heroDarkBg,
     "--color-ink-anthracite": inkAnthracite,
     "--color-ink-mid": inkMid,
     "--color-surface-white": surfaceWhite,

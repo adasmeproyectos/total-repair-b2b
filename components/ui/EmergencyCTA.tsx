@@ -17,21 +17,22 @@ export function EmergencyCTA({
 
   return (
     <section
-      style={{ backgroundColor: "var(--color-surface-cream, #F8FAFC)" }}
-      className="w-full tr-divider-t py-16 md:py-20 px-4 sm:px-6 md:px-12"
+      style={{ backgroundColor: "var(--color-surface-cream, #F5F3EE)" }}
+      className="w-full tr-divider-t py-14 md:py-20 px-4 sm:px-6 md:px-12"
     >
       <div className="tr-container">
         <div
           style={{
-            backgroundColor: "var(--color-surface-white, #FFFFFF)",
-            borderLeft: "4px solid var(--color-brand-orange, #FF5000)",
+            backgroundColor: "var(--color-surface-dark, #141413)",
+            borderLeft: "5px solid var(--color-brand-orange, #FF5000)",
+            borderRadius: "var(--tr-card-radius, 4px)",
           }}
-          className="tr-card p-6 sm:p-10 md:p-12 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8"
+          className="tr-blueprint-grid p-7 sm:p-10 md:p-12 shadow-xl flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 text-white"
         >
           <div className="max-w-2xl">
             <div
               style={{ color: "var(--color-brand-orange, #FF5000)" }}
-              className="inline-flex items-center gap-2 px-3 py-1 bg-[#FF5000]/10 border border-[#FF5000]/30 text-xs font-mono font-bold uppercase tracking-widest mb-4"
+              className="inline-flex items-center gap-2 px-3 py-1 bg-[#FF5000]/15 border border-[#FF5000]/40 text-xs font-mono font-bold uppercase tracking-widest mb-4"
             >
               <span className="relative flex h-2 w-2">
                 <span
@@ -46,17 +47,11 @@ export function EmergencyCTA({
               {data.badge}
             </div>
 
-            <h2
-              style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
-              className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight mb-3 font-display uppercase"
-            >
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-white tracking-tight mb-3 font-display uppercase">
               {isHogar ? data.hogarTitle : data.empresasTitle}
             </h2>
 
-            <p
-              style={{ color: "var(--color-ink-mid, #52525B)" }}
-              className="text-sm sm:text-base md:text-lg font-light leading-relaxed"
-            >
+            <p className="text-zinc-300 text-sm sm:text-base md:text-lg font-light leading-relaxed">
               {isHogar ? data.hogarDescription : data.empresasDescription}
             </p>
           </div>
@@ -68,7 +63,7 @@ export function EmergencyCTA({
                 backgroundColor: "var(--color-brand-orange, #FF5000)",
                 borderRadius: "var(--tr-btn-radius, 2px)",
               }}
-              className="flex items-center justify-center gap-3 px-7 py-4 text-white font-bold tracking-wider uppercase text-xs sm:text-sm hover:opacity-90 transition-opacity duration-200 text-center"
+              className="flex items-center justify-center gap-3 px-7 py-4 text-white font-bold tracking-wider uppercase text-xs sm:text-sm hover:opacity-90 transition-opacity duration-200 text-center shadow-lg"
             >
               <svg
                 viewBox="0 0 24 24"
@@ -92,10 +87,9 @@ export function EmergencyCTA({
                   : "/contacto?urgencia=true"
               }
               style={{
-                backgroundColor: "var(--color-ink-anthracite, #0F172A)",
                 borderRadius: "var(--tr-btn-radius, 2px)",
               }}
-              className="flex items-center justify-center gap-2 px-6 py-4 text-white font-bold tracking-wider uppercase text-xs sm:text-sm hover:opacity-90 transition-opacity duration-200 group text-center"
+              className="flex items-center justify-center gap-2 px-6 py-4 bg-white/10 hover:bg-white hover:text-[#141413] border border-white/30 text-white font-bold tracking-wider uppercase text-xs sm:text-sm transition-colors duration-200 group text-center"
             >
               <span>{data.reportLabel}</span>
               <svg

@@ -13,18 +13,19 @@ export const DEFAULT_THEME: SiteTheme = {
 
   brandOrange: "#FF5000",
   brandOrangeDark: "#CC4000",
-  inkAnthracite: "#0F172A",
+  heroDarkBg: "#141413",
+  inkAnthracite: "#141413",
   inkMid: "#52525B",
   surfaceWhite: "#FFFFFF",
-  surfaceCream: "#F8FAFC",
-  dividerColor: "#E4E4E7",
+  surfaceCream: "#F5F3EE",
+  dividerColor: "#E2DFD7",
 
   sectionPy: 88,
   gridGap: 24,
   containerMax: 1280,
   borderWidth: 1,
   dividerWidth: 1,
-  cardRadius: 2,
+  cardRadius: 4,
   cardShadow: "sm",
   cardPadding: 28,
   btnRadius: 2,
@@ -37,23 +38,28 @@ export const DESIGN_PRESETS: Array<{
   theme: SiteTheme;
 }> = [
   {
-    id: "classic",
-    name: "Clásico Total Repair",
-    description: "El diseño corporativo original: contraste limpio, líneas rectas e identidad naranja.",
+    id: "industrial",
+    name: "Industrial Alto Contraste (Recomendado)",
+    description:
+      "Portadas carbón #141413, piedra cálida #F5F3EE y acento naranjo para máxima intención.",
     theme: DEFAULT_THEME,
   },
   {
-    id: "editorial",
-    name: "Editorial Amplio",
-    description: "Tipografía industrial Barlow Condensed, mayor aire entre secciones y bordes marcados.",
+    id: "classic",
+    name: "Blanco Corporativo Clásico",
+    description:
+      "Estética editorial con tipografía Barlow Condensed, mayor aire y bordes marcados.",
     theme: {
       ...DEFAULT_THEME,
       displayFont: "barlow",
       bodyFont: "inter",
-      textScale: 1.05,
-      headingScale: 1.08,
-      sectionPy: 112,
-      gridGap: 32,
+      heroDarkBg: "#1F1F1E",
+      surfaceCream: "#F8FAFC",
+      dividerColor: "#E4E4E7",
+      textScale: 1.04,
+      headingScale: 1.06,
+      sectionPy: 104,
+      gridGap: 28,
       borderWidth: 2,
       dividerWidth: 2,
       cardRadius: 0,
@@ -64,7 +70,8 @@ export const DESIGN_PRESETS: Array<{
   {
     id: "modern",
     name: "Moderno Redondeado",
-    description: "Tarjetas suaves con esquinas redondeadas, sombra sutil y tipografía Montserrat.",
+    description:
+      "Tarjetas suaves con esquinas redondeadas, sombra sutil y tipografía Montserrat.",
     theme: {
       ...DEFAULT_THEME,
       displayFont: "montserrat",
@@ -80,7 +87,8 @@ export const DESIGN_PRESETS: Array<{
   {
     id: "accessible",
     name: "Lectura Grande (Accesible)",
-    description: "Letra más grande, alto contraste y espaciado cómodo pensado para lectura sin esfuerzo.",
+    description:
+      "Letra más grande, alto contraste y espaciado cómodo pensado para lectura sin esfuerzo.",
     theme: {
       ...DEFAULT_THEME,
       displayFont: "outfit",

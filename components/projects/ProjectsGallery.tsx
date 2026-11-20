@@ -265,6 +265,7 @@ export function ProjectsGallery({ projects }: ProjectsGalleryProps) {
                     activePhotos[photoIndex].caption || activeProject.title
                   }
                   fill
+                  priority
                   sizes="(max-width: 1024px) 100vw, 1024px"
                   className="object-contain"
                 />

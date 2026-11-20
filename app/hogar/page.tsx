@@ -72,24 +72,24 @@ export default async function HogarPage() {
     <div
       style={{
         backgroundColor: "var(--color-surface-white, #FFFFFF)",
-        color: "var(--color-ink-anthracite, #0F172A)",
+        color: "var(--color-ink-anthracite, #141413)",
       }}
-      className="min-h-screen overflow-x-hidden pt-20"
+      className="min-h-screen overflow-x-hidden pt-[72px] sm:pt-[104px]"
     >
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
-      {/* ── HERO RESIDENCIAL ─────────────────────────────────────── */}
-      <section className="relative tr-divider-b">
+      {/* ── HERO RESIDENCIAL OSCURO (#141413) ────────────────────── */}
+      <section
+        style={{ backgroundColor: "var(--color-surface-dark, #141413)" }}
+        className="relative text-white tr-blueprint-grid"
+      >
         <div className="tr-container px-4 sm:px-6 md:px-12 py-14 sm:py-20 lg:py-24 grid grid-cols-1 lg:grid-cols-12 tr-grid items-center">
           <div className="lg:col-span-7">
-            <SectionLabel label={h.eyebrow} />
-            <h1
-              style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
-              className="font-display tr-heading-page font-black leading-[1.08] mb-6 tracking-tight uppercase"
-            >
+            <SectionLabel label={h.eyebrow} dark />
+            <h1 className="font-display tr-heading-page font-black text-white leading-[1.06] mb-6 tracking-tight uppercase">
               {h.title}{" "}
               <span
                 style={{ color: "var(--color-brand-orange, #FF5000)" }}
@@ -98,10 +98,7 @@ export default async function HogarPage() {
                 {h.titleHighlight}
               </span>
             </h1>
-            <p
-              style={{ color: "var(--color-ink-mid, #52525B)" }}
-              className="text-base sm:text-lg md:text-xl mb-8 sm:mb-10 max-w-xl font-light leading-relaxed"
-            >
+            <p className="text-base sm:text-lg md:text-xl text-zinc-300 mb-8 sm:mb-10 max-w-xl font-light leading-relaxed">
               {h.description}
             </p>
             <div className="flex flex-col sm:flex-row gap-3.5 sm:gap-4">
@@ -120,14 +117,14 @@ export default async function HogarPage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ borderRadius: "var(--tr-btn-radius, 2px)" }}
-                className="border border-emerald-600 bg-emerald-50/50 text-emerald-700 px-8 py-4 text-xs sm:text-sm font-bold uppercase tracking-widest hover:bg-emerald-600 hover:text-white transition-colors duration-200 text-center"
+                className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 text-xs sm:text-sm font-bold uppercase tracking-widest transition-colors duration-200 text-center"
               >
                 {h.ctaWhatsapp}
               </a>
             </div>
           </div>
 
-          <div className="lg:col-span-5 relative aspect-[4/3] w-full overflow-hidden tr-card bg-zinc-100">
+          <div className="lg:col-span-5 relative aspect-[4/3] w-full overflow-hidden border border-white/15 bg-black/40 shadow-2xl">
             <Image
               src={h.heroImage || "/img/fotos/hero-hogar.jpg"}
               alt="Remodelación de hogar moderno — Total Repair Ltda."
@@ -142,7 +139,7 @@ export default async function HogarPage() {
 
       {/* ── STATS HOGAR ───────────────────────────────────────────── */}
       <div
-        style={{ backgroundColor: "var(--color-surface-cream, #F8FAFC)" }}
+        style={{ backgroundColor: "var(--color-surface-cream, #F5F3EE)" }}
         className="tr-divider-b py-10"
       >
         <div className="tr-container px-4 sm:px-6 md:px-12 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 text-center">
@@ -154,7 +151,7 @@ export default async function HogarPage() {
               >
                 {stat.value}
               </p>
-              <p className="text-xs font-mono text-zinc-600 uppercase tracking-wider mt-1">
+              <p className="text-xs font-mono text-zinc-700 uppercase tracking-wider mt-1">
                 {stat.label}
               </p>
             </div>
@@ -167,7 +164,7 @@ export default async function HogarPage() {
         <div className="mb-14">
           <SectionLabel label={h.servicesEyebrow} />
           <h2
-            style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
+            style={{ color: "var(--color-ink-anthracite, #141413)" }}
             className="font-display tr-heading-section font-black mb-3 tracking-tight uppercase"
           >
             {h.servicesTitle}
@@ -184,7 +181,7 @@ export default async function HogarPage() {
           {h.services.map((service) => (
             <article
               key={service.id}
-              style={{ backgroundColor: "var(--color-surface-cream, #F8FAFC)" }}
+              style={{ backgroundColor: "var(--color-surface-cream, #F5F3EE)" }}
               className="group flex flex-col sm:flex-row gap-6 tr-card tr-card-pad hover:border-[#FF5000] transition-colors duration-200"
             >
               <div className="relative w-full sm:w-28 h-44 sm:h-28 shrink-0 overflow-hidden bg-zinc-100 border border-zinc-200">
@@ -204,7 +201,7 @@ export default async function HogarPage() {
                   <HogarIcon kind={service.icon} />
                 </div>
                 <h3
-                  style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
+                  style={{ color: "var(--color-ink-anthracite, #141413)" }}
                   className="text-xl font-bold mb-2 group-hover:text-[#FF5000] transition-colors duration-200"
                 >
                   {service.title}
@@ -224,7 +221,7 @@ export default async function HogarPage() {
       {/* ── GALERÍA DE PROYECTOS HOGAR ───────────────────────────── */}
       {hogarProjects.length > 0 && (
         <section
-          style={{ backgroundColor: "var(--color-surface-cream, #F8FAFC)" }}
+          style={{ backgroundColor: "var(--color-surface-cream, #F5F3EE)" }}
           className="tr-section tr-divider-y"
         >
           <div className="tr-container px-4 sm:px-6 md:px-12">
@@ -232,7 +229,7 @@ export default async function HogarPage() {
               <div>
                 <SectionLabel label={h.portfolioEyebrow} />
                 <h2
-                  style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
+                  style={{ color: "var(--color-ink-anthracite, #141413)" }}
                   className="font-display tr-heading-section font-black tracking-tight uppercase"
                 >
                   {h.portfolioTitle}
@@ -273,7 +270,7 @@ export default async function HogarPage() {
                       {project.location}
                     </p>
                     <h3
-                      style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
+                      style={{ color: "var(--color-ink-anthracite, #141413)" }}
                       className="font-bold text-lg group-hover:text-[#FF5000] transition-colors duration-200"
                     >
                       {project.title}
@@ -291,7 +288,7 @@ export default async function HogarPage() {
         <div className="mb-14 text-center">
           <SectionLabel label={h.faqsEyebrow} className="justify-center" />
           <h2
-            style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
+            style={{ color: "var(--color-ink-anthracite, #141413)" }}
             className="font-display tr-heading-section font-black tracking-tight uppercase"
           >
             {h.faqsTitle}
@@ -302,12 +299,12 @@ export default async function HogarPage() {
             <details
               key={faq.id}
               open={idx === 0}
-              style={{ backgroundColor: "var(--color-surface-cream, #F8FAFC)" }}
+              style={{ backgroundColor: "var(--color-surface-cream, #F5F3EE)" }}
               className="group tr-card open:border-[#FF5000]/50 transition-colors duration-200"
             >
               <summary className="w-full flex items-center justify-between p-5 sm:p-6 text-left cursor-pointer list-none">
                 <span
-                  style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
+                  style={{ color: "var(--color-ink-anthracite, #141413)" }}
                   className="font-bold pr-4 text-sm sm:text-base"
                 >
                   {faq.q}

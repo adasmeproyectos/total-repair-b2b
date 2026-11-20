@@ -3,43 +3,38 @@
 import { useState } from "react";
 import {
   CheckCircle2,
+  Eye,
+  EyeOff,
   History,
+  KeyRound,
   Loader2,
   Mail,
   RotateCcw,
   Save,
-  ShieldCheck,
-  UserPlus,
 } from "lucide-react";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
-import type {
-  AdminUserRecord,
-  SiteCompany,
-  SiteConfig,
-  SiteRevision,
-} from "@/lib/types/cms";
+import type { SiteCompany, SiteConfig, SiteRevision } from "@/lib/types/cms";
 
 interface SettingsManagerProps {
   initialConfig: SiteConfig;
-  initialAdmins: AdminUserRecord[];
   initialRevisions: SiteRevision[];
   userEmail: string;
 }
 
 export function SettingsManager({
   initialConfig,
-  initialAdmins,
   initialRevisions,
   userEmail,
 }: SettingsManagerProps) {
   const [company, setCompany] = useState<SiteCompany>(initialConfig.company);
-  const [admins, setAdmins] = useState<AdminUserRecord[]>(initialAdmins);
   const [revisions, setRevisions] = useState<SiteRevision[]>(initialRevisions);
 
-  const [newEmail, setNewEmail] = useState("");
-  const [newName, setNewName] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPasswords, setShowPasswords] = useState(false);
+
   const [savingEmailCfg, setSavingEmailCfg] = useState(false);
-  const [addingUser, setAddingUser] = useState(false);
+  const [updatingPassword, setUpdatingPassword] = useState(false);
   const [restoringId, setRestoringId] = useState<string | null>(null);
   const [statusMsg, setStatusMsg] = useState<{
     type: "ok" | "err";
@@ -77,81 +72,51 @@ export function SettingsManager({
     }
   };
 
-  const handleAddAdmin = async (e: React.FormEvent) => {
+  const handleUpdatePassword = async (e: React.FormEvent) => {
     e.preventDefault();
-    const cleanEmail = newEmail.trim().toLowerCase();
-    if (!cleanEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) {
-      setStatusMsg({ type: "err", text: "Ingresa un correo de Google válido." });
+    setStatusMsg(null);
+
+    if (newPassword.length < 6) {
+      setStatusMsg({
+        type: "err",
+        text: "La contraseña debe tener al menos 6 caracteres.",
+      });
       return;
     }
 
-    setAddingUser(true);
-    setStatusMsg(null);
+    if (newPassword !== confirmPassword) {
+      setStatusMsg({
+        type: "err",
+        text: "Las dos contraseñas no coinciden. Vuelve a escribirlas.",
+      });
+      return;
+    }
+
+    setUpdatingPassword(true);
     try {
       const supabase = createSupabaseBrowserClient();
-      const { data, error } = await supabase
-        .from("admin_users")
-        .insert({
-          email: cleanEmail,
-          display_name: newName.trim() || cleanEmail.split("@")[0],
-          role: "admin",
-          is_active: true,
-        })
-        .select("*")
-        .single();
+      const { error } = await supabase.auth.updateUser({
+        password: newPassword,
+      });
 
       if (error) throw new Error(error.message);
-      setAdmins((prev) => [...prev, data as AdminUserRecord]);
-      setNewEmail("");
-      setNewName("");
+
+      setNewPassword("");
+      setConfirmPassword("");
       setStatusMsg({
         type: "ok",
-        text: `¡Listo! ${cleanEmail} ahora puede entrar al panel con su cuenta Google.`,
+        text: "¡Listo! La contraseña de acceso se actualizó correctamente.",
       });
     } catch (err) {
       setStatusMsg({
         type: "err",
         text:
           err instanceof Error
-            ? `No se pudo agregar: ${err.message}`
-            : "Error al agregar usuario.",
+            ? `No se pudo cambiar la contraseña: ${err.message}`
+            : "Error al cambiar la contraseña.",
       });
     } finally {
-      setAddingUser(false);
-    }
-  };
-
-  const toggleAdminActive = async (target: AdminUserRecord) => {
-    const activeOwners = admins.filter(
-      (a) => a.role === "owner" && a.is_active
-    );
-    if (target.role === "owner" && target.is_active && activeOwners.length <= 1) {
-      setStatusMsg({
-        type: "err",
-        text: "Debe quedar al menos un propietario activo para no perder el acceso.",
-      });
-      return;
-    }
-
-    const nextActive = !target.is_active;
-    const supabase = createSupabaseBrowserClient();
-    const { error } = await supabase
-      .from("admin_users")
-      .update({ is_active: nextActive })
-      .eq("id", target.id);
-
-    if (!error) {
-      setAdmins((prev) =>
-        prev.map((a) =>
-          a.id === target.id ? { ...a, is_active: nextActive } : a
-        )
-      );
-      setStatusMsg({
-        type: "ok",
-        text: nextActive
-          ? `Acceso activado para ${target.email}.`
-          : `Acceso desactivado para ${target.email}.`,
-      });
+      setUpdatingPassword(false);
     }
   };
 
@@ -219,8 +184,8 @@ export function SettingsManager({
         <p className="text-xs font-mono font-bold uppercase tracking-widest text-[#FF5000] mb-1">
           Ajustes, Correos y Seguridad
         </p>
-        <h1 className="font-display text-2xl sm:text-3xl font-black text-[#0F172A]">
-          Automatización de Correos, Accesos y Respaldos
+        <h1 className="font-display text-2xl sm:text-3xl font-black text-[#141413]">
+          Automatización de Correos, Contraseña y Respaldos
         </h1>
       </div>
 
@@ -244,14 +209,14 @@ export function SettingsManager({
       >
         <div className="flex items-center gap-3 border-b border-zinc-200 pb-3">
           <Mail className="w-6 h-6 text-[#FF5000]" />
-          <h2 className="font-display text-xl font-bold text-[#0F172A]">
+          <h2 className="font-display text-xl font-bold text-[#141413]">
             1. Automatización de Correos (Premium Hosting)
           </h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div className="space-y-1.5">
-            <label className="block text-sm font-bold text-[#0F172A]">
+            <label className="block text-sm font-bold text-[#141413]">
               Correo principal donde llegan las cotizaciones
             </label>
             <input
@@ -265,7 +230,7 @@ export function SettingsManager({
           </div>
 
           <div className="space-y-1.5">
-            <label className="block text-sm font-bold text-[#0F172A]">
+            <label className="block text-sm font-bold text-[#141413]">
               Enviar copia adicional a (Opcional, ej: tu correo de apoyo)
             </label>
             <input
@@ -295,7 +260,7 @@ export function SettingsManager({
                 }
                 className="w-5 h-5 accent-[#FF5000]"
               />
-              <span className="font-bold text-sm sm:text-base text-[#0F172A]">
+              <span className="font-bold text-sm sm:text-base text-[#141413]">
                 Enviar correo automático de confirmación al cliente apenas
                 escribe
               </span>
@@ -303,7 +268,7 @@ export function SettingsManager({
           </div>
 
           <div className="md:col-span-2 space-y-1.5">
-            <label className="block text-sm font-bold text-[#0F172A]">
+            <label className="block text-sm font-bold text-[#141413]">
               Asunto del correo automático al cliente
             </label>
             <input
@@ -317,7 +282,7 @@ export function SettingsManager({
           </div>
 
           <div className="md:col-span-2 space-y-1.5">
-            <label className="block text-sm font-bold text-[#0F172A]">
+            <label className="block text-sm font-bold text-[#141413]">
               Mensaje automático para el cliente
             </label>
             <textarea
@@ -345,86 +310,95 @@ export function SettingsManager({
         </button>
       </form>
 
-      {/* 2. Cuentas de Google Autorizadas */}
-      <section className="bg-white border border-zinc-200 p-6 sm:p-8 space-y-5">
-        <div className="flex items-center gap-3 border-b border-zinc-200 pb-3">
-          <ShieldCheck className="w-6 h-6 text-[#FF5000]" />
-          <div>
-            <h2 className="font-display text-xl font-bold text-[#0F172A]">
-              2. Cuentas de Google Autorizadas a Entrar
-            </h2>
-            <p className="text-sm text-zinc-600">
-              Agrega aquí el correo Gmail de tu mamá para que entre con un toque.
-            </p>
+      {/* 2. Cambiar Contraseña de Acceso */}
+      <form
+        onSubmit={handleUpdatePassword}
+        className="bg-white border border-zinc-200 p-6 sm:p-8 space-y-5"
+      >
+        <div className="flex items-center justify-between gap-3 border-b border-zinc-200 pb-3">
+          <div className="flex items-center gap-3">
+            <KeyRound className="w-6 h-6 text-[#FF5000]" />
+            <div>
+              <h2 className="font-display text-xl font-bold text-[#141413]">
+                2. Cambiar Contraseña de Acceso al Panel
+              </h2>
+              <p className="text-sm text-zinc-600">
+                Sesión actual: <span className="font-mono">{userEmail}</span>
+              </p>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setShowPasswords((prev) => !prev)}
+            className="px-3.5 py-2 border border-zinc-300 bg-zinc-50 text-xs font-bold inline-flex items-center gap-1.5 cursor-pointer"
+          >
+            {showPasswords ? (
+              <>
+                <EyeOff className="w-4 h-4" />
+                <span>Ocultar</span>
+              </>
+            ) : (
+              <>
+                <Eye className="w-4 h-4" />
+                <span>Mostrar</span>
+              </>
+            )}
+          </button>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="space-y-1.5">
+            <label className="block text-sm font-bold text-[#141413]">
+              Nueva contraseña (mínimo 6 caracteres)
+            </label>
+            <input
+              type={showPasswords ? "text" : "password"}
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              placeholder="Escribe la nueva clave..."
+              className="w-full bg-zinc-50 border border-zinc-300 px-4 py-3 text-base"
+            />
+          </div>
+
+          <div className="space-y-1.5">
+            <label className="block text-sm font-bold text-[#141413]">
+              Repetir nueva contraseña
+            </label>
+            <input
+              type={showPasswords ? "text" : "password"}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              placeholder="Vuelve a escribirla..."
+              className="w-full bg-zinc-50 border border-zinc-300 px-4 py-3 text-base"
+            />
           </div>
         </div>
 
-        <form
-          onSubmit={handleAddAdmin}
-          className="grid grid-cols-1 md:grid-cols-3 gap-3 bg-zinc-50 border border-zinc-200 p-4"
+        <button
+          type="submit"
+          disabled={updatingPassword}
+          className="bg-[#141413] hover:bg-[#FF5000] text-white font-bold text-base px-7 py-3.5 inline-flex items-center gap-2 cursor-pointer transition-colors"
         >
-          <input
-            type="text"
-            value={newName}
-            onChange={(e) => setNewName(e.target.value)}
-            placeholder="Nombre (ej. Mamá / Patricia)"
-            className="bg-white border border-zinc-300 px-4 py-3 text-base"
-          />
-          <input
-            type="email"
-            required
-            value={newEmail}
-            onChange={(e) => setNewEmail(e.target.value)}
-            placeholder="correo.autorizado@gmail.com"
-            className="bg-white border border-zinc-300 px-4 py-3 text-base"
-          />
-          <button
-            type="submit"
-            disabled={addingUser}
-            className="bg-[#0F172A] hover:bg-[#FF5000] text-white font-bold text-sm px-5 py-3 inline-flex items-center justify-center gap-2 cursor-pointer transition-colors"
-          >
-            <UserPlus className="w-4 h-4" />
-            <span>{addingUser ? "Agregando..." : "Autorizar Correo Google"}</span>
-          </button>
-        </form>
-
-        <div className="space-y-2.5">
-          {admins.map((admin) => (
-            <div
-              key={admin.id}
-              className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border border-zinc-200 p-4"
-            >
-              <div>
-                <p className="font-bold text-[#0F172A]">
-                  {admin.display_name || admin.email}
-                  <span className="ml-2 text-xs font-mono px-2 py-0.5 bg-zinc-100 text-zinc-600 uppercase">
-                    {admin.role === "owner" ? "Propietario" : "Editor"}
-                  </span>
-                </p>
-                <p className="text-sm font-mono text-zinc-600">{admin.email}</p>
-              </div>
-              <button
-                type="button"
-                onClick={() => toggleAdminActive(admin)}
-                className={`px-4 py-2 text-xs font-bold border cursor-pointer ${
-                  admin.is_active
-                    ? "bg-emerald-50 border-emerald-300 text-emerald-800"
-                    : "bg-red-50 border-red-200 text-red-700"
-                }`}
-              >
-                {admin.is_active ? "Activo (Puede entrar)" : "Desactivado"}
-              </button>
-            </div>
-          ))}
-        </div>
-      </section>
+          {updatingPassword ? (
+            <Loader2 className="w-5 h-5 animate-spin" />
+          ) : (
+            <KeyRound className="w-5 h-5" />
+          )}
+          <span>
+            {updatingPassword
+              ? "Actualizando clave..."
+              : "Actualizar Contraseña"}
+          </span>
+        </button>
+      </form>
 
       {/* 3. Historial de Respaldos */}
       <section className="bg-white border border-zinc-200 p-6 sm:p-8 space-y-5">
         <div className="flex items-center gap-3 border-b border-zinc-200 pb-3">
           <History className="w-6 h-6 text-[#FF5000]" />
           <div>
-            <h2 className="font-display text-xl font-bold text-[#0F172A]">
+            <h2 className="font-display text-xl font-bold text-[#141413]">
               3. Copias de Respaldo y Deshacer ({revisions.length})
             </h2>
             <p className="text-sm text-zinc-600">
@@ -447,7 +421,7 @@ export function SettingsManager({
                 className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border border-zinc-200 bg-zinc-50 p-4"
               >
                 <div>
-                  <p className="font-bold text-[#0F172A] text-sm sm:text-base">
+                  <p className="font-bold text-[#141413] text-sm sm:text-base">
                     {rev.label}
                   </p>
                   <p className="text-xs text-zinc-500 font-mono mt-0.5">
@@ -463,7 +437,7 @@ export function SettingsManager({
                   type="button"
                   onClick={() => handleRestoreRevision(rev)}
                   disabled={restoringId === rev.id}
-                  className="px-4 py-2.5 bg-white border border-zinc-300 hover:border-[#FF5000] text-[#0F172A] text-sm font-bold inline-flex items-center gap-2 cursor-pointer"
+                  className="px-4 py-2.5 bg-white border border-zinc-300 hover:border-[#FF5000] text-[#141413] text-sm font-bold inline-flex items-center gap-2 cursor-pointer"
                 >
                   {restoringId === rev.id ? (
                     <Loader2 className="w-4 h-4 animate-spin" />

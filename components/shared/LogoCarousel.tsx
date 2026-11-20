@@ -6,19 +6,26 @@ interface LogoCarouselProps {
   speed?: number;
   title?: string;
   logos?: LogoItem[];
+  surface?: "white" | "cream";
 }
 
 export function LogoCarousel({
   speed = 40,
   title = DEFAULT_SITE_CONFIG.content.logosTitle,
   logos = DEFAULT_SITE_CONFIG.content.logos,
+  surface = "cream",
 }: LogoCarouselProps) {
   if (!logos || logos.length === 0) return null;
   const items = [...logos, ...logos, ...logos];
 
   return (
     <section
-      style={{ backgroundColor: "var(--color-surface-cream, #F8FAFC)" }}
+      style={{
+        backgroundColor:
+          surface === "white"
+            ? "var(--color-surface-white, #FFFFFF)"
+            : "var(--color-surface-cream, #F5F3EE)",
+      }}
       className="tr-divider-y py-14 overflow-hidden"
       aria-label="Clientes y empresas con las que trabajamos"
     >
