@@ -1,7 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-
   // ── Seguridad: Bloquear Source Maps en producción (Manifiesto §1.1) ──────────
   productionBrowserSourceMaps: false,
 
@@ -14,6 +13,7 @@ const nextConfig: NextConfig = {
     minimumCacheTTL: 86400,
     remotePatterns: [
       { hostname: "images.unsplash.com" },
+      { protocol: "https", hostname: "*.supabase.co" },
     ],
   },
 
@@ -23,10 +23,16 @@ const nextConfig: NextConfig = {
       {
         source: "/(.*)",
         headers: [
-          { key: "X-Frame-Options",           value: "DENY" },
-          { key: "X-Content-Type-Options",    value: "nosniff" },
-          { key: "Referrer-Policy",           value: "strict-origin-when-cross-origin" },
-          { key: "Permissions-Policy",        value: "camera=(), microphone=(), geolocation=()" },
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          {
+            key: "Referrer-Policy",
+            value: "strict-origin-when-cross-origin",
+          },
+          {
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=()",
+          },
           {
             key: "Strict-Transport-Security",
             value: "max-age=63072000; includeSubDomains; preload",
@@ -36,11 +42,13 @@ const nextConfig: NextConfig = {
             value: [
               "default-src 'self'",
               "script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com",
-              "frame-src https://challenges.cloudflare.com https://maps.google.com https://www.google.com",
-              "img-src 'self' data: blob: https://images.unsplash.com",
+              "frame-src 'self' https://challenges.cloudflare.com https://maps.google.com https://www.google.com",
+              "frame-ancestors 'self'",
+              "img-src 'self' data: blob: https://*.supabase.co https://images.unsplash.com",
               "font-src 'self'",
               "style-src 'self' 'unsafe-inline'",
-              "connect-src 'self' https://us.i.posthog.com https://api.resend.com",
+              "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://us.i.posthog.com https://api.resend.com",
+              "worker-src 'self'",
             ].join("; "),
           },
         ],

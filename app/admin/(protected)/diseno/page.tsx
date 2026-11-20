@@ -1,0 +1,23 @@
+import { DesignStudio } from "@/components/admin/DesignStudio";
+import { requireAdmin } from "@/lib/supabase/server";
+import { normalizeSiteConfig } from "@/lib/site-data";
+import type { SiteConfig } from "@/lib/types/cms";
+
+export const dynamic = "force-dynamic";
+
+export default async function AdminDisenoPage() {
+  const auth = await requireAdmin();
+  if (!auth) return null;
+
+  const { data } = await auth.supabase
+    .from("site_config")
+    .select("*")
+    .eq("id", "main")
+    .maybeSingle();
+
+  const initialConfig = normalizeSiteConfig(data as Partial<SiteConfig> | null);
+
+  return (
+    <DesignStudio initialConfig={initialConfig} userEmail={auth.userEmail} />
+  );
+}

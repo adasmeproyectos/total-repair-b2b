@@ -1,47 +1,80 @@
 import Link from "next/link";
 import Image from "next/image";
 import { COMPANY, NAV_LINKS } from "@/lib/constants";
+import { DEFAULT_SITE_CONFIG } from "@/lib/default-site-config";
+import type { SiteCompany } from "@/lib/types/cms";
 
-export function Footer() {
+interface FooterProps {
+  company?: SiteCompany;
+}
+
+export function Footer({
+  company = DEFAULT_SITE_CONFIG.company,
+}: FooterProps) {
   const currentYear = new Date().getFullYear();
+  const nameParts = company.shortName.split(" ");
+  const firstWord = nameParts[0] || "TOTAL";
+  const restWords = nameParts.slice(1).join(" ") || "REPAIR";
 
   return (
-    <footer className="bg-white text-zinc-600 border-t border-zinc-200 font-sans">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-16 lg:py-20">
+    <footer
+      style={{
+        backgroundColor: "var(--color-surface-white, #FFFFFF)",
+        color: "var(--color-ink-mid, #52525B)",
+      }}
+      className="tr-divider-t font-sans"
+    >
+      <div className="tr-container px-4 sm:px-6 md:px-12 py-16 lg:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
-          {/* Columna 1: Identidad Corporativa (4 cols) */}
+          {/* Columna 1: Identidad Corporativa */}
           <div className="lg:col-span-4 space-y-5">
             <Link href="/" className="flex items-center gap-3">
               <div className="relative w-11 h-11 flex items-center justify-center shrink-0">
                 <Image
-                  src="/img/logos/logo.png"
-                  alt="Total Repair Ltda. Logo"
+                  src={company.logoUrl || "/img/logos/logo.png"}
+                  alt={`${company.legalName} Logo`}
                   fill
                   sizes="44px"
                   className="object-contain"
                 />
               </div>
               <div className="flex flex-col">
-                <span className="text-[#0F172A] font-extrabold tracking-tight text-xl leading-none font-display uppercase">
-                  TOTAL <span className="text-[#FF5000]">REPAIR</span>
+                <span
+                  style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
+                  className="font-extrabold tracking-tight text-xl leading-none font-display uppercase"
+                >
+                  {firstWord}{" "}
+                  <span style={{ color: "var(--color-brand-orange, #FF5000)" }}>
+                    {restWords}
+                  </span>
                 </span>
                 <span className="text-zinc-500 font-mono text-[10px] tracking-[0.2em] uppercase mt-1">
-                  Construcción & Siniestros
+                  {company.tagline}
                 </span>
               </div>
             </Link>
 
-            <p className="text-sm text-zinc-600 leading-relaxed max-w-sm font-light">
-              Empresa constructora y contratista general con más de 22 años de experiencia en liquidación y reconstrucción de siniestros, obras civiles B2B y remodelaciones residenciales en Chile.
+            <p className="text-sm leading-relaxed max-w-sm font-light">
+              Empresa constructora y contratista general con más de{" "}
+              {company.yearsExperience.replace("+", "")} años de experiencia en
+              liquidación y reconstrucción de siniestros, obras civiles B2B y
+              remodelaciones residenciales en Chile.
             </p>
 
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#F8FAFC] border border-zinc-200 text-xs font-mono text-[#0F172A]">
+            <div
+              style={{
+                backgroundColor: "var(--color-surface-cream, #F8FAFC)",
+                color: "var(--color-ink-anthracite, #0F172A)",
+              }}
+              className="inline-flex items-center gap-2 px-3 py-1.5 tr-card text-xs font-mono"
+            >
               <svg
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
-                className="w-4 h-4 text-[#FF5000] shrink-0"
+                style={{ color: "var(--color-brand-orange, #FF5000)" }}
+                className="w-4 h-4 shrink-0"
                 aria-hidden="true"
               >
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
@@ -51,9 +84,12 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Columna 2: Navegación Rápida (2 cols) */}
+          {/* Columna 2: Navegación Rápida */}
           <div className="lg:col-span-2 space-y-4">
-            <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-[#0F172A] font-bold">
+            <h3
+              style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
+              className="text-xs font-mono uppercase tracking-[0.2em] font-bold"
+            >
               Ecosistema
             </h3>
             <ul className="space-y-2.5 text-sm">
@@ -61,7 +97,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-zinc-600 hover:text-[#FF5000] transition-colors duration-200 inline-block"
+                    className="hover:text-[#FF5000] transition-colors duration-200 inline-block"
                   >
                     {link.label}
                   </Link>
@@ -70,7 +106,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/contacto"
-                  className="text-zinc-600 hover:text-[#FF5000] transition-colors duration-200 inline-block"
+                  className="hover:text-[#FF5000] transition-colors duration-200 inline-block"
                 >
                   Contacto
                 </Link>
@@ -78,12 +114,15 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Columna 3: Especialidades Técnicas (3 cols) */}
+          {/* Columna 3: Especialidades Técnicas */}
           <div className="lg:col-span-3 space-y-4">
-            <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-[#0F172A] font-bold">
+            <h3
+              style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
+              className="text-xs font-mono uppercase tracking-[0.2em] font-bold"
+            >
               Líneas de Acción
             </h3>
-            <ul className="space-y-2.5 text-sm text-zinc-600">
+            <ul className="space-y-2.5 text-sm">
               <li>
                 <Link
                   href="/servicios"
@@ -127,25 +166,29 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Columna 4: Coordenadas Operativas (3 cols) */}
+          {/* Columna 4: Coordenadas Operativas */}
           <div className="lg:col-span-3 space-y-4">
-            <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-[#0F172A] font-bold">
+            <h3
+              style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
+              className="text-xs font-mono uppercase tracking-[0.2em] font-bold"
+            >
               Central de Operaciones
             </h3>
-            <ul className="space-y-3 text-sm text-zinc-600">
+            <ul className="space-y-3 text-sm">
               <li className="flex items-start gap-3">
                 <svg
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="2"
-                  className="w-4 h-4 text-[#FF5000] shrink-0 mt-1"
+                  style={{ color: "var(--color-brand-orange, #FF5000)" }}
+                  className="w-4 h-4 shrink-0 mt-1"
                   aria-hidden="true"
                 >
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
                   <circle cx="12" cy="10" r="3" />
                 </svg>
-                <span>{COMPANY.address}</span>
+                <span>{company.address}</span>
               </li>
               <li className="flex items-center gap-3">
                 <svg
@@ -153,16 +196,17 @@ export function Footer() {
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="2"
-                  className="w-4 h-4 text-[#FF5000] shrink-0"
+                  style={{ color: "var(--color-brand-orange, #FF5000)" }}
+                  className="w-4 h-4 shrink-0"
                   aria-hidden="true"
                 >
                   <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
                 </svg>
                 <a
-                  href={`tel:${COMPANY.phoneClean}`}
+                  href={`tel:${company.phoneClean}`}
                   className="hover:text-[#FF5000] transition-colors duration-200 font-mono"
                 >
-                  {COMPANY.phoneDisplay}
+                  {company.phoneDisplay}
                 </a>
               </li>
               <li className="flex items-center gap-3">
@@ -171,17 +215,18 @@ export function Footer() {
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="2"
-                  className="w-4 h-4 text-[#FF5000] shrink-0"
+                  style={{ color: "var(--color-brand-orange, #FF5000)" }}
+                  className="w-4 h-4 shrink-0"
                   aria-hidden="true"
                 >
                   <rect x="2" y="4" width="20" height="16" rx="2" />
                   <path d="M22 7l-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7" />
                 </svg>
                 <a
-                  href={`mailto:${COMPANY.email}`}
+                  href={`mailto:${company.email}`}
                   className="hover:text-[#FF5000] transition-colors duration-200 font-mono break-all"
                 >
-                  {COMPANY.email}
+                  {company.email}
                 </a>
               </li>
               <li className="flex items-start gap-3 pt-1">
@@ -190,16 +235,25 @@ export function Footer() {
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="2"
-                  className="w-4 h-4 text-[#FF5000] shrink-0 mt-0.5"
+                  style={{ color: "var(--color-brand-orange, #FF5000)" }}
+                  className="w-4 h-4 shrink-0 mt-0.5"
                   aria-hidden="true"
                 >
                   <circle cx="12" cy="12" r="10" />
                   <path d="M12 6v6l4 2" />
                 </svg>
                 <div className="text-xs space-y-1">
-                  <p className="text-[#0F172A] font-medium">{COMPANY.hours}</p>
-                  <p className="text-[#FF5000] font-mono font-semibold uppercase">
-                    {COMPANY.emergencyHours}
+                  <p
+                    style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
+                    className="font-medium"
+                  >
+                    {company.hours}
+                  </p>
+                  <p
+                    style={{ color: "var(--color-brand-orange, #FF5000)" }}
+                    className="font-mono font-semibold uppercase"
+                  >
+                    {company.emergencyHours}
                   </p>
                 </div>
               </li>
@@ -209,11 +263,14 @@ export function Footer() {
       </div>
 
       {/* Barra Inferior Legal & Créditos */}
-      <div className="border-t border-zinc-200 bg-[#F8FAFC]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
+      <div
+        style={{ backgroundColor: "var(--color-surface-cream, #F8FAFC)" }}
+        className="tr-divider-t"
+      >
+        <div className="tr-container px-4 sm:px-6 md:px-12 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
           <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-6 text-center sm:text-left">
             <p>
-              © {currentYear} {COMPANY.legalName} Todos los derechos reservados.
+              © {currentYear} {company.legalName} Todos los derechos reservados.
             </p>
             <div className="flex items-center gap-4">
               <Link

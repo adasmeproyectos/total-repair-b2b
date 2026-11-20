@@ -1,37 +1,49 @@
 @import "tailwindcss";
 
 :root {
-  /* ── Kodak Institutional Orange */
+  /* ── Fallback Brand Palette ── */
   --color-brand-orange:        #FF5000;
   --color-brand-orange-hover:  #FF6A22;
   --color-brand-orange-dark:   #CC4000;
   --color-brand-orange-pale:   #FFF2EB;
 
-  /* ── Superficies (fondo predominante blanco/claro) */
   --color-surface-white:       #FFFFFF;
   --color-surface-cream:       #F8FAFC;
   --color-surface-concrete:    #F1F5F9;
 
-  /* ── Tinta / Texto */
   --color-ink-black:           #000000;
   --color-ink-anthracite:      #0F172A;
-  --color-ink-mid:             #6B6B6B;
+  --color-ink-mid:             #52525B;
   --color-ink-light:           #A8A8A8;
 
-  /* ── Separadores */
-  --color-divider:             #E5E2DD;
+  --color-divider:             #E4E4E7;
   --color-divider-dark:        #C8C4BE;
 
-  /* ── Brand tokens */
   --brand-orange:              #FF5000;
   --brand-slate-950:           #0F172A;
   --brand-slate-900:           #1E293B;
   --brand-slate-800:           #334155;
+
+  /* ── Layout & Typography Defaults ── */
+  --tr-font-display:           var(--font-outfit), system-ui, sans-serif;
+  --tr-font-sans:              var(--font-jakarta), system-ui, sans-serif;
+  --tr-text-scale:             1;
+  --tr-heading-scale:          1;
+  --tr-line-height:            1.65;
+  --tr-section-py:             88px;
+  --tr-grid-gap:               24px;
+  --tr-container-max:          1280px;
+  --tr-border-width:           1px;
+  --tr-divider-width:          1px;
+  --tr-card-radius:            2px;
+  --tr-card-shadow:            0 1px 3px 0 rgba(15, 23, 42, 0.06);
+  --tr-card-padding:           28px;
+  --tr-btn-radius:             2px;
 }
 
 @theme inline {
-  --font-sans:    "Plus Jakarta Sans", system-ui, sans-serif;
-  --font-display: "Outfit", system-ui, sans-serif;
+  --font-sans:    var(--tr-font-sans);
+  --font-display: var(--tr-font-display);
 }
 
 /* ─── Global Base ───────────────────────────────────────────────────────────── */
@@ -41,12 +53,76 @@ html {
 }
 
 body {
-  background-color: var(--color-surface-white);
-  color: var(--color-ink-anthracite);
-  font-family: var(--font-sans);
+  background-color: #FFFFFF;
+  color: #0F172A;
+  font-family: var(--font-jakarta), system-ui, sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.tr-public-site {
+  background-color: var(--color-surface-white);
+  color: var(--color-ink-anthracite);
+  font-family: var(--tr-font-sans);
+  line-height: var(--tr-line-height);
+}
+
+/* ─── Dynamic CMS Design Utilities ──────────────────────────────────────────── */
+.tr-container {
+  max-width: var(--tr-container-max, 1280px);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tr-section {
+  padding-top: var(--tr-section-py, 88px);
+  padding-bottom: var(--tr-section-py, 88px);
+}
+
+.tr-grid {
+  gap: var(--tr-grid-gap, 24px);
+}
+
+.tr-divider-b {
+  border-bottom: var(--tr-divider-width, 1px) solid var(--color-divider, #E4E4E7);
+}
+
+.tr-divider-t {
+  border-top: var(--tr-divider-width, 1px) solid var(--color-divider, #E4E4E7);
+}
+
+.tr-divider-y {
+  border-top: var(--tr-divider-width, 1px) solid var(--color-divider, #E4E4E7);
+  border-bottom: var(--tr-divider-width, 1px) solid var(--color-divider, #E4E4E7);
+}
+
+.tr-card {
+  border-width: var(--tr-border-width, 1px);
+  border-style: solid;
+  border-color: var(--color-divider, #E4E4E7);
+  border-radius: var(--tr-card-radius, 2px);
+  box-shadow: var(--tr-card-shadow, none);
+}
+
+.tr-card-pad {
+  padding: var(--tr-card-padding, 28px);
+}
+
+.tr-btn {
+  border-radius: var(--tr-btn-radius, 2px);
+}
+
+.tr-heading-hero {
+  font-size: calc(clamp(3rem, 7.5vw, 7rem) * var(--tr-heading-scale, 1));
+}
+
+.tr-heading-page {
+  font-size: calc(clamp(2.25rem, 4.5vw, 3.75rem) * var(--tr-heading-scale, 1));
+}
+
+.tr-heading-section {
+  font-size: calc(clamp(1.75rem, 3.2vw, 2.75rem) * var(--tr-heading-scale, 1));
 }
 
 /* ─── Selection ─────────────────────────────────────────────────────────────── */
@@ -87,8 +163,9 @@ body {
 }
 
 /* ─── Titulares ─────────────────────────────────────────────────────────────── */
-h1, h2 {
-  font-family: var(--font-display);
+.tr-public-site h1,
+.tr-public-site h2 {
+  font-family: var(--tr-font-display);
   font-weight: 700;
   letter-spacing: -0.01em;
 }

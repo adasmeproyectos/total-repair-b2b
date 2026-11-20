@@ -4,6 +4,7 @@ import Link from "next/link";
 import { SectionLabel } from "@/components/shared/SectionLabel";
 import { EmergencyCTA } from "@/components/ui/EmergencyCTA";
 import { generateMetadata as buildMetadata } from "@/lib/metadata";
+import { getSiteConfig } from "@/lib/site-data";
 
 export const metadata = buildMetadata({
   title: "Catálogo Técnico de Servicios y Siniestros",
@@ -45,85 +46,67 @@ const Icon = ({ name }: { name: string }) => {
   );
 };
 
-const specialities = [
-  {
-    name: "Carpintería Industrial",
-    desc: "Tabiquería estructural y acústica, puertas cortafuego, cielos modulares y mobiliario técnico corporativo.",
-    icon: "carpentery",
-  },
-  {
-    name: "Pintura Alta Gama",
-    desc: "Revestimientos epóxicos, intumescentes, esmaltes industriales y terminaciones arquitectónicas de alto tráfico.",
-    icon: "paint",
-  },
-  {
-    name: "Electricidad SEC",
-    desc: "Proyectos eléctricos en baja tensión, tableros generales, bancos de condensadores, iluminación LED y certificación TE1.",
-    icon: "sec",
-  },
-  {
-    name: "Redes de Datos y Clima",
-    desc: "Cableado estructurado, canalización industrial, salas de servidores y climatización HVAC para oficinas y locales.",
-    icon: "data",
-  },
-];
+export default async function ServiciosPage() {
+  const { content, company } = await getSiteConfig();
+  const s = content.servicios;
 
-const claims = [
-  {
-    id: "01",
-    title: "Inundación y Daño por Agua",
-    desc: "Extracción mecanizada de agua, deshumidificación industrial, secado de losas y reparación integral de locales comerciales, oficinas y viviendas tras roturas de matrices o eventos climáticos.",
-  },
-  {
-    id: "02",
-    title: "Siniestros por Incendio",
-    desc: "Retiro normado de escombros, encapsulamiento y limpieza técnica de hollín, evaluación estructural y reconstrucción certificada pos-fuego en coordinación directa con liquidadores de seguros.",
-  },
-  {
-    id: "03",
-    title: "Impacto y Daño Estructural",
-    desc: "Apuntalamiento de emergencia, evaluación SEC/OGUC inmediata y reconstrucción de muros perimetrales, fachadas, escaparates comerciales y techumbres afectadas por sismos o colisiones.",
-  },
-];
+  const claimsFaqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: s.claims.map((c) => ({
+      "@type": "Question",
+      name: `¿En qué consiste el servicio de ${c.title} de Total Repair Ltda.?`,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: c.description,
+      },
+    })),
+  };
 
-const claimsFaqJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: claims.map((c) => ({
-    "@type": "Question",
-    name: `¿En qué consiste el servicio de ${c.title} de Total Repair Ltda.?`,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: c.desc,
-    },
-  })),
-};
-
-export default function ServiciosPage() {
   return (
-    <div className="min-h-screen bg-white text-[#0F172A] overflow-x-hidden pt-20">
+    <div
+      style={{
+        backgroundColor: "var(--color-surface-white, #FFFFFF)",
+        color: "var(--color-ink-anthracite, #0F172A)",
+      }}
+      className="min-h-screen overflow-x-hidden pt-20"
+    >
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(claimsFaqJsonLd) }}
       />
 
       {/* 1. HERO DIVIDIDO */}
-      <section className="relative border-b border-zinc-200 bg-[#F8FAFC]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-14 sm:py-20 lg:py-24 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+      <section
+        style={{ backgroundColor: "var(--color-surface-cream, #F8FAFC)" }}
+        className="relative tr-divider-b"
+      >
+        <div className="tr-container px-4 sm:px-6 md:px-12 py-14 sm:py-20 lg:py-24 grid grid-cols-1 lg:grid-cols-12 tr-grid items-center">
           <div className="lg:col-span-7">
-            <SectionLabel label="Catálogo Técnico" />
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-[#0F172A] leading-[1.08] mb-6 tracking-tight font-display uppercase">
-              SOLUCIONES <br className="hidden sm:inline" /> ESTRUCTURALES{" "}
-              <span className="text-[#FF5000] block sm:inline">B2B & HOGAR.</span>
+            <SectionLabel label={s.eyebrow} />
+            <h1
+              style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
+              className="tr-heading-page font-black leading-[1.08] mb-6 tracking-tight font-display uppercase"
+            >
+              {s.title}{" "}
+              <span
+                style={{ color: "var(--color-brand-orange, #FF5000)" }}
+                className="block sm:inline"
+              >
+                {s.titleHighlight}
+              </span>
             </h1>
-            <p className="text-base sm:text-lg text-zinc-600 font-light leading-relaxed max-w-xl">
-              Abarcamos toda la gama de servicios de ingeniería civil, remodelación y respuesta a siniestros, desde el levantamiento técnico hasta la recepción conforme bajo normativa chilena.
+            <p
+              style={{ color: "var(--color-ink-mid, #52525B)" }}
+              className="text-base sm:text-lg font-light leading-relaxed max-w-xl"
+            >
+              {s.description}
             </p>
           </div>
 
-          <div className="lg:col-span-5 relative aspect-[4/3] w-full overflow-hidden border border-zinc-200 bg-zinc-100 shadow-xs">
+          <div className="lg:col-span-5 relative aspect-[4/3] w-full overflow-hidden tr-card bg-zinc-100">
             <Image
-              src="/img/fotos/arquitectura-B2B.jpg"
+              src={s.heroImage || "/img/fotos/arquitectura-B2B.jpg"}
               alt="Arquitectura e Ingeniería Industrial B2B — Total Repair Ltda."
               fill
               sizes="(max-width: 1024px) 100vw, 42vw"
@@ -134,33 +117,46 @@ export default function ServiciosPage() {
         </div>
       </section>
 
-      {/* 2. GRID TÉCNICO DE ESPECIALIDADES (#FFFFFF) */}
-      <section className="py-20 sm:py-24 max-w-7xl px-4 sm:px-6 md:px-12 mx-auto bg-white">
+      {/* 2. GRID TÉCNICO DE ESPECIALIDADES */}
+      <section className="tr-section tr-container px-4 sm:px-6 md:px-12">
         <div className="mb-14 text-center max-w-2xl mx-auto">
-          <SectionLabel label="Gremios Integrados" className="justify-center" />
-          <h2 className="font-display text-3xl sm:text-4xl font-black text-[#0F172A] mb-3 tracking-tight uppercase">
-            Especialidades de Ejecución
+          <SectionLabel label={s.specEyebrow} className="justify-center" />
+          <h2
+            style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
+            className="font-display tr-heading-section font-black mb-3 tracking-tight uppercase"
+          >
+            {s.specTitle}
           </h2>
-          <p className="text-zinc-600 font-light">
-            Coordinamos todos los gremios bajo una misma supervisión logística y administrativa para garantizar cumplimiento de plazos y calidad.
+          <p
+            style={{ color: "var(--color-ink-mid, #52525B)" }}
+            className="font-light"
+          >
+            {s.specDescription}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {specialities.map((spec) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 tr-grid">
+          {s.specialities.map((spec) => (
             <article
-              key={spec.name}
-              className="group border border-zinc-200 bg-[#F8FAFC] p-6 sm:p-8 flex flex-col justify-between min-h-[220px] transition-colors duration-200 hover:border-[#FF5000] hover:shadow-md"
+              key={spec.id}
+              style={{ backgroundColor: "var(--color-surface-cream, #F8FAFC)" }}
+              className="group tr-card tr-card-pad flex flex-col justify-between min-h-[220px] transition-colors duration-200 hover:border-[#FF5000]"
             >
               <div className="flex justify-between items-start mb-6">
                 <Icon name={spec.icon} />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-[#0F172A] leading-snug tracking-tight group-hover:text-[#FF5000] transition-colors duration-200 mb-2">
+                <h3
+                  style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
+                  className="text-lg font-bold leading-snug tracking-tight group-hover:text-[#FF5000] transition-colors duration-200 mb-2"
+                >
                   {spec.name}
                 </h3>
-                <p className="text-sm text-zinc-600 leading-relaxed font-light">
-                  {spec.desc}
+                <p
+                  style={{ color: "var(--color-ink-mid, #52525B)" }}
+                  className="text-sm leading-relaxed font-light"
+                >
+                  {spec.description}
                 </p>
               </div>
             </article>
@@ -168,31 +164,49 @@ export default function ServiciosPage() {
         </div>
       </section>
 
-      {/* 3. SINIESTROS EXPANDIBLES (#F8FAFC) */}
-      <section className="py-20 sm:py-24 bg-[#F8FAFC] border-t border-zinc-200">
-        <div className="max-w-7xl px-4 sm:px-6 md:px-12 mx-auto">
+      {/* 3. SINIESTROS EXPANDIBLES */}
+      <section
+        style={{ backgroundColor: "var(--color-surface-cream, #F8FAFC)" }}
+        className="tr-section tr-divider-t"
+      >
+        <div className="tr-container px-4 sm:px-6 md:px-12">
           <div className="mb-12">
-            <span className="inline-block bg-[#FF5000]/10 text-[#FF5000] border border-[#FF5000]/30 px-3 py-1 text-xs font-mono font-bold uppercase tracking-widest mb-4">
-              Unidad de Reacción Inmediata
+            <span
+              style={{ color: "var(--color-brand-orange, #FF5000)" }}
+              className="inline-block bg-[#FF5000]/10 border border-[#FF5000]/30 px-3 py-1 text-xs font-mono font-bold uppercase tracking-widest mb-4"
+            >
+              {s.claimsBadge}
             </span>
-            <h2 className="font-display text-3xl sm:text-4xl font-black text-[#0F172A] mb-3 tracking-tight uppercase">
-              Manejo de Emergencias y Siniestros
+            <h2
+              style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
+              className="font-display tr-heading-section font-black mb-3 tracking-tight uppercase"
+            >
+              {s.claimsTitle}
             </h2>
           </div>
 
-          <div className="border border-zinc-200 bg-white shadow-xs overflow-hidden">
-            {claims.map((claim, index) => (
+          <div
+            style={{ backgroundColor: "var(--color-surface-white, #FFFFFF)" }}
+            className="tr-card overflow-hidden"
+          >
+            {s.claims.map((claim, index) => (
               <details
                 key={claim.id}
                 open={index === 0}
-                className="group border-b border-zinc-200 last:border-b-0"
+                className="group tr-divider-b last:border-b-0"
               >
                 <summary className="p-6 sm:p-8 md:p-10 flex items-center justify-between gap-4 sm:gap-6 cursor-pointer list-none hover:bg-[#F8FAFC] transition-colors duration-200">
                   <div className="flex items-center gap-4 sm:gap-6">
-                    <span className="font-mono text-[#FF5000] font-bold text-base sm:text-lg">
-                      {claim.id}
+                    <span
+                      style={{ color: "var(--color-brand-orange, #FF5000)" }}
+                      className="font-mono font-bold text-base sm:text-lg"
+                    >
+                      {claim.code}
                     </span>
-                    <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-[#0F172A] tracking-tight group-hover:text-[#FF5000] transition-colors duration-200">
+                    <h3
+                      style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
+                      className="text-lg sm:text-xl md:text-2xl font-bold tracking-tight group-hover:text-[#FF5000] transition-colors duration-200"
+                    >
                       {claim.title}
                     </h3>
                   </div>
@@ -208,11 +222,20 @@ export default function ServiciosPage() {
                   </div>
                 </summary>
 
-                <div className="px-6 sm:px-8 md:px-20 pb-8 sm:pb-10 pt-2 bg-[#F8FAFC] border-t border-zinc-200/60 text-zinc-600 leading-relaxed font-light">
-                  <p className="max-w-4xl pt-4 text-sm sm:text-base">{claim.desc}</p>
+                <div
+                  style={{
+                    backgroundColor: "var(--color-surface-cream, #F8FAFC)",
+                    color: "var(--color-ink-mid, #52525B)",
+                  }}
+                  className="px-6 sm:px-8 md:px-20 pb-8 sm:pb-10 pt-2 tr-divider-t leading-relaxed font-light"
+                >
+                  <p className="max-w-4xl pt-4 text-sm sm:text-base">
+                    {claim.description}
+                  </p>
                   <Link
                     href="/contacto?urgencia=true"
-                    className="text-[#FF5000] text-xs sm:text-sm font-bold uppercase tracking-widest flex items-center gap-2 mt-6 hover:text-[#CC4000] w-fit transition-colors duration-200"
+                    style={{ color: "var(--color-brand-orange, #FF5000)" }}
+                    className="text-xs sm:text-sm font-bold uppercase tracking-widest flex items-center gap-2 mt-6 hover:underline w-fit transition-colors duration-200"
                   >
                     Solicitar Asistencia Técnica <span className="text-lg">→</span>
                   </Link>
@@ -223,7 +246,11 @@ export default function ServiciosPage() {
         </div>
       </section>
 
-      <EmergencyCTA variant="empresas" />
+      <EmergencyCTA
+        variant="empresas"
+        company={company}
+        data={content.emergency}
+      />
     </div>
   );
 }

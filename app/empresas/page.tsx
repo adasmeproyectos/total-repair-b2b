@@ -4,6 +4,7 @@ import { LogoCarousel } from "@/components/shared/LogoCarousel";
 import { SectionLabel } from "@/components/shared/SectionLabel";
 import { EmergencyCTA } from "@/components/ui/EmergencyCTA";
 import { generateMetadata as buildMetadata } from "@/lib/metadata";
+import { getSiteConfig } from "@/lib/site-data";
 
 export const metadata = buildMetadata({
   title: "División Empresas e Instituciones B2B",
@@ -12,40 +13,69 @@ export const metadata = buildMetadata({
   path: "/empresas",
 });
 
-export default function EmpresasPage() {
+export default async function EmpresasPage() {
+  const { content, company } = await getSiteConfig();
+  const e = content.empresas;
+
   return (
-    <div className="min-h-screen bg-white text-[#0F172A] overflow-x-hidden pt-20">
-      {/* ── HERO — Cohesive Light Corporate Split ─────────────────────── */}
-      <section className="relative border-b border-zinc-200 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-14 sm:py-20 lg:py-24 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+    <div
+      style={{
+        backgroundColor: "var(--color-surface-white, #FFFFFF)",
+        color: "var(--color-ink-anthracite, #0F172A)",
+      }}
+      className="min-h-screen overflow-x-hidden pt-20"
+    >
+      {/* ── HERO ──────────────────────────────────────────────────── */}
+      <section className="relative tr-divider-b">
+        <div className="tr-container px-4 sm:px-6 md:px-12 py-14 sm:py-20 lg:py-24 grid grid-cols-1 lg:grid-cols-12 tr-grid items-center">
           <div className="lg:col-span-7">
-            <SectionLabel label="División Empresas e Instituciones" />
-            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-black text-[#0F172A] leading-[1.08] mb-6 tracking-tight uppercase">
-              CONSTRUIMOS TUS <br className="hidden sm:inline" /> PROYECTOS.{" "}
-              <span className="text-[#FF5000] block sm:inline">SIN DEMORAS.</span>
+            <SectionLabel label={e.eyebrow} />
+            <h1
+              style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
+              className="font-display tr-heading-page font-black leading-[1.08] mb-6 tracking-tight uppercase"
+            >
+              {e.titleLine1}{" "}
+              <span
+                style={{ color: "var(--color-brand-orange, #FF5000)" }}
+                className="block sm:inline"
+              >
+                {e.titleHighlight}
+              </span>
             </h1>
-            <p className="text-base sm:text-lg md:text-xl text-zinc-600 mb-8 sm:mb-10 max-w-xl font-light leading-relaxed">
-              Tu espacio listo para funcionar. Especialistas en remodelación, obras civiles y habilitación de locales comerciales con más de 22 años de experiencia en Chile.
+            <p
+              style={{ color: "var(--color-ink-mid, #52525B)" }}
+              className="text-base sm:text-lg md:text-xl mb-8 sm:mb-10 max-w-xl font-light leading-relaxed"
+            >
+              {e.description}
             </p>
             <div className="flex flex-col sm:flex-row gap-3.5 sm:gap-4">
               <Link
                 href="/contacto"
-                className="bg-[#FF5000] text-white px-8 py-4 text-xs sm:text-sm font-bold uppercase tracking-widest hover:bg-[#CC4000] transition-colors duration-200 text-center"
+                style={{
+                  backgroundColor: "var(--color-brand-orange, #FF5000)",
+                  borderRadius: "var(--tr-btn-radius, 2px)",
+                }}
+                className="text-white px-8 py-4 text-xs sm:text-sm font-bold uppercase tracking-widest hover:opacity-90 transition-opacity duration-200 text-center"
               >
-                Agendar Reunión
+                {e.ctaPrimary}
               </Link>
               <Link
                 href="/servicios"
-                className="border border-zinc-300 bg-[#F8FAFC] text-[#0F172A] px-8 py-4 text-xs sm:text-sm font-bold uppercase tracking-widest hover:border-[#FF5000] hover:text-[#FF5000] transition-colors duration-200 text-center"
+                style={{
+                  backgroundColor: "var(--color-surface-cream, #F8FAFC)",
+                  color: "var(--color-ink-anthracite, #0F172A)",
+                  borderRadius: "var(--tr-btn-radius, 2px)",
+                }}
+                className="border border-zinc-300 px-8 py-4 text-xs sm:text-sm font-bold uppercase tracking-widest hover:border-[#FF5000] hover:text-[#FF5000] transition-colors duration-200 text-center"
               >
-                Ver Servicios
+                {e.ctaSecondary}
               </Link>
             </div>
           </div>
 
-          <div className="lg:col-span-5 relative aspect-[4/3] w-full overflow-hidden border border-zinc-200 bg-zinc-100 shadow-xs">
+          <div className="lg:col-span-5 relative aspect-[4/3] w-full overflow-hidden tr-card bg-zinc-100">
             <Image
-              src="/img/fotos/hero-corporativo.jpg"
+              src={e.heroImage || "/img/fotos/hero-corporativo.jpg"}
               alt="Oficina Corporativa en Construcción — Total Repair Ltda."
               fill
               sizes="(max-width: 1024px) 100vw, 42vw"
@@ -56,51 +86,71 @@ export default function EmpresasPage() {
         </div>
       </section>
 
-      {/* ── CARRUSEL CLIENTES (#F8FAFC) ──────────────────────────────────────── */}
-      <LogoCarousel />
+      <LogoCarousel title={content.logosTitle} logos={content.logos} />
 
-      {/* ── BENTO GRID SERVICIOS (#FFFFFF) ───────────────────────────────────── */}
-      <section className="py-20 sm:py-24 max-w-7xl px-4 sm:px-6 md:px-12 mx-auto bg-white">
+      {/* ── BENTO GRID SERVICIOS ───────────────────────────────────── */}
+      <section className="tr-section tr-container px-4 sm:px-6 md:px-12">
         <div className="mb-14">
-          <SectionLabel label="Especialidades de Ejecución" />
-          <h2 className="font-display text-3xl sm:text-4xl font-black text-[#0F172A] mb-3 tracking-tight uppercase">
-            Soluciones Corporativas Integrales
+          <SectionLabel label={e.bentoEyebrow} />
+          <h2
+            style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
+            className="font-display tr-heading-section font-black mb-3 tracking-tight uppercase"
+          >
+            {e.bentoTitle}
           </h2>
-          <p className="text-zinc-600 max-w-2xl font-light">
-            Coordinamos todos los gremios bajo una supervisión logística y administrativa unificada para garantizar continuidad operacional.
+          <p
+            style={{ color: "var(--color-ink-mid, #52525B)" }}
+            className="max-w-2xl font-light"
+          >
+            {e.bentoDescription}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Featured: Centros Comerciales (Light Mode Card) */}
-          <article className="lg:col-span-2 border border-zinc-200 bg-[#F8FAFC] overflow-hidden flex flex-col justify-between hover:border-[#FF5000] transition-colors duration-200">
-            <div className="relative h-64 sm:h-80 w-full overflow-hidden bg-zinc-100 border-b border-zinc-200">
+        <div className="grid grid-cols-1 lg:grid-cols-3 tr-grid">
+          <article
+            style={{ backgroundColor: "var(--color-surface-cream, #F8FAFC)" }}
+            className="lg:col-span-2 tr-card overflow-hidden flex flex-col justify-between hover:border-[#FF5000] transition-colors duration-200"
+          >
+            <div className="relative h-64 sm:h-80 w-full overflow-hidden bg-zinc-100 tr-divider-b">
               <Image
-                src="/img/fotos/arquitectura-B2B.jpg"
-                alt="Habilitación de Centros Comerciales y Oficinas Corporativas"
+                src={e.featuredImage || "/img/fotos/arquitectura-B2B.jpg"}
+                alt={e.featuredTitle}
                 fill
                 sizes="(max-width: 1024px) 100vw, 66vw"
                 className="object-cover origin-top-left scale-[1.08]"
               />
             </div>
             <div className="p-6 sm:p-10">
-              <span className="text-[#FF5000] text-xs font-mono font-bold uppercase tracking-widest mb-3 block">
-                Especialidad Principal
+              <span
+                style={{ color: "var(--color-brand-orange, #FF5000)" }}
+                className="text-xs font-mono font-bold uppercase tracking-widest mb-3 block"
+              >
+                {e.featuredLabel}
               </span>
-              <h3 className="font-display text-2xl sm:text-3xl font-bold text-[#0F172A] mb-3">
-                Centros Comerciales y Habilitación B2B
+              <h3
+                style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
+                className="font-display text-2xl sm:text-3xl font-bold mb-3"
+              >
+                {e.featuredTitle}
               </h3>
-              <p className="text-zinc-600 max-w-2xl font-light leading-relaxed text-sm sm:text-base">
-                Desde la planificación técnica hasta la entrega final. Remodelamos locales comerciales, oficinas corporativas, instituciones educativas y centros médicos garantizando que tus operaciones no se detengan.
+              <p
+                style={{ color: "var(--color-ink-mid, #52525B)" }}
+                className="max-w-2xl font-light leading-relaxed text-sm sm:text-base"
+              >
+                {e.featuredDescription}
               </p>
             </div>
           </article>
 
-          {/* Right Column: Mantenimiento + Emergencias */}
-          <div className="flex flex-col gap-6">
-            {/* Mantenimiento */}
-            <article className="flex-1 border border-zinc-200 bg-[#F8FAFC] p-6 sm:p-8 flex flex-col justify-between hover:border-[#FF5000] transition-colors duration-200">
-              <div className="w-12 h-12 bg-white border border-zinc-200 flex items-center justify-center text-[#FF5000] mb-6">
+          <div className="flex flex-col tr-grid">
+            <article
+              style={{ backgroundColor: "var(--color-surface-cream, #F8FAFC)" }}
+              className="flex-1 tr-card tr-card-pad flex flex-col justify-between hover:border-[#FF5000] transition-colors duration-200"
+            >
+              <div
+                style={{ color: "var(--color-brand-orange, #FF5000)" }}
+                className="w-12 h-12 bg-white border border-zinc-200 flex items-center justify-center mb-6"
+              >
                 <svg
                   width="24"
                   height="24"
@@ -113,74 +163,83 @@ export default function EmpresasPage() {
                 </svg>
               </div>
               <div>
-                <h3 className="font-display text-xl font-bold text-[#0F172A] mb-2">
-                  Mantenimiento Corporativo
+                <h3
+                  style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
+                  className="font-display text-xl font-bold mb-2"
+                >
+                  {e.maintTitle}
                 </h3>
-                <p className="text-sm text-zinc-600 leading-relaxed font-light">
-                  Reparación de techumbres, pisos industriales, redes eléctricas SEC y muros en zonas de alta circulación.
+                <p
+                  style={{ color: "var(--color-ink-mid, #52525B)" }}
+                  className="text-sm leading-relaxed font-light"
+                >
+                  {e.maintDescription}
                 </p>
               </div>
             </article>
 
-            {/* Emergencias (Light Mode High-Priority Card) */}
-            <article className="flex-1 border border-zinc-200 border-l-4 border-l-[#FF5000] bg-white p-6 sm:p-8 flex flex-col justify-between shadow-xs hover:border-[#FF5000] transition-colors duration-200">
+            <article
+              style={{
+                backgroundColor: "var(--color-surface-white, #FFFFFF)",
+                borderLeft: "4px solid var(--color-brand-orange, #FF5000)",
+              }}
+              className="flex-1 tr-card tr-card-pad flex flex-col justify-between hover:border-[#FF5000] transition-colors duration-200"
+            >
               <div>
-                <span className="inline-block bg-[#FF5000]/10 text-[#FF5000] border border-[#FF5000]/30 px-3 py-1 text-xs font-mono font-bold uppercase tracking-widest mb-5">
-                  Atención 24/7
+                <span
+                  style={{ color: "var(--color-brand-orange, #FF5000)" }}
+                  className="inline-block bg-[#FF5000]/10 border border-[#FF5000]/30 px-3 py-1 text-xs font-mono font-bold uppercase tracking-widest mb-5"
+                >
+                  {e.claimsBadge}
                 </span>
-                <h3 className="font-display text-xl font-bold text-[#0F172A] mb-2">
-                  Liquidación y Siniestros
+                <h3
+                  style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
+                  className="font-display text-xl font-bold mb-2"
+                >
+                  {e.claimsTitle}
                 </h3>
-                <p className="text-sm text-zinc-600 leading-relaxed font-light">
-                  Inundaciones, daños por fuego o sismos. Presupuestos técnicos e informes directos para compañías de seguros.
+                <p
+                  style={{ color: "var(--color-ink-mid, #52525B)" }}
+                  className="text-sm leading-relaxed font-light"
+                >
+                  {e.claimsDescription}
                 </p>
               </div>
               <Link
                 href="/contacto?urgencia=true"
-                className="mt-6 text-[#FF5000] text-xs sm:text-sm font-bold uppercase tracking-widest flex items-center gap-2 hover:text-[#CC4000] transition-colors duration-200"
+                style={{ color: "var(--color-brand-orange, #FF5000)" }}
+                className="mt-6 text-xs sm:text-sm font-bold uppercase tracking-widest flex items-center gap-2 hover:underline transition-colors duration-200"
               >
-                Línea Directa <span className="text-lg">→</span>
+                {e.claimsCta} <span className="text-lg">→</span>
               </Link>
             </article>
           </div>
         </div>
       </section>
 
-      {/* ── GESTIÓN DE SINIESTROS (#F8FAFC) ──────────────────────────────────── */}
-      <section className="py-20 sm:py-24 bg-[#F8FAFC] border-t border-zinc-200">
-        <div className="max-w-7xl px-4 sm:px-6 md:px-12 mx-auto">
+      {/* ── GESTIÓN DE SINIESTROS ─────────────────────────────────── */}
+      <section
+        style={{ backgroundColor: "var(--color-surface-cream, #F8FAFC)" }}
+        className="tr-section tr-divider-t"
+      >
+        <div className="tr-container px-4 sm:px-6 md:px-12">
           <div className="mb-12">
-            <SectionLabel label="Unidad de Reacción Inmediata (URI)" />
-            <h2 className="font-display text-3xl sm:text-4xl font-black text-[#0F172A] tracking-tight uppercase">
-              Gestión de Siniestros Corporativos
+            <SectionLabel label={e.uriEyebrow} />
+            <h2
+              style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
+              className="font-display tr-heading-section font-black tracking-tight uppercase"
+            >
+              {e.uriTitle}
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-            {[
-              {
-                id: "01",
-                title: "Inundación y Daño por Agua",
-                desc: "Extracción industrial, secado técnico y reparación ultra-rápida de locales operativos tras roturas de matrices o temporales.",
-                image: "/img/fotos/dano-agua.jpg",
-              },
-              {
-                id: "02",
-                title: "Siniestros por Incendio",
-                desc: "Retiro de escombros, descontaminación de hollín y reconstrucción estructural certificada pos-fuego.",
-                image: "/img/fotos/dano-incendio.jpg",
-              },
-              {
-                id: "03",
-                title: "Impacto y Daño Estructural",
-                desc: "Evaluación SEC inmediata y reparación de muros, fachadas, pilares y techumbres por sismos o colisiones.",
-                image: "/img/fotos/otros-siniestros.jpg",
-              },
-            ].map((claim) => (
+          <div className="grid grid-cols-1 md:grid-cols-3 tr-grid">
+            {e.uriItems.map((claim) => (
               <article
                 key={claim.id}
-                className="group border border-zinc-200 bg-white overflow-hidden hover:border-[#FF5000] hover:shadow-md transition-all duration-200"
+                style={{ backgroundColor: "var(--color-surface-white, #FFFFFF)" }}
+                className="group tr-card overflow-hidden hover:border-[#FF5000] transition-all duration-200"
               >
-                <div className="relative h-52 overflow-hidden bg-zinc-100 border-b border-zinc-200">
+                <div className="relative h-52 overflow-hidden bg-zinc-100 tr-divider-b">
                   <Image
                     src={claim.image}
                     alt={claim.title}
@@ -189,15 +248,24 @@ export default function EmpresasPage() {
                     className="object-cover origin-top-left scale-[1.08]"
                   />
                 </div>
-                <div className="p-6 sm:p-8">
-                  <span className="text-[#FF5000] text-xs font-mono font-bold mb-2 block">
-                    PROTOCOLO {claim.id}
+                <div className="tr-card-pad">
+                  <span
+                    style={{ color: "var(--color-brand-orange, #FF5000)" }}
+                    className="text-xs font-mono font-bold mb-2 block"
+                  >
+                    PROTOCOLO {claim.code}
                   </span>
-                  <h3 className="text-xl font-bold text-[#0F172A] mb-3">
+                  <h3
+                    style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
+                    className="text-xl font-bold mb-3"
+                  >
                     {claim.title}
                   </h3>
-                  <p className="text-sm text-zinc-600 leading-relaxed font-light">
-                    {claim.desc}
+                  <p
+                    style={{ color: "var(--color-ink-mid, #52525B)" }}
+                    className="text-sm leading-relaxed font-light"
+                  >
+                    {claim.description}
                   </p>
                 </div>
               </article>
@@ -206,8 +274,11 @@ export default function EmpresasPage() {
         </div>
       </section>
 
-      {/* ── CTA EMERGENCIAS ──────────────────────────────────────────────────── */}
-      <EmergencyCTA variant="empresas" />
+      <EmergencyCTA
+        variant="empresas"
+        company={company}
+        data={content.emergency}
+      />
     </div>
   );
 }
