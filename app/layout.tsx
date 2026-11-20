@@ -1,5 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import {
+  Archivo,
+  IBM_Plex_Sans,
+  IBM_Plex_Mono,
   Outfit,
   Barlow_Condensed,
   Montserrat,
@@ -11,10 +14,29 @@ import {
   Lato,
 } from "next/font/google";
 import "./globals.css";
-import { SiteChrome } from "@/components/layout/SiteChrome";
 import { LOCAL_BUSINESS_SCHEMA } from "@/lib/metadata";
-import { getSiteConfig } from "@/lib/site-data";
-import { themeToStyleString } from "@/lib/theme-css";
+import { safeJsonLd } from "@/lib/security";
+
+const archivo = Archivo({
+  subsets: ["latin"],
+  weight: ["500", "600", "700", "800"],
+  variable: "--font-archivo",
+  display: "swap",
+});
+
+const ibmPlexSans = IBM_Plex_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-ibm-plex",
+  display: "swap",
+});
+
+const ibmPlexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-plex-mono",
+  display: "swap",
+});
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -53,14 +75,12 @@ const inter = Inter({
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
   variable: "--font-jakarta",
   display: "swap",
 });
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
   variable: "--font-dmsans",
   display: "swap",
 });
@@ -80,7 +100,7 @@ const lato = Lato({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#FF5000",
+  themeColor: "#E8490F",
   width: "device-width",
   initialScale: 1,
 };
@@ -129,11 +149,6 @@ export const metadata: Metadata = {
     apple: "/img/logos/logo.png",
     shortcut: "/favicon.ico",
   },
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "default",
-    title: "TR Admin",
-  },
   openGraph: {
     title:
       "Total Repair Ltda. | Construcción, Remodelación B2B y Siniestros en Chile",
@@ -165,15 +180,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const siteConfig = await getSiteConfig();
-  const themeStyle = themeToStyleString(siteConfig.theme);
-
   const fontVars = [
+    archivo.variable,
+    ibmPlexSans.variable,
+    ibmPlexMono.variable,
     outfit.variable,
     barlow.variable,
     montserrat.variable,
@@ -188,25 +203,14 @@ export default async function RootLayout({
   return (
     <html lang="es" className="scroll-smooth">
       <head>
-        <style
-          id="tr-theme-vars"
-          dangerouslySetInnerHTML={{ __html: themeStyle }}
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(LOCAL_BUSINESS_SCHEMA),
+            __html: safeJsonLd(LOCAL_BUSINESS_SCHEMA),
           }}
         />
       </head>
-      <body className={`${fontVars} font-sans antialiased`}>
-        <SiteChrome
-          company={siteConfig.company}
-          initialTheme={siteConfig.theme}
-        >
-          {children}
-        </SiteChrome>
-      </body>
+      <body className={`${fontVars} font-sans antialiased`}>{children}</body>
     </html>
   );
 }

@@ -14,7 +14,7 @@ import {
   Palette,
   Settings,
 } from "lucide-react";
-import { createSupabaseBrowserClient } from "@/lib/supabase/client";
+import { PORTAL_BASE_PATH, PORTAL_LOGIN_PATH } from "@/lib/portal-config";
 import { PwaInstallBanner } from "./PwaInstallBanner";
 
 interface AdminShellProps {
@@ -24,33 +24,33 @@ interface AdminShellProps {
 }
 
 const NAV_ITEMS = [
-  { href: "/admin", label: "Inicio", short: "Inicio", icon: Home },
+  { href: PORTAL_BASE_PATH, label: "Inicio", short: "Inicio", icon: Home },
   {
-    href: "/admin/proyectos",
+    href: `${PORTAL_BASE_PATH}/proyectos`,
     label: "Proyectos y Fotos",
     short: "Proyectos",
     icon: FolderKanban,
   },
   {
-    href: "/admin/contenido",
+    href: `${PORTAL_BASE_PATH}/contenido`,
     label: "Textos e Imágenes",
     short: "Textos",
     icon: FileText,
   },
   {
-    href: "/admin/diseno",
+    href: `${PORTAL_BASE_PATH}/diseno`,
     label: "Diseño Visual",
     short: "Diseño",
     icon: Palette,
   },
   {
-    href: "/admin/solicitudes",
+    href: `${PORTAL_BASE_PATH}/solicitudes`,
     label: "Solicitudes",
     short: "Mensajes",
     icon: Inbox,
   },
   {
-    href: "/admin/configuracion",
+    href: `${PORTAL_BASE_PATH}/configuracion`,
     label: "Ajustes y Respaldos",
     short: "Ajustes",
     icon: Settings,
@@ -75,9 +75,10 @@ export function AdminShell({
   const handleSignOut = async () => {
     setSigningOut(true);
     try {
-      const supabase = createSupabaseBrowserClient();
-      await supabase.auth.signOut();
-      router.push("/admin/login");
+      await fetch("/api/portal-logout", { method: "POST" }).catch(
+        () => undefined
+      );
+      router.push(PORTAL_LOGIN_PATH);
       router.refresh();
     } finally {
       setSigningOut(false);
@@ -85,7 +86,9 @@ export function AdminShell({
   };
 
   const isRouteActive = (href: string) =>
-    href === "/admin" ? pathname === "/admin" : pathname.startsWith(href);
+    href === PORTAL_BASE_PATH
+      ? pathname === PORTAL_BASE_PATH
+      : pathname.startsWith(href);
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] flex flex-col lg:flex-row">
@@ -167,7 +170,7 @@ export function AdminShell({
       <div className="flex-1 lg:pl-72 flex flex-col min-h-screen pb-24 lg:pb-10">
         {/* Top Mobile Header */}
         <header className="lg:hidden sticky top-0 z-30 bg-white border-b border-zinc-200 px-4 py-3 flex items-center justify-between gap-2">
-          <Link href="/admin" className="flex items-center gap-2.5">
+          <Link href={PORTAL_BASE_PATH} className="flex items-center gap-2.5">
             <div className="relative w-8 h-8 shrink-0">
               <Image
                 src="/img/logos/logo.png"
@@ -184,9 +187,9 @@ export function AdminShell({
 
           <div className="flex items-center gap-2">
             <Link
-              href="/admin/configuracion"
+              href={`${PORTAL_BASE_PATH}/configuracion`}
               className={`p-2.5 border text-xs font-bold inline-flex items-center gap-1 ${
-                isRouteActive("/admin/configuracion")
+                isRouteActive(`${PORTAL_BASE_PATH}/configuracion`)
                   ? "bg-[#FF5000] text-white border-[#FF5000]"
                   : "bg-zinc-50 text-zinc-700 border-zinc-200"
               }`}

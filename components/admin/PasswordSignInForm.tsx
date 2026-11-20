@@ -3,9 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Eye, EyeOff, Loader2, Lock } from "lucide-react";
-import { createSupabaseBrowserClient } from "@/lib/supabase/client";
-
-const ADMIN_ACCOUNT_EMAIL = "admin@totalrepair.cl";
+import { PORTAL_BASE_PATH } from "@/lib/portal-config";
 
 export function PasswordSignInForm() {
   const router = useRouter();
@@ -25,21 +23,24 @@ export function PasswordSignInForm() {
     setError(null);
 
     try {
-      const supabase = createSupabaseBrowserClient();
-      const { error: authError } = await supabase.auth.signInWithPassword({
-        email: ADMIN_ACCOUNT_EMAIL,
-        password,
+      const response = await fetch("/api/portal-auth", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password }),
       });
 
-      if (authError) {
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
         setError(
-          "Contraseña incorrecta. Revisa si tienes activadas las mayúsculas e intenta nuevamente."
+          data.error ||
+            "Contraseña incorrecta. Revisa si tienes activadas las mayúsculas e intenta nuevamente."
         );
         setLoading(false);
         return;
       }
 
-      router.push("/admin");
+      router.push(PORTAL_BASE_PATH);
       router.refresh();
     } catch {
       setError("No se pudo conectar con el servidor. Verifica tu internet.");
@@ -69,7 +70,7 @@ export function PasswordSignInForm() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Escribe tu contraseña..."
-            className="w-full min-h-[56px] bg-zinc-50 border-2 border-zinc-300 focus:border-[#FF5000] focus:bg-white pl-12 pr-14 py-3 text-lg text-[#141413] focus:outline-none transition-colors"
+            className="w-full min-h-[56px] bg-zinc-50 border-2 border-zinc-300 focus:border-[#E8490F] focus:bg-white pl-12 pr-14 py-3 text-lg text-[#141413] focus:outline-none transition-colors"
           />
           <button
             type="button"
@@ -100,7 +101,7 @@ export function PasswordSignInForm() {
       <button
         type="submit"
         disabled={loading}
-        className="w-full min-h-[58px] bg-[#FF5000] hover:bg-[#CC4000] text-white font-bold uppercase tracking-wider text-base px-6 py-4 flex items-center justify-center gap-2.5 transition-colors shadow-sm cursor-pointer disabled:opacity-60"
+        className="w-full min-h-[58px] bg-[#E8490F] hover:bg-[#C23908] text-white font-bold uppercase tracking-wider text-base px-6 py-4 flex items-center justify-center gap-2.5 transition-colors shadow-sm cursor-pointer disabled:opacity-60"
       >
         {loading && <Loader2 className="w-5 h-5 animate-spin" />}
         <span>{loading ? "Entrando al panel..." : "Entrar al Panel"}</span>

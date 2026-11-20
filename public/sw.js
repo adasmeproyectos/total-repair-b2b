@@ -1,4 +1,4 @@
-const CACHE_NAME = "totalrepair-admin-v1";
+const CACHE_NAME = "totalrepair-static-v2";
 
 self.addEventListener("install", (event) => {
   self.skipWaiting();
@@ -30,11 +30,12 @@ self.addEventListener("fetch", (event) => {
 
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
-  if (url.pathname.startsWith("/api/") || url.pathname.startsWith("/auth/")) {
+
+  // Nunca almacenar respuestas de navegación HTML autenticadas ni APIs
+  if (request.mode === "navigate" || url.pathname.startsWith("/api/")) {
     return;
   }
 
-  // Network-first so CMS changes and admin data stay fresh
   event.respondWith(
     fetch(request).catch(() => caches.match(request))
   );

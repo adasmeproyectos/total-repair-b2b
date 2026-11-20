@@ -4,6 +4,7 @@
  */
 
 export type DisplayFontKey =
+  | "archivo"
   | "outfit"
   | "barlow"
   | "montserrat"
@@ -11,6 +12,7 @@ export type DisplayFontKey =
   | "inter";
 
 export type BodyFontKey =
+  | "ibm_plex"
   | "plus_jakarta"
   | "inter"
   | "dm_sans"

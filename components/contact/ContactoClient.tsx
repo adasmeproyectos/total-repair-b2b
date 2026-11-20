@@ -13,18 +13,21 @@ interface ContactoClientProps {
 
 const QUICK_INTENTS = [
   {
+    code: "01",
     id: "Siniestros / Emergencia 24/7",
-    label: "🚨 Emergencia 24/7",
+    label: "Emergencia 24/7",
     sub: "Inundación, incendio o daño urgente",
   },
   {
+    code: "02",
     id: "Remodelación Corporativa",
-    label: "🏢 Empresa / Local",
-    sub: "Oficinas, retail, mantención B2B",
+    label: "Empresa o local",
+    sub: "Oficinas, retail y mantención B2B",
   },
   {
+    code: "03",
     id: "Remodelación Residencial / Hogar",
-    label: "🏠 Hogar",
+    label: "Hogar",
     sub: "Cocinas, baños, gasfitería, luz",
   },
 ];
@@ -105,36 +108,34 @@ function ContactoFormInner({ company, content }: ContactoClientProps) {
   };
 
   return (
-    <div className="tr-container w-full grid grid-cols-1 lg:grid-cols-12 shadow-xl tr-card overflow-hidden bg-white">
+    <div className="tr-container w-full grid grid-cols-1 lg:grid-cols-12 tr-card overflow-hidden bg-white">
       {/* COLUMNA IZQUIERDA OSCURA: Atención Directa & Urgencias */}
       <aside
         style={{ backgroundColor: "var(--color-surface-dark, #141413)" }}
-        className="lg:col-span-5 p-8 sm:p-10 md:p-12 text-white tr-blueprint-grid flex flex-col justify-between gap-10"
+        className="lg:col-span-5 p-8 sm:p-10 md:p-12 text-white flex flex-col justify-between gap-10"
       >
         <div>
-          <SectionLabel label="Atención Directa" dark />
-          <h2 className="font-display text-3xl sm:text-4xl font-black uppercase tracking-tight text-white mb-4">
-            Respuesta rápida en{" "}
-            <span style={{ color: "var(--color-brand-orange, #FF5000)" }}>
-              terreno.
-            </span>
+          <SectionLabel label="Atención directa" dark />
+          <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-white mb-4">
+            Respuesta técnica en terreno.
           </h2>
-          <p className="text-zinc-300 font-light leading-relaxed mb-8">
-            Coordinamos visitas técnicas e informes para empresas, comunidades,
-            aseguradoras y viviendas en toda la Región Metropolitana.
+          <p className="text-zinc-300 leading-relaxed mb-8 text-sm sm:text-base">
+            Coordinamos visitas de evaluación e informes para empresas,
+            comunidades, aseguradoras y viviendas en toda la Región
+            Metropolitana.
           </p>
 
-          <div className="space-y-4">
+          <div className="space-y-3">
             <a
               href={`tel:${company.phoneClean}`}
               style={{
-                backgroundColor: "var(--color-brand-orange, #FF5000)",
-                borderRadius: "var(--tr-btn-radius, 2px)",
+                backgroundColor: "var(--color-brand-orange, #E8490F)",
+                borderRadius: "var(--tr-btn-radius, 0px)",
               }}
-              className="w-full py-4 px-5 flex items-center justify-between text-white font-bold text-sm uppercase tracking-wider hover:opacity-90 transition-opacity"
+              className="w-full py-4 px-5 flex items-center justify-between text-white font-semibold text-xs sm:text-sm uppercase tracking-wider hover:opacity-90 transition-opacity"
             >
-              <span>Llamar Directo ({company.phoneDisplay})</span>
-              <span>→</span>
+              <span>Llamar directo · {company.phoneDisplay}</span>
+              <span aria-hidden="true">→</span>
             </a>
 
             <a
@@ -143,45 +144,55 @@ function ContactoFormInner({ company, content }: ContactoClientProps) {
               )}`}
               target="_blank"
               rel="noopener noreferrer"
-              style={{ borderRadius: "var(--tr-btn-radius, 2px)" }}
-              className="w-full py-4 px-5 bg-emerald-600 hover:bg-emerald-700 flex items-center justify-between text-white font-bold text-sm uppercase tracking-wider transition-colors"
+              style={{ borderRadius: "var(--tr-btn-radius, 0px)" }}
+              className="w-full py-4 px-5 border border-white/25 hover:bg-white hover:text-[#141413] flex items-center justify-between text-white font-semibold text-xs sm:text-sm uppercase tracking-wider transition-colors"
             >
               <span>Escribir por WhatsApp</span>
-              <span>→</span>
+              <span aria-hidden="true">→</span>
             </a>
           </div>
         </div>
 
-        <div className="border-t border-white/15 pt-6 space-y-3 text-sm text-zinc-300">
-          <div className="grid grid-cols-2 gap-3 pb-3">
-            <div className="bg-white/5 border border-white/10 p-3.5">
-              <p className="text-[#FF5000] font-display text-xl font-black">
+        <div className="border-t border-white/15 pt-6 space-y-4 text-sm text-zinc-300">
+          <div className="grid grid-cols-2 border border-white/15 divide-x divide-white/15">
+            <div className="p-3.5">
+              <p className="text-[#E8490F] font-display text-xl font-bold">
                 &lt; 2 hrs
               </p>
               <p className="text-xs text-zinc-400">Emergencias URI 24/7</p>
             </div>
-            <div className="bg-white/5 border border-white/10 p-3.5">
-              <p className="text-white font-display text-xl font-black">
+            <div className="p-3.5">
+              <p className="text-white font-display text-xl font-bold">
                 &lt; 24 hrs
               </p>
               <p className="text-xs text-zinc-400">Presupuestos hábiles</p>
             </div>
           </div>
 
-          <p>
-            <strong className="text-white">Central:</strong> {company.address}
-          </p>
-          <p>
-            <strong className="text-white">Correo:</strong>{" "}
-            <span className="font-mono">{company.email}</span>
-          </p>
-          <p>
-            <strong className="text-white">Horario:</strong> {company.hours}
-          </p>
+          <dl className="space-y-2 text-xs sm:text-sm">
+            <div>
+              <dt className="text-zinc-400 font-mono uppercase text-[11px]">
+                Central
+              </dt>
+              <dd className="text-white">{company.address}</dd>
+            </div>
+            <div>
+              <dt className="text-zinc-400 font-mono uppercase text-[11px]">
+                Correo
+              </dt>
+              <dd className="font-mono text-white">{company.email}</dd>
+            </div>
+            <div>
+              <dt className="text-zinc-400 font-mono uppercase text-[11px]">
+                Horario oficina
+              </dt>
+              <dd className="text-zinc-300">{company.hours}</dd>
+            </div>
+          </dl>
         </div>
       </aside>
 
-      {/* COLUMNA DERECHA: Formulario con Selector Rápido de Intención */}
+      {/* COLUMNA DERECHA: Formulario con Selector Rápido */}
       <div className="lg:col-span-7 p-8 sm:p-10 md:p-12 bg-white">
         {!isSuccess ? (
           <div>
@@ -189,27 +200,27 @@ function ContactoFormInner({ company, content }: ContactoClientProps) {
               <SectionLabel label={content.eyebrow} />
               <h1
                 style={{ color: "var(--color-ink-anthracite, #141413)" }}
-                className="font-display text-3xl sm:text-4xl font-black tracking-tight uppercase"
+                className="font-display text-3xl sm:text-4xl font-bold tracking-tight"
               >
                 {content.titlePrefix}{" "}
-                <span style={{ color: "var(--color-brand-orange, #FF5000)" }}>
+                <span style={{ color: "var(--color-brand-orange, #E8490F)" }}>
                   {content.titleHighlight}
                 </span>
               </h1>
               <p
-                style={{ color: "var(--color-ink-mid, #52525B)" }}
-                className="mt-2 font-light text-sm sm:text-base"
+                style={{ color: "var(--color-ink-mid, #57534E)" }}
+                className="mt-2 text-sm sm:text-base"
               >
                 {content.description}
               </p>
             </div>
 
-            {/* Selector visual de intención */}
-            <div className="mb-6">
-              <p className="text-xs font-bold uppercase tracking-widest text-zinc-700 mb-2.5">
-                1. ¿Qué necesitas hoy?
+            {/* Selector numerado de intención */}
+            <div className="mb-7">
+              <p className="text-xs font-mono uppercase tracking-wider text-[#57534E] mb-2.5">
+                1. Seleccione tipo de solicitud
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+              <div className="grid grid-cols-1 sm:grid-cols-3 border border-[#D6D3CD] divide-y sm:divide-y-0 sm:divide-x divide-[#D6D3CD]">
                 {QUICK_INTENTS.map((intent) => {
                   const active = formData.tipoRequerimiento === intent.id;
                   return (
@@ -225,21 +236,27 @@ function ContactoFormInner({ company, content }: ContactoClientProps) {
                       style={
                         active
                           ? {
-                              borderColor: "var(--color-brand-orange, #FF5000)",
-                              backgroundColor: "#FFF5F0",
+                              backgroundColor: "#FBF3EF",
+                              boxShadow: "inset 0 -3px 0 0 var(--color-brand-orange, #E8490F)",
                             }
                           : undefined
                       }
-                      className={`p-3 border text-left transition-colors cursor-pointer ${
-                        active
-                          ? "border-2"
-                          : "border-zinc-200 bg-zinc-50 hover:border-zinc-400"
+                      className={`p-3.5 text-left transition-colors cursor-pointer ${
+                        active ? "" : "bg-[#F7F6F2] hover:bg-[#ECEAE3]/60"
                       }`}
                     >
+                      <span
+                        style={{
+                          color: active ? "#E8490F" : "#57534E",
+                        }}
+                        className="font-mono text-[11px] font-semibold block mb-1"
+                      >
+                        {intent.code}
+                      </span>
                       <p className="font-bold text-xs sm:text-sm text-[#141413]">
                         {intent.label}
                       </p>
-                      <p className="text-[11px] text-zinc-600 mt-0.5">
+                      <p className="text-[11px] text-[#57534E] mt-0.5">
                         {intent.sub}
                       </p>
                     </button>
@@ -267,9 +284,9 @@ function ContactoFormInner({ company, content }: ContactoClientProps) {
                 <div className="space-y-2">
                   <label
                     htmlFor="nombre"
-                    className="text-xs font-bold uppercase tracking-widest text-zinc-700"
+                    className="text-xs font-mono font-semibold uppercase tracking-wider text-[#141413]"
                   >
-                    Nombre Completo <span className="text-[#FF5000]">*</span>
+                    Nombre Completo <span className="text-[#E8490F]">*</span>
                   </label>
                   <input
                     type="text"
@@ -278,7 +295,7 @@ function ContactoFormInner({ company, content }: ContactoClientProps) {
                     required
                     value={formData.nombre}
                     onChange={handleChange}
-                    className="w-full bg-zinc-50 border border-zinc-300 px-4 py-3 focus:outline-none focus:border-[#FF5000] focus:ring-1 focus:ring-[#FF5000] transition-colors"
+                    className="w-full bg-[#F7F6F2] border border-[#D6D3CD] px-4 py-3 focus:outline-none focus:bg-white focus:border-[#E8490F] transition-colors"
                     placeholder="Ej. Juan Pérez"
                   />
                 </div>
@@ -286,7 +303,7 @@ function ContactoFormInner({ company, content }: ContactoClientProps) {
                 <div className="space-y-2">
                   <label
                     htmlFor="empresa"
-                    className="text-xs font-bold uppercase tracking-widest text-zinc-700"
+                    className="text-xs font-mono font-semibold uppercase tracking-wider text-[#141413]"
                   >
                     Empresa o Comunidad
                   </label>
@@ -296,7 +313,7 @@ function ContactoFormInner({ company, content }: ContactoClientProps) {
                     name="empresa"
                     value={formData.empresa}
                     onChange={handleChange}
-                    className="w-full bg-zinc-50 border border-zinc-300 px-4 py-3 focus:outline-none focus:border-[#FF5000] focus:ring-1 focus:ring-[#FF5000] transition-colors"
+                    className="w-full bg-[#F7F6F2] border border-[#D6D3CD] px-4 py-3 focus:outline-none focus:bg-white focus:border-[#E8490F] transition-colors"
                     placeholder="Razón Social o Particular (Opcional)"
                   />
                 </div>
@@ -304,9 +321,9 @@ function ContactoFormInner({ company, content }: ContactoClientProps) {
                 <div className="space-y-2">
                   <label
                     htmlFor="telefono"
-                    className="text-xs font-bold uppercase tracking-widest text-zinc-700"
+                    className="text-xs font-mono font-semibold uppercase tracking-wider text-[#141413]"
                   >
-                    Teléfono <span className="text-[#FF5000]">*</span>
+                    Teléfono <span className="text-[#E8490F]">*</span>
                   </label>
                   <input
                     type="tel"
@@ -315,7 +332,7 @@ function ContactoFormInner({ company, content }: ContactoClientProps) {
                     required
                     value={formData.telefono}
                     onChange={handleChange}
-                    className="w-full bg-zinc-50 border border-zinc-300 px-4 py-3 focus:outline-none focus:border-[#FF5000] focus:ring-1 focus:ring-[#FF5000] transition-colors"
+                    className="w-full bg-[#F7F6F2] border border-[#D6D3CD] px-4 py-3 focus:outline-none focus:bg-white focus:border-[#E8490F] transition-colors"
                     placeholder="+56 9 1234 5678"
                   />
                 </div>
@@ -323,9 +340,9 @@ function ContactoFormInner({ company, content }: ContactoClientProps) {
                 <div className="space-y-2">
                   <label
                     htmlFor="correo"
-                    className="text-xs font-bold uppercase tracking-widest text-zinc-700"
+                    className="text-xs font-mono font-semibold uppercase tracking-wider text-[#141413]"
                   >
-                    Correo Electrónico <span className="text-[#FF5000]">*</span>
+                    Correo Electrónico <span className="text-[#E8490F]">*</span>
                   </label>
                   <input
                     type="email"
@@ -334,7 +351,7 @@ function ContactoFormInner({ company, content }: ContactoClientProps) {
                     required
                     value={formData.correo}
                     onChange={handleChange}
-                    className="w-full bg-zinc-50 border border-zinc-300 px-4 py-3 focus:outline-none focus:border-[#FF5000] focus:ring-1 focus:ring-[#FF5000] transition-colors"
+                    className="w-full bg-[#F7F6F2] border border-[#D6D3CD] px-4 py-3 focus:outline-none focus:bg-white focus:border-[#E8490F] transition-colors"
                     placeholder="correo@empresa.cl"
                   />
                 </div>
@@ -343,9 +360,9 @@ function ContactoFormInner({ company, content }: ContactoClientProps) {
               <div className="space-y-2">
                 <label
                   htmlFor="tipoRequerimiento"
-                  className="text-xs font-bold uppercase tracking-widest text-zinc-700"
+                  className="text-xs font-mono font-semibold uppercase tracking-wider text-[#141413]"
                 >
-                  Tipo de Requerimiento <span className="text-[#FF5000]">*</span>
+                  Tipo de Requerimiento <span className="text-[#E8490F]">*</span>
                 </label>
                 <select
                   id="tipoRequerimiento"
@@ -353,7 +370,7 @@ function ContactoFormInner({ company, content }: ContactoClientProps) {
                   required
                   value={formData.tipoRequerimiento}
                   onChange={handleChange}
-                  className="w-full bg-zinc-50 border border-zinc-300 px-4 py-3 focus:outline-none focus:border-[#FF5000] focus:ring-1 focus:ring-[#FF5000] transition-colors"
+                  className="w-full bg-[#F7F6F2] border border-[#D6D3CD] px-4 py-3 focus:outline-none focus:bg-white focus:border-[#E8490F] transition-colors"
                 >
                   <option value="" disabled>
                     Seleccione una opción
@@ -380,10 +397,10 @@ function ContactoFormInner({ company, content }: ContactoClientProps) {
                 <div className="space-y-2">
                   <label
                     htmlFor="especificacionOtro"
-                    className="text-xs font-bold uppercase tracking-widest text-zinc-700"
+                    className="text-xs font-mono font-semibold uppercase tracking-wider text-[#141413]"
                   >
                     Especifique su requerimiento{" "}
-                    <span className="text-[#FF5000]">*</span>
+                    <span className="text-[#E8490F]">*</span>
                   </label>
                   <input
                     type="text"
@@ -392,7 +409,7 @@ function ContactoFormInner({ company, content }: ContactoClientProps) {
                     required
                     value={formData.especificacionOtro}
                     onChange={handleChange}
-                    className="w-full bg-zinc-50 border border-zinc-300 px-4 py-3 focus:outline-none focus:border-[#FF5000] focus:ring-1 focus:ring-[#FF5000] transition-colors"
+                    className="w-full bg-[#F7F6F2] border border-[#D6D3CD] px-4 py-3 focus:outline-none focus:bg-white focus:border-[#E8490F] transition-colors"
                     placeholder="Describa brevemente el tipo de obra..."
                   />
                 </div>
@@ -401,10 +418,10 @@ function ContactoFormInner({ company, content }: ContactoClientProps) {
               <div className="space-y-2">
                 <label
                   htmlFor="especificaciones"
-                  className="text-xs font-bold uppercase tracking-widest text-zinc-700 flex justify-between"
+                  className="text-xs font-mono font-semibold uppercase tracking-wider text-[#141413] flex justify-between"
                 >
                   <span>Especificaciones Técnicas</span>
-                  <span className="text-zinc-500 font-light normal-case tracking-normal">
+                  <span className="text-[#57534E] font-normal normal-case tracking-normal">
                     Opcional
                   </span>
                 </label>
@@ -414,13 +431,13 @@ function ContactoFormInner({ company, content }: ContactoClientProps) {
                   rows={4}
                   value={formData.especificaciones}
                   onChange={handleChange}
-                  className="w-full bg-zinc-50 border border-zinc-300 px-4 py-3 focus:outline-none focus:border-[#FF5000] focus:ring-1 focus:ring-[#FF5000] transition-colors resize-y"
+                  className="w-full bg-[#F7F6F2] border border-[#D6D3CD] px-4 py-3 focus:outline-none focus:bg-white focus:border-[#E8490F] transition-colors resize-y"
                   placeholder="Detalles adicionales, metros cuadrados, comuna, compañía de seguros (si aplica), etc."
                 />
               </div>
 
               {errorMessage && (
-                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 text-sm">
+                <div className="bg-red-50 border-l-4 border-red-600 text-red-800 px-4 py-3 text-sm">
                   {errorMessage}
                 </div>
               )}
@@ -429,19 +446,19 @@ function ContactoFormInner({ company, content }: ContactoClientProps) {
                 type="submit"
                 disabled={isSubmitting}
                 style={{
-                  backgroundColor: "var(--color-brand-orange, #FF5000)",
-                  borderRadius: "var(--tr-btn-radius, 2px)",
+                  backgroundColor: "var(--color-brand-orange, #E8490F)",
+                  borderRadius: "var(--tr-btn-radius, 0px)",
                 }}
-                className="w-full text-white py-4 font-bold uppercase tracking-widest text-sm hover:opacity-90 transition-opacity duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center gap-2 cursor-pointer"
+                className="w-full text-white py-4 font-semibold uppercase tracking-wider text-xs sm:text-sm hover:opacity-90 transition-opacity duration-150 disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center gap-2 cursor-pointer"
               >
                 {isSubmitting ? "Procesando..." : content.submitLabel}
               </button>
 
-              <p className="text-xs text-zinc-500 text-center font-light mt-4">
+              <p className="text-xs text-[#57534E] text-center mt-4">
                 {content.privacyNote}{" "}
                 <Link
                   href="/privacidad"
-                  className="underline hover:text-[#FF5000]"
+                  className="underline hover:text-[#E8490F]"
                 >
                   Ver Política de Privacidad
                 </Link>
@@ -451,27 +468,15 @@ function ContactoFormInner({ company, content }: ContactoClientProps) {
           </div>
         ) : (
           <div className="py-6 text-center relative overflow-hidden">
-            <div className="w-20 h-20 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-8">
-              <svg
-                className="w-10 h-10 text-emerald-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
+            <div className="w-16 h-16 border-2 border-[#141413] flex items-center justify-center mx-auto mb-6 font-mono text-sm font-bold text-[#141413]">
+              OK
             </div>
 
-            <h2 className="font-display text-3xl font-black text-[#141413] mb-4 tracking-tight">
-              SOLICITUD RECIBIDA
+            <h2 className="font-display text-3xl font-bold text-[#141413] mb-4 tracking-tight">
+              Solicitud recibida
             </h2>
 
-            <p className="text-zinc-600 font-light text-lg mb-8">
+            <p className="text-[#57534E] text-base sm:text-lg mb-8">
               Gracias,{" "}
               <strong className="font-semibold text-[#141413]">
                 {formData.nombre}
@@ -485,35 +490,37 @@ function ContactoFormInner({ company, content }: ContactoClientProps) {
               .
             </p>
 
-            <div className="bg-zinc-50 border border-zinc-200 p-6 text-sm text-left mb-8">
-              <p className="text-zinc-500 font-mono text-xs uppercase mb-2">
+            <div className="bg-[#F7F6F2] border border-[#D6D3CD] p-6 text-sm text-left mb-8">
+              <p className="text-[#57534E] font-mono text-xs uppercase mb-2">
                 Comprobante de Recepción — {company.legalName}
               </p>
               {folio && (
-                <div className="flex justify-between items-center border-b border-zinc-200 pb-2 mb-2">
-                  <span className="text-zinc-500">N° de Folio:</span>
+                <div className="flex justify-between items-center border-b border-[#D6D3CD] pb-2 mb-2">
+                  <span className="text-[#57534E]">N° de Folio:</span>
                   <span className="font-mono font-bold text-[#141413]">
                     {folio}
                   </span>
                 </div>
               )}
-              <div className="flex justify-between items-center border-b border-zinc-200 pb-2 mb-2">
-                <span className="text-zinc-500">Fecha:</span>
+              <div className="flex justify-between items-center border-b border-[#D6D3CD] pb-2 mb-2">
+                <span className="text-[#57534E]">Fecha:</span>
                 <span className="font-medium text-[#141413]">
                   {new Date().toLocaleDateString("es-CL")}
                 </span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-zinc-500">Estado:</span>
-                <span className="font-mono font-bold text-[#FF5000]">
+                <span className="text-[#57534E]">Estado:</span>
+                <span className="font-mono font-semibold text-[#E8490F]">
                   EN EVALUACIÓN TÉCNICA
                 </span>
               </div>
             </div>
 
-            <p className="text-sm text-zinc-600 font-light mb-8">
+            <p className="text-sm text-[#57534E] mb-8">
               Un especialista se contactará al{" "}
-              <span className="font-mono font-medium">{formData.telefono}</span>{" "}
+              <span className="font-mono font-medium text-[#141413]">
+                {formData.telefono}
+              </span>{" "}
               o vía correo electrónico a la brevedad.
             </p>
 
@@ -524,13 +531,13 @@ function ContactoFormInner({ company, content }: ContactoClientProps) {
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 bg-emerald-600 text-white py-4 font-bold uppercase tracking-widest text-sm hover:bg-emerald-700 transition-colors duration-200 text-center"
+                className="flex-1 bg-[#E8490F] text-white py-4 font-semibold uppercase tracking-wider text-xs sm:text-sm hover:opacity-90 transition-opacity text-center"
               >
                 Escribir por WhatsApp
               </a>
               <Link
                 href="/"
-                className="flex-1 bg-[#141413] text-white py-4 font-bold uppercase tracking-widest text-sm hover:bg-zinc-800 transition-colors duration-200 text-center"
+                className="flex-1 bg-[#141413] text-white py-4 font-semibold uppercase tracking-wider text-xs sm:text-sm hover:bg-zinc-800 transition-colors text-center"
               >
                 Volver al Inicio
               </Link>
@@ -545,12 +552,12 @@ function ContactoFormInner({ company, content }: ContactoClientProps) {
 export function ContactoClient({ company, content }: ContactoClientProps) {
   return (
     <div
-      style={{ backgroundColor: "var(--color-surface-cream, #F5F3EE)" }}
-      className="min-h-screen text-zinc-900 pt-[96px] sm:pt-[136px] pb-24 px-4 sm:px-6 flex items-center justify-center"
+      style={{ backgroundColor: "var(--color-surface-cream, #F7F6F2)" }}
+      className="min-h-screen text-[#141413] pt-[104px] sm:pt-[120px] pb-24 px-4 sm:px-6 flex items-center justify-center"
     >
       <Suspense
         fallback={
-          <div className="max-w-4xl w-full bg-white p-12 border border-zinc-200 text-center text-zinc-500 font-mono text-sm">
+          <div className="max-w-4xl w-full bg-white p-12 border border-[#D6D3CD] text-center text-[#57534E] font-mono text-sm">
             Cargando formulario de contacto...
           </div>
         }

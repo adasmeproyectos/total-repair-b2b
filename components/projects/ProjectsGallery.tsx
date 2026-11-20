@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, Images, MapPin, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import type { ProjectDivision, ProjectRecord } from "@/lib/types/cms";
 
 interface ProjectsGalleryProps {
@@ -72,8 +72,8 @@ export function ProjectsGallery({ projects }: ProjectsGalleryProps) {
 
   return (
     <>
-      {/* Filtros por División */}
-      <div className="flex flex-wrap items-center gap-3 mb-10">
+      {/* Filtros arquitectónicos */}
+      <div className="flex flex-wrap items-center gap-2 pb-6 mb-10 tr-divider-b">
         {FILTERS.map((item) => {
           const isActive = filter === item.id;
           return (
@@ -82,16 +82,18 @@ export function ProjectsGallery({ projects }: ProjectsGalleryProps) {
               type="button"
               onClick={() => setFilter(item.id)}
               style={{
-                borderRadius: "var(--tr-btn-radius, 2px)",
+                borderRadius: "var(--tr-btn-radius, 0px)",
                 backgroundColor: isActive
-                  ? "var(--color-brand-orange, #FF5000)"
-                  : "var(--color-surface-cream, #F8FAFC)",
-                color: isActive ? "#FFFFFF" : "var(--color-ink-anthracite, #0F172A)",
+                  ? "var(--color-ink-anthracite, #141413)"
+                  : "transparent",
+                color: isActive
+                  ? "#FFFFFF"
+                  : "var(--color-ink-mid, #57534E)",
                 borderColor: isActive
-                  ? "var(--color-brand-orange, #FF5000)"
-                  : "var(--color-divider, #E4E4E7)",
+                  ? "var(--color-ink-anthracite, #141413)"
+                  : "var(--color-divider, #D6D3CD)",
               }}
-              className="px-5 py-2.5 border text-xs sm:text-sm font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer"
+              className="px-4 py-2 border text-xs font-mono uppercase tracking-wider transition-colors duration-150 cursor-pointer hover:text-[#141413]"
             >
               {item.label}
             </button>
@@ -99,11 +101,11 @@ export function ProjectsGallery({ projects }: ProjectsGalleryProps) {
         })}
       </div>
 
-      {/* Grilla de Proyectos */}
+      {/* Grilla Editorial de Obras */}
       {filtered.length === 0 ? (
         <div
-          style={{ backgroundColor: "var(--color-surface-cream, #F8FAFC)" }}
-          className="tr-card p-12 text-center text-zinc-600"
+          style={{ backgroundColor: "var(--color-surface-cream, #F7F6F2)" }}
+          className="tr-card p-12 text-center text-[#57534E]"
         >
           No hay proyectos publicados en esta categoría por el momento.
         </div>
@@ -127,93 +129,67 @@ export function ProjectsGallery({ projects }: ProjectsGalleryProps) {
                   }
                 }}
                 style={{
-                  backgroundColor: "var(--color-surface-cream, #F8FAFC)",
+                  backgroundColor: "var(--color-surface-cream, #F7F6F2)",
                 }}
-                className="group tr-card overflow-hidden hover:border-[#FF5000] transition-all duration-200 flex flex-col justify-between cursor-pointer text-left"
+                className="group tr-card overflow-hidden hover:border-[#E8490F] transition-colors duration-150 flex flex-col justify-between cursor-pointer text-left"
               >
                 <div>
-                  <div className="relative h-56 overflow-hidden bg-zinc-100 tr-divider-b">
+                  <div className="relative h-60 overflow-hidden bg-[#ECEAE3] tr-divider-b">
                     <Image
                       src={p.cover_image_url || "/img/fotos/hero-corporativo.jpg"}
                       alt={p.title}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      className="object-cover origin-top-left scale-[1.08] group-hover:scale-[1.12] transition-transform duration-300"
+                      className="object-cover origin-top-left scale-[1.08] group-hover:scale-[1.11] transition-transform duration-300"
                     />
 
-                    <span
-                      style={{
-                        color: "var(--color-ink-anthracite, #0F172A)",
-                        borderRadius: "var(--tr-btn-radius, 2px)",
-                      }}
-                      className="absolute top-4 left-4 bg-white/95 font-mono font-bold text-xs px-3 py-1 tracking-widest border border-zinc-200 shadow-2xs"
-                    >
-                      {orderLabel}
-                    </span>
-
-                    <span
-                      style={{ borderRadius: "var(--tr-btn-radius, 2px)" }}
-                      className="absolute bottom-3 right-3 bg-[#0F172A]/85 text-white font-mono text-[11px] px-2.5 py-1 inline-flex items-center gap-1.5"
-                    >
-                      <Images className="w-3.5 h-3.5 text-[#FF5000]" />
-                      <span>
-                        {photoCount} {photoCount === 1 ? "foto" : "fotos"}
+                    {photoCount > 1 && (
+                      <span className="absolute bottom-3 right-3 bg-[#141413]/90 text-white font-mono text-[11px] px-2.5 py-1">
+                        {photoCount} fotos
                       </span>
-                    </span>
+                    )}
                   </div>
 
                   <div className="tr-card-pad">
-                    <div className="flex items-center justify-between gap-2 mb-3">
-                      <p
-                        style={{ color: "var(--color-brand-orange, #FF5000)" }}
-                        className="text-xs font-mono font-semibold uppercase tracking-widest"
+                    <div className="flex items-center justify-between gap-2 mb-3 text-xs font-mono">
+                      <span
+                        style={{ color: "var(--color-brand-orange, #E8490F)" }}
+                        className="font-semibold uppercase tracking-wider"
                       >
-                        {p.category}
-                      </p>
-                      <span className="text-zinc-500 text-xs font-mono flex items-center gap-1 shrink-0">
-                        <MapPin
-                          style={{ color: "var(--color-brand-orange, #FF5000)" }}
-                          className="w-3.5 h-3.5 shrink-0"
-                        />
+                        {orderLabel} · {p.category}
+                      </span>
+                      <span
+                        style={{ color: "var(--color-ink-mid, #57534E)" }}
+                        className="shrink-0"
+                      >
                         {p.location}
                       </span>
                     </div>
 
                     <h2
-                      style={{ color: "var(--color-ink-anthracite, #0F172A)" }}
-                      className="font-display text-xl font-bold mb-3 leading-snug group-hover:text-[#FF5000] transition-colors duration-200"
+                      style={{ color: "var(--color-ink-anthracite, #141413)" }}
+                      className="font-display text-xl font-bold mb-2.5 leading-snug group-hover:text-[#E8490F] transition-colors duration-150"
                     >
                       {p.title}
                     </h2>
                     <p
-                      style={{ color: "var(--color-ink-mid, #52525B)" }}
-                      className="text-sm leading-relaxed font-light mb-2"
+                      style={{ color: "var(--color-ink-mid, #57534E)" }}
+                      className="text-sm leading-relaxed"
                     >
                       {p.description}
                     </p>
                   </div>
                 </div>
 
-                <div className="px-6 sm:px-7 pb-6 flex flex-wrap items-center justify-between gap-2">
-                  <div className="flex flex-wrap gap-2">
-                    {p.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        style={{
-                          backgroundColor: "var(--color-surface-white, #FFFFFF)",
-                          borderRadius: "var(--tr-btn-radius, 2px)",
-                        }}
-                        className="border border-zinc-200 text-zinc-700 text-xs font-mono px-3 py-1 font-medium"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+                <div className="px-6 sm:px-7 py-4 tr-divider-t flex items-center justify-between gap-2 text-xs font-mono">
+                  <span style={{ color: "var(--color-ink-mid, #57534E)" }}>
+                    {p.tags.join(" · ")}
+                  </span>
                   <span
-                    style={{ color: "var(--color-brand-orange, #FF5000)" }}
-                    className="text-xs font-bold uppercase tracking-wider"
+                    style={{ color: "var(--color-brand-orange, #E8490F)" }}
+                    className="font-semibold uppercase tracking-wider shrink-0"
                   >
-                    Ver galería →
+                    Ver registro →
                   </span>
                 </div>
               </article>
@@ -225,7 +201,7 @@ export function ProjectsGallery({ projects }: ProjectsGalleryProps) {
       {/* Visor Lightbox Multi-foto */}
       {activeProject && (
         <div
-          className="fixed inset-0 z-50 bg-[#0F172A]/85 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6"
+          className="fixed inset-0 z-50 bg-[#141413]/85 flex items-center justify-center p-3 sm:p-6"
           role="dialog"
           aria-modal="true"
           aria-label={`Galería de ${activeProject.title}`}
@@ -233,31 +209,31 @@ export function ProjectsGallery({ projects }: ProjectsGalleryProps) {
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="bg-white w-full max-w-5xl max-h-[92vh] overflow-y-auto border border-zinc-200 shadow-2xl flex flex-col"
+            className="bg-white w-full max-w-5xl max-h-[92vh] overflow-y-auto border border-[#D6D3CD] flex flex-col"
           >
             {/* Barra superior */}
-            <div className="flex items-start justify-between gap-4 p-4 sm:p-6 border-b border-zinc-200">
+            <div className="flex items-start justify-between gap-4 p-4 sm:p-6 border-b border-[#D6D3CD]">
               <div>
-                <p className="text-[#FF5000] text-xs font-mono font-bold uppercase tracking-widest mb-1">
+                <p className="text-[#E8490F] text-xs font-mono font-semibold uppercase tracking-widest mb-1">
                   {activeProject.category} · {activeProject.location}
                   {activeProject.year ? ` (${activeProject.year})` : ""}
                 </p>
-                <h3 className="font-display text-xl sm:text-2xl font-black text-[#0F172A]">
+                <h3 className="font-display text-xl sm:text-2xl font-bold text-[#141413]">
                   {activeProject.title}
                 </h3>
               </div>
               <button
                 type="button"
                 onClick={() => setActiveProject(null)}
-                className="p-2.5 bg-zinc-100 hover:bg-zinc-200 text-[#0F172A] shrink-0 cursor-pointer"
+                className="p-2.5 bg-[#F7F6F2] hover:bg-[#ECEAE3] border border-[#D6D3CD] text-[#141413] shrink-0 cursor-pointer"
                 aria-label="Cerrar galería"
               >
-                <X className="w-6 h-6" />
+                <X className="w-5 h-5" />
               </button>
             </div>
 
             {/* Imagen principal */}
-            <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] bg-zinc-900 overflow-hidden">
+            <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] bg-[#141413] overflow-hidden">
               {activePhotos[photoIndex] && (
                 <Image
                   src={activePhotos[photoIndex].image_url}
@@ -273,10 +249,10 @@ export function ProjectsGallery({ projects }: ProjectsGalleryProps) {
 
               {activePhotos[photoIndex]?.photo_type !== "gallery" && (
                 <span
-                  className={`absolute top-4 left-4 px-3.5 py-1.5 text-xs font-mono font-bold uppercase tracking-widest shadow ${
+                  className={`absolute top-4 left-4 px-3 py-1 text-xs font-mono font-semibold uppercase tracking-widest ${
                     activePhotos[photoIndex]?.photo_type === "before"
-                      ? "bg-amber-500 text-white"
-                      : "bg-emerald-600 text-white"
+                      ? "bg-[#141413] text-white border border-white/25"
+                      : "bg-[#E8490F] text-white"
                   }`}
                 >
                   {activePhotos[photoIndex]?.photo_type === "before"
@@ -295,25 +271,25 @@ export function ProjectsGallery({ projects }: ProjectsGalleryProps) {
                           (prev - 1 + activePhotos.length) % activePhotos.length
                       )
                     }
-                    className="absolute left-3 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 hover:bg-white text-[#0F172A] flex items-center justify-center shadow-lg cursor-pointer"
+                    className="absolute left-3 top-1/2 -translate-y-1/2 w-11 h-11 bg-white hover:bg-[#F7F6F2] text-[#141413] border border-[#D6D3CD] flex items-center justify-center cursor-pointer"
                     aria-label="Foto anterior"
                   >
-                    <ChevronLeft className="w-7 h-7" />
+                    <ChevronLeft className="w-6 h-6" />
                   </button>
                   <button
                     type="button"
                     onClick={() =>
                       setPhotoIndex((prev) => (prev + 1) % activePhotos.length)
                     }
-                    className="absolute right-3 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 hover:bg-white text-[#0F172A] flex items-center justify-center shadow-lg cursor-pointer"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 w-11 h-11 bg-white hover:bg-[#F7F6F2] text-[#141413] border border-[#D6D3CD] flex items-center justify-center cursor-pointer"
                     aria-label="Siguiente foto"
                   >
-                    <ChevronRight className="w-7 h-7" />
+                    <ChevronRight className="w-6 h-6" />
                   </button>
                 </>
               )}
 
-              <span className="absolute bottom-3 right-3 bg-black/75 text-white text-xs font-mono px-3 py-1">
+              <span className="absolute bottom-3 right-3 bg-[#141413]/90 text-white text-xs font-mono px-3 py-1">
                 {photoIndex + 1} / {activePhotos.length}
               </span>
             </div>
@@ -321,12 +297,12 @@ export function ProjectsGallery({ projects }: ProjectsGalleryProps) {
             {/* Descripción + Miniaturas */}
             <div className="p-4 sm:p-6 space-y-4">
               {activePhotos[photoIndex]?.caption && (
-                <p className="text-sm font-medium text-[#0F172A] bg-zinc-50 border-l-4 border-[#FF5000] px-4 py-2.5">
+                <p className="text-sm font-medium text-[#141413] bg-[#F7F6F2] border-l-2 border-[#E8490F] px-4 py-2.5">
                   {activePhotos[photoIndex].caption}
                 </p>
               )}
 
-              <p className="text-sm sm:text-base text-zinc-600 font-light leading-relaxed">
+              <p className="text-sm sm:text-base text-[#57534E] leading-relaxed">
                 {activeProject.description}
               </p>
 
@@ -337,10 +313,10 @@ export function ProjectsGallery({ projects }: ProjectsGalleryProps) {
                       key={img.id}
                       type="button"
                       onClick={() => setPhotoIndex(idx)}
-                      className={`relative w-20 h-16 shrink-0 overflow-hidden border-2 cursor-pointer transition-all ${
+                      className={`relative w-20 h-16 shrink-0 overflow-hidden border-2 cursor-pointer transition-opacity ${
                         idx === photoIndex
-                          ? "border-[#FF5000] ring-2 ring-[#FF5000]/30"
-                          : "border-zinc-200 opacity-70 hover:opacity-100"
+                          ? "border-[#E8490F] opacity-100"
+                          : "border-[#D6D3CD] opacity-65 hover:opacity-100"
                       }`}
                     >
                       <Image

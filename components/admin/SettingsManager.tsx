@@ -76,10 +76,10 @@ export function SettingsManager({
     e.preventDefault();
     setStatusMsg(null);
 
-    if (newPassword.length < 6) {
+    if (newPassword.length < 8) {
       setStatusMsg({
         type: "err",
-        text: "La contraseña debe tener al menos 6 caracteres.",
+        text: "La contraseña debe tener al menos 8 caracteres (recomendamos 10+ o una frase fácil de recordar).",
       });
       return;
     }
@@ -212,6 +212,13 @@ export function SettingsManager({
           <h2 className="font-display text-xl font-bold text-[#141413]">
             1. Automatización de Correos (Premium Hosting)
           </h2>
+        </div>
+
+        <div className="bg-emerald-50 border-l-4 border-emerald-600 p-4 text-xs sm:text-sm text-emerald-950 leading-relaxed">
+          <p className="font-bold">Aislamiento garantizado del correo corporativo:</p>
+          <p className="mt-0.5">
+            La casilla <strong>contacto@totalrepair.cl</strong> está bloqueada en servidor como destinataria obligatoria y este panel <strong>no tiene claves IMAP/SMTP ni acceso de lectura</strong> a tus buzones de Premium Hosting (solo envía notificaciones salientes unidireccionales).
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -350,7 +357,7 @@ export function SettingsManager({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-1.5">
             <label className="block text-sm font-bold text-[#141413]">
-              Nueva contraseña (mínimo 6 caracteres)
+              Nueva contraseña (mínimo 8 caracteres, ideal 10+ o frase segura)
             </label>
             <input
               type={showPasswords ? "text" : "password"}

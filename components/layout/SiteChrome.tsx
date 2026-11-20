@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppFAB } from "@/components/shared/WhatsAppFAB";
@@ -19,20 +18,20 @@ export function SiteChrome({
   company,
   initialTheme,
 }: SiteChromeProps) {
-  const pathname = usePathname();
-  const isAdminRoute = pathname.startsWith("/admin");
   const [liveTheme, setLiveTheme] = useState<SiteTheme | null>(null);
 
   useEffect(() => {
-    if (isAdminRoute) return;
-
     const handleMessage = (event: MessageEvent) => {
+      if (window.self === window.top) return;
       if (event.origin !== window.location.origin) return;
       if (
         event.data &&
         typeof event.data === "object" &&
+        !Array.isArray(event.data) &&
         event.data.type === "TR_PREVIEW_THEME" &&
-        event.data.theme
+        event.data.theme &&
+        typeof event.data.theme === "object" &&
+        !Array.isArray(event.data.theme)
       ) {
         setLiveTheme(event.data.theme as SiteTheme);
       }
@@ -40,25 +39,22 @@ export function SiteChrome({
 
     window.addEventListener("message", handleMessage);
     return () => window.removeEventListener("message", handleMessage);
-  }, [isAdminRoute]);
-
-  if (isAdminRoute) {
-    return <>{children}</>;
-  }
+  }, []);
 
   const activeTheme = liveTheme ?? initialTheme;
-  const inlineVars = buildThemeCssVars(activeTheme) as React.CSSProperties;
+  const inlineVars = buildThemeCssVars(activeTheme);
+  const safeScale = inlineVars["--tr-text-scale"] ?? "1";
 
   return (
     <div
       id="tr-public-root"
       className="tr-public-site min-h-screen flex flex-col"
-      style={inlineVars}
+      style={inlineVars as React.CSSProperties}
     >
       {liveTheme && (
         <style
           dangerouslySetInnerHTML={{
-            __html: `html:has(.tr-public-site){--tr-text-scale:${activeTheme.textScale};font-size:calc(16px * var(--tr-text-scale));}`,
+            __html: `html:has(.tr-public-site){--tr-text-scale:${safeScale};font-size:calc(16px * var(--tr-text-scale));}`,
           }}
         />
       )}

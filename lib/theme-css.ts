@@ -9,8 +9,13 @@ export const DISPLAY_FONTS: Record<
   DisplayFontKey,
   { label: string; sample: string; cssVar: string }
 > = {
+  archivo: {
+    label: "Archivo (Editorial Arquitectónico)",
+    sample: "Geométrica técnica y arquitectónica de precisión",
+    cssVar: "var(--font-archivo), system-ui, sans-serif",
+  },
   outfit: {
-    label: "Outfit (Actual)",
+    label: "Outfit",
     sample: "Geométrica moderna y corporativa",
     cssVar: "var(--font-outfit), system-ui, sans-serif",
   },
@@ -40,8 +45,13 @@ export const BODY_FONTS: Record<
   BodyFontKey,
   { label: string; sample: string; cssVar: string }
 > = {
+  ibm_plex: {
+    label: "IBM Plex Sans (Editorial Arquitectónico)",
+    sample: "Rigor técnico suizo y lectura nítida",
+    cssVar: "var(--font-ibm-plex), system-ui, sans-serif",
+  },
   plus_jakarta: {
-    label: "Plus Jakarta Sans (Actual)",
+    label: "Plus Jakarta Sans",
     sample: "Clara, amigable y profesional",
     cssVar: "var(--font-jakarta), system-ui, sans-serif",
   },
@@ -69,9 +79,9 @@ export const BODY_FONTS: Record<
 
 const SHADOW_MAP: Record<CardShadowKey, string> = {
   none: "none",
-  sm: "0 1px 3px 0 rgba(15, 23, 42, 0.06), 0 1px 2px -1px rgba(15, 23, 42, 0.04)",
-  md: "0 6px 16px -4px rgba(15, 23, 42, 0.08), 0 2px 6px -2px rgba(15, 23, 42, 0.04)",
-  lg: "0 14px 30px -6px rgba(15, 23, 42, 0.12), 0 4px 10px -4px rgba(15, 23, 42, 0.06)",
+  sm: "0 1px 2px 0 rgba(20, 20, 19, 0.05)",
+  md: "0 6px 14px -4px rgba(20, 20, 19, 0.08)",
+  lg: "0 14px 28px -6px rgba(20, 20, 19, 0.12)",
 };
 
 function sanitizeHex(hex: string | undefined, fallback: string): string {
@@ -82,23 +92,30 @@ function sanitizeHex(hex: string | undefined, fallback: string): string {
     : fallback;
 }
 
-function clamp(val: number | undefined, min: number, max: number, fallback: number): number {
+function clamp(
+  val: number | undefined,
+  min: number,
+  max: number,
+  fallback: number
+): number {
   if (typeof val !== "number" || Number.isNaN(val)) return fallback;
   return Math.min(max, Math.max(min, val));
 }
 
 export function buildThemeCssVars(theme: SiteTheme): Record<string, string> {
-  const displayFont = DISPLAY_FONTS[theme.displayFont]?.cssVar ?? DISPLAY_FONTS.outfit.cssVar;
-  const bodyFont = BODY_FONTS[theme.bodyFont]?.cssVar ?? BODY_FONTS.plus_jakarta.cssVar;
+  const displayFont =
+    DISPLAY_FONTS[theme.displayFont]?.cssVar ?? DISPLAY_FONTS.archivo.cssVar;
+  const bodyFont =
+    BODY_FONTS[theme.bodyFont]?.cssVar ?? BODY_FONTS.ibm_plex.cssVar;
 
-  const brandOrange = sanitizeHex(theme.brandOrange, "#FF5000");
-  const brandOrangeDark = sanitizeHex(theme.brandOrangeDark, "#CC4000");
+  const brandOrange = sanitizeHex(theme.brandOrange, "#E8490F");
+  const brandOrangeDark = sanitizeHex(theme.brandOrangeDark, "#C23908");
   const heroDarkBg = sanitizeHex(theme.heroDarkBg, "#141413");
   const inkAnthracite = sanitizeHex(theme.inkAnthracite, "#141413");
-  const inkMid = sanitizeHex(theme.inkMid, "#52525B");
+  const inkMid = sanitizeHex(theme.inkMid, "#57534E");
   const surfaceWhite = sanitizeHex(theme.surfaceWhite, "#FFFFFF");
-  const surfaceCream = sanitizeHex(theme.surfaceCream, "#F5F3EE");
-  const dividerColor = sanitizeHex(theme.dividerColor, "#E2DFD7");
+  const surfaceCream = sanitizeHex(theme.surfaceCream, "#F7F6F2");
+  const dividerColor = sanitizeHex(theme.dividerColor, "#D6D3CD");
 
   const textScale = clamp(theme.textScale, 0.85, 1.35, 1);
   const headingScale = clamp(theme.headingScale, 0.8, 1.35, 1);
@@ -108,14 +125,14 @@ export function buildThemeCssVars(theme: SiteTheme): Record<string, string> {
   const containerMax = clamp(theme.containerMax, 960, 1480, 1280);
   const borderWidth = clamp(theme.borderWidth, 0, 4, 1);
   const dividerWidth = clamp(theme.dividerWidth, 0, 4, 1);
-  const cardRadius = clamp(theme.cardRadius, 0, 28, 4);
+  const cardRadius = clamp(theme.cardRadius, 0, 28, 0);
   const cardPadding = clamp(theme.cardPadding, 14, 48, 28);
-  const btnRadius = clamp(theme.btnRadius, 0, 999, 2);
-  const cardShadow = SHADOW_MAP[theme.cardShadow] ?? SHADOW_MAP.sm;
+  const btnRadius = clamp(theme.btnRadius, 0, 999, 0);
+  const cardShadow = SHADOW_MAP[theme.cardShadow] ?? SHADOW_MAP.none;
 
   return {
     "--color-brand-orange": brandOrange,
-    "--color-brand-orange-hover": brandOrange,
+    "--color-brand-orange-hover": brandOrangeDark,
     "--color-brand-orange-dark": brandOrangeDark,
     "--color-surface-dark": heroDarkBg,
     "--color-ink-anthracite": inkAnthracite,

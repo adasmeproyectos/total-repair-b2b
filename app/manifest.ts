@@ -2,16 +2,15 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Total Repair — Administración",
-    short_name: "TR Admin",
+    name: "Total Repair Ltda.",
+    short_name: "Total Repair",
     description:
-      "Aplicación web autoadministrable de Total Repair Ltda. para gestionar proyectos, textos, diseño y solicitudes.",
-    start_url: "/admin",
+      "Construcción, habilitación corporativa B2B, remodelación residencial y atención de siniestros 24/7 en Chile.",
+    start_url: "/",
     scope: "/",
-    display: "standalone",
-    orientation: "portrait",
+    display: "browser",
     background_color: "#FFFFFF",
-    theme_color: "#FF5000",
+    theme_color: "#E8490F",
     lang: "es-CL",
     icons: [
       {

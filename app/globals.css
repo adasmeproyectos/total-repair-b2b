@@ -1,33 +1,28 @@
 @import "tailwindcss";
 
 :root {
-  /* ── Fallback Brand Palette ── */
-  --color-brand-orange:        #FF5000;
-  --color-brand-orange-hover:  #FF6A22;
-  --color-brand-orange-dark:   #CC4000;
-  --color-brand-orange-pale:   #FFF2EB;
+  /* ── Paleta Editorial Arquitectónica ── */
+  --color-brand-orange:        #E8490F;
+  --color-brand-orange-hover:  #C23908;
+  --color-brand-orange-dark:   #C23908;
+  --color-brand-orange-pale:   #FBF3EF;
 
   --color-surface-white:       #FFFFFF;
-  --color-surface-cream:       #F5F3EE;
-  --color-surface-concrete:    #ECE9E1;
+  --color-surface-cream:       #F7F6F2;
+  --color-surface-concrete:    #ECEAE3;
   --color-surface-dark:        #141413;
 
-  --color-ink-black:           #000000;
+  --color-ink-black:           #0B0B0A;
   --color-ink-anthracite:      #141413;
-  --color-ink-mid:             #52525B;
-  --color-ink-light:           #A8A8A8;
+  --color-ink-mid:             #57534E;
+  --color-ink-light:           #A8A29E;
 
-  --color-divider:             #E2DFD7;
-  --color-divider-dark:        #C8C4BE;
+  --color-divider:             #D6D3CD;
+  --color-divider-dark:        #B8B3AA;
 
-  --brand-orange:              #FF5000;
-  --brand-slate-950:           #0F172A;
-  --brand-slate-900:           #1E293B;
-  --brand-slate-800:           #334155;
-
-  /* ── Layout & Typography Defaults ── */
-  --tr-font-display:           var(--font-outfit), system-ui, sans-serif;
-  --tr-font-sans:              var(--font-jakarta), system-ui, sans-serif;
+  /* ── Tipografía & Espaciado por Defecto ── */
+  --tr-font-display:           var(--font-archivo), system-ui, sans-serif;
+  --tr-font-sans:              var(--font-ibm-plex), system-ui, sans-serif;
   --tr-text-scale:             1;
   --tr-heading-scale:          1;
   --tr-line-height:            1.65;
@@ -36,15 +31,16 @@
   --tr-container-max:          1280px;
   --tr-border-width:           1px;
   --tr-divider-width:          1px;
-  --tr-card-radius:            2px;
-  --tr-card-shadow:            0 1px 3px 0 rgba(15, 23, 42, 0.06);
+  --tr-card-radius:            0px;
+  --tr-card-shadow:            none;
   --tr-card-padding:           28px;
-  --tr-btn-radius:             2px;
+  --tr-btn-radius:             0px;
 }
 
 @theme inline {
   --font-sans:    var(--tr-font-sans);
   --font-display: var(--tr-font-display);
+  --font-mono:    var(--font-plex-mono), ui-monospace, monospace;
 }
 
 /* ─── Global Base ───────────────────────────────────────────────────────────── */
@@ -55,8 +51,8 @@ html {
 
 body {
   background-color: #FFFFFF;
-  color: #0F172A;
-  font-family: var(--font-jakarta), system-ui, sans-serif;
+  color: #141413;
+  font-family: var(--font-ibm-plex), system-ui, sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -69,7 +65,7 @@ body {
   line-height: var(--tr-line-height);
 }
 
-/* ─── Dynamic CMS Design Utilities ──────────────────────────────────────────── */
+/* ─── Utilidades Dinámicas CMS ──────────────────────────────────────────────── */
 .tr-container {
   max-width: var(--tr-container-max, 1280px);
   margin-left: auto;
@@ -86,23 +82,23 @@ body {
 }
 
 .tr-divider-b {
-  border-bottom: var(--tr-divider-width, 1px) solid var(--color-divider, #E4E4E7);
+  border-bottom: var(--tr-divider-width, 1px) solid var(--color-divider, #D6D3CD);
 }
 
 .tr-divider-t {
-  border-top: var(--tr-divider-width, 1px) solid var(--color-divider, #E4E4E7);
+  border-top: var(--tr-divider-width, 1px) solid var(--color-divider, #D6D3CD);
 }
 
 .tr-divider-y {
-  border-top: var(--tr-divider-width, 1px) solid var(--color-divider, #E4E4E7);
-  border-bottom: var(--tr-divider-width, 1px) solid var(--color-divider, #E4E4E7);
+  border-top: var(--tr-divider-width, 1px) solid var(--color-divider, #D6D3CD);
+  border-bottom: var(--tr-divider-width, 1px) solid var(--color-divider, #D6D3CD);
 }
 
 .tr-card {
   border-width: var(--tr-border-width, 1px);
   border-style: solid;
-  border-color: var(--color-divider, #E4E4E7);
-  border-radius: var(--tr-card-radius, 2px);
+  border-color: var(--color-divider, #D6D3CD);
+  border-radius: var(--tr-card-radius, 0px);
   box-shadow: var(--tr-card-shadow, none);
 }
 
@@ -111,7 +107,7 @@ body {
 }
 
 .tr-btn {
-  border-radius: var(--tr-btn-radius, 2px);
+  border-radius: var(--tr-btn-radius, 0px);
 }
 
 .tr-dark-surface {
@@ -119,23 +115,19 @@ body {
   color: #FFFFFF;
 }
 
-.tr-blueprint-grid {
-  background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  background-size: 48px 48px;
-}
-
 .tr-heading-hero {
-  font-size: calc(clamp(3rem, 7.5vw, 7rem) * var(--tr-heading-scale, 1));
+  font-size: calc(clamp(2.4rem, 5.2vw, 4.5rem) * var(--tr-heading-scale, 1));
+  letter-spacing: -0.025em;
 }
 
 .tr-heading-page {
-  font-size: calc(clamp(2.25rem, 4.5vw, 3.75rem) * var(--tr-heading-scale, 1));
+  font-size: calc(clamp(2rem, 3.8vw, 3.25rem) * var(--tr-heading-scale, 1));
+  letter-spacing: -0.025em;
 }
 
 .tr-heading-section {
-  font-size: calc(clamp(1.75rem, 3.2vw, 2.75rem) * var(--tr-heading-scale, 1));
+  font-size: calc(clamp(1.6rem, 2.7vw, 2.35rem) * var(--tr-heading-scale, 1));
+  letter-spacing: -0.02em;
 }
 
 /* ─── Selection ─────────────────────────────────────────────────────────────── */
@@ -147,10 +139,10 @@ body {
 /* ─── Scrollbar (Webkit) ────────────────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--color-surface-concrete); }
-::-webkit-scrollbar-thumb { background: var(--color-ink-light); border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: var(--color-ink-light); }
 ::-webkit-scrollbar-thumb:hover { background: var(--color-brand-orange); }
 
-/* ─── Logo Carousel — Infinite Scroll ───────────────────────────────────────── */
+/* ─── Logo Carousel — Infinite Scroll (sin pausa en hover) ─────────────────── */
 @keyframes marquee {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
@@ -180,5 +172,5 @@ body {
 .tr-public-site h2 {
   font-family: var(--tr-font-display);
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.025em;
 }

@@ -22,89 +22,36 @@ export function Navbar({
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 12);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const nameParts = company.shortName.split(" ");
-  const firstWord = nameParts[0] || "TOTAL";
-  const restWords = nameParts.slice(1).join(" ") || "REPAIR";
+  const firstWord = nameParts[0] || "Total";
+  const restWords = nameParts.slice(1).join(" ") || "Repair";
 
   return (
     <>
       <header
         style={{
           borderBottom:
-            "var(--tr-divider-width, 1px) solid var(--color-divider, #E2DFD7)",
-          backgroundColor: isScrolled
-            ? "color-mix(in srgb, var(--color-surface-white, #FFFFFF) 96%, transparent)"
-            : "var(--color-surface-white, #FFFFFF)",
+            "var(--tr-divider-width, 1px) solid var(--color-divider, #D6D3CD)",
+          backgroundColor: "var(--color-surface-white, #FFFFFF)",
         }}
-        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-200 ${
-          isScrolled ? "backdrop-blur-md shadow-sm" : ""
+        className={`fixed top-0 left-0 right-0 z-40 transition-colors duration-150 ${
+          isScrolled ? "border-b" : ""
         }`}
       >
-        {/* Franja superior de Emergencias 24/7 */}
-        <div
-          style={{
-            backgroundColor: "var(--color-surface-dark, #141413)",
-          }}
-          className="hidden sm:block text-white border-b border-white/10"
-        >
-          <div className="tr-container px-4 sm:px-6 md:px-12 h-8 flex items-center justify-between text-[11px] font-mono">
-            <div className="flex items-center gap-2.5 text-zinc-300">
-              <span className="relative flex h-2 w-2">
-                <span
-                  style={{ backgroundColor: "var(--color-brand-orange, #FF5000)" }}
-                  className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
-                />
-                <span
-                  style={{ backgroundColor: "var(--color-brand-orange, #FF5000)" }}
-                  className="relative inline-flex rounded-full h-2 w-2"
-                />
-              </span>
-              <span className="uppercase tracking-wider font-semibold text-white">
-                {company.emergencyHours}
-              </span>
-              <span className="text-zinc-500 hidden md:inline">·</span>
-              <span className="text-zinc-400 hidden md:inline">
-                {company.addressShort}
-              </span>
-            </div>
-
-            <div className="flex items-center gap-4">
-              <a
-                href={`tel:${company.phoneClean}`}
-                className="text-zinc-300 hover:text-white transition-colors"
-              >
-                Llamar: <strong className="text-white">{company.phoneDisplay}</strong>
-              </a>
-              <Link
-                href="/contacto?urgencia=true"
-                style={{ color: "var(--color-brand-orange, #FF5000)" }}
-                className="font-bold uppercase tracking-wider hover:underline"
-              >
-                Reportar Urgencia →
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        {/* Barra principal de navegación */}
-        <div
-          className={`tr-container px-4 sm:px-6 md:px-12 flex items-center justify-between transition-all duration-200 ${
-            isScrolled ? "py-2.5" : "py-3.5"
-          }`}
-        >
-          <Link href="/" className="flex items-center gap-3 group shrink-0">
-            <div className="relative w-10 h-10 sm:w-11 sm:h-11 overflow-hidden flex items-center justify-center shrink-0">
+        <div className="tr-container px-4 sm:px-6 md:px-12 h-[76px] flex items-center justify-between gap-4">
+          <Link href="/" className="flex items-center gap-3 shrink-0 group">
+            <div className="relative w-9 h-9 overflow-hidden flex items-center justify-center shrink-0">
               <Image
                 src={company.logoUrl || "/img/logos/logo.png"}
                 alt={`${company.legalName} Logo`}
                 fill
-                sizes="44px"
+                sizes="36px"
                 className="object-contain"
                 priority
               />
@@ -112,16 +59,16 @@ export function Navbar({
             <div className="flex flex-col">
               <span
                 style={{ color: "var(--color-ink-anthracite, #141413)" }}
-                className="font-extrabold tracking-tight text-lg sm:text-xl leading-none font-display uppercase"
+                className="font-bold tracking-tight text-base sm:text-lg leading-none font-display"
               >
                 {firstWord}{" "}
-                <span style={{ color: "var(--color-brand-orange, #FF5000)" }}>
+                <span style={{ color: "var(--color-brand-orange, #E8490F)" }}>
                   {restWords}
                 </span>
               </span>
               <span
-                style={{ color: "var(--color-ink-mid, #52525B)" }}
-                className="font-mono text-[10px] tracking-[0.18em] uppercase mt-1"
+                style={{ color: "var(--color-ink-mid, #57534E)" }}
+                className="font-mono text-[10px] tracking-[0.12em] uppercase mt-1"
               >
                 {company.tagline}
               </span>
@@ -143,20 +90,20 @@ export function Navbar({
                   href={link.href}
                   style={{
                     color: isActive
-                      ? "var(--color-brand-orange, #FF5000)"
+                      ? "var(--color-brand-orange, #E8490F)"
                       : "var(--color-ink-anthracite, #141413)",
                   }}
-                  className={`text-sm tracking-wide uppercase transition-colors duration-200 relative py-1 hover:opacity-100 ${
-                    isActive ? "font-bold" : "font-semibold opacity-75"
+                  className={`text-sm tracking-tight transition-colors duration-150 relative py-1 hover:opacity-100 ${
+                    isActive ? "font-semibold" : "font-medium opacity-75"
                   }`}
                 >
                   {link.label}
                   {isActive && (
                     <span
                       style={{
-                        backgroundColor: "var(--color-brand-orange, #FF5000)",
+                        backgroundColor: "var(--color-brand-orange, #E8490F)",
                       }}
-                      className="absolute bottom-0 left-0 w-full h-0.5"
+                      className="absolute bottom-0 left-0 w-full h-[2px]"
                     />
                   )}
                 </Link>
@@ -164,28 +111,37 @@ export function Navbar({
             })}
           </nav>
 
-          <div className="hidden lg:flex items-center gap-3 shrink-0">
+          <div className="hidden lg:flex items-center gap-5 shrink-0">
+            <a
+              href={`tel:${company.phoneClean}`}
+              style={{ color: "var(--color-ink-mid, #57534E)" }}
+              className="hidden xl:inline-block font-mono text-xs tabular-nums hover:text-[#141413] transition-colors"
+            >
+              {company.phoneDisplay}
+            </a>
+
             <Link
               href="/contacto?urgencia=true"
-              style={{
-                borderRadius: "var(--tr-btn-radius, 2px)",
-                borderColor: "var(--color-ink-anthracite, #141413)",
-                color: "var(--color-ink-anthracite, #141413)",
-              }}
-              className="border px-4 py-2.5 text-xs font-bold uppercase tracking-wider hover:bg-[#141413] hover:text-white transition-colors"
+              style={{ color: "var(--color-ink-anthracite, #141413)" }}
+              className="inline-flex items-center gap-2 text-xs font-semibold tracking-tight hover:text-[#E8490F] transition-colors"
             >
-              Siniestros 24/7
+              <span
+                style={{ backgroundColor: "var(--color-brand-orange, #E8490F)" }}
+                className="w-2 h-2 inline-block shrink-0"
+                aria-hidden="true"
+              />
+              <span>Urgencias 24/7</span>
             </Link>
 
             <Link
               href="/contacto"
               style={{
-                backgroundColor: "var(--color-brand-orange, #FF5000)",
-                borderRadius: "var(--tr-btn-radius, 2px)",
+                backgroundColor: "var(--color-brand-orange, #E8490F)",
+                borderRadius: "var(--tr-btn-radius, 0px)",
               }}
-              className="flex items-center gap-2 text-white text-xs font-bold uppercase tracking-wider px-5 py-3 transition-opacity duration-200 hover:opacity-90 shadow-xs"
+              className="text-white text-xs font-semibold tracking-wide uppercase px-5 py-3 transition-opacity duration-150 hover:opacity-90"
             >
-              <span>Cotizar Proyecto</span>
+              Solicitar presupuesto
             </Link>
           </div>
 
@@ -200,11 +156,11 @@ export function Navbar({
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              strokeWidth="2"
-              className="w-7 h-7"
+              strokeWidth="1.75"
+              className="w-6 h-6"
               aria-hidden="true"
             >
-              <path d="M4 6h16M4 12h16M4 18h16" />
+              <path d="M3 7h18M3 12h18M3 17h18" />
             </svg>
           </button>
         </div>
