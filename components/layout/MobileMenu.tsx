@@ -3,17 +3,28 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { NAV_LINKS, COMPANY } from "@/lib/constants";
+import { NAV_LINKS } from "@/lib/constants";
+import { DEFAULT_SITE_CONFIG } from "@/lib/default-site-config";
+import type { SiteCompany } from "@/lib/types/cms";
 
 interface MobileMenuProps {
   isOpen: boolean;
   onClose: () => void;
+  company?: SiteCompany;
 }
 
-export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
+export function MobileMenu({
+  isOpen,
+  onClose,
+  company = DEFAULT_SITE_CONFIG.company,
+}: MobileMenuProps) {
   const pathname = usePathname();
 
   if (!isOpen) return null;
+
+  const nameParts = company.shortName.split(" ");
+  const firstWord = nameParts[0] || "Total";
+  const restWords = nameParts.slice(1).join(" ") || "Repair";
 
   return (
     <div
@@ -22,17 +33,17 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
       aria-modal="true"
       aria-label="Menú de navegación móvil"
     >
-      {/* Backdrop */}
       <div
         onClick={onClose}
-        className="fixed inset-0 bg-[#0F172A]/40 backdrop-blur-xs"
+        className="fixed inset-0 bg-[#141413]/45"
         aria-hidden="true"
       />
 
-      {/* Drawer Blanco Corporativo */}
-      <div className="fixed top-0 right-0 bottom-0 w-80 max-w-[85vw] bg-white border-l border-zinc-200 flex flex-col justify-between shadow-2xl overflow-y-auto z-10">
-        {/* Header del Menú */}
-        <div className="p-6 flex items-center justify-between border-b border-zinc-200">
+      <div
+        style={{ backgroundColor: "var(--color-surface-white, #FFFFFF)" }}
+        className="fixed top-0 right-0 bottom-0 w-80 max-w-[85vw] border-l border-[#D6D3CD] flex flex-col justify-between overflow-y-auto z-10"
+      >
+        <div className="p-6 flex items-center justify-between tr-divider-b">
           <Link
             href="/"
             onClick={onClose}
@@ -40,28 +51,35 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           >
             <div className="relative w-8 h-8 shrink-0">
               <Image
-                src="/img/logos/logo.png"
-                alt="Total Repair Ltda."
+                src={company.logoUrl || "/img/logos/logo.png"}
+                alt={company.legalName}
                 fill
                 sizes="32px"
                 className="object-contain"
               />
             </div>
-            <span className="font-display font-extrabold text-lg tracking-tight text-[#0F172A] uppercase">
-              TOTAL <span className="text-[#FF5000]">REPAIR</span>
+            <span
+              style={{ color: "var(--color-ink-anthracite, #141413)" }}
+              className="font-display font-bold text-lg tracking-tight"
+            >
+              {firstWord}{" "}
+              <span style={{ color: "var(--color-brand-orange, #E8490F)" }}>
+                {restWords}
+              </span>
             </span>
           </Link>
           <button
             type="button"
             onClick={onClose}
-            className="p-2 text-zinc-500 hover:text-[#0F172A] bg-zinc-50 border border-zinc-200"
+            style={{ color: "var(--color-ink-anthracite, #141413)" }}
+            className="p-2 bg-[#F7F6F2] border border-[#D6D3CD]"
             aria-label="Cerrar menú"
           >
             <svg
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              strokeWidth="2"
+              strokeWidth="1.75"
               className="w-5 h-5"
               aria-hidden="true"
             >
@@ -70,12 +88,11 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           </button>
         </div>
 
-        {/* Enlaces de Navegación */}
         <nav
           aria-label="Menú móvil"
-          className="p-6 flex-1 flex flex-col gap-1"
+          className="p-6 flex-1 flex flex-col divide-y divide-[#D6D3CD]"
         >
-          {NAV_LINKS.map((link) => {
+          {NAV_LINKS.map((link, idx) => {
             const isActive =
               link.href === "/"
                 ? pathname === "/"
@@ -85,79 +102,65 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 key={link.href}
                 href={link.href}
                 onClick={onClose}
-                className={`flex items-center justify-between py-3.5 px-4 border-b border-zinc-100 text-sm font-bold uppercase tracking-wider transition-colors duration-200 ${
-                  isActive
-                    ? "text-[#FF5000] bg-orange-50/60 border-l-4 border-l-[#FF5000]"
-                    : "text-zinc-700 hover:text-[#0F172A] hover:bg-zinc-50"
+                style={{
+                  color: isActive
+                    ? "var(--color-brand-orange, #E8490F)"
+                    : "var(--color-ink-anthracite, #141413)",
+                }}
+                className={`flex items-center justify-between py-4 px-2 text-sm font-semibold tracking-tight transition-colors duration-150 ${
+                  isActive ? "" : "hover:bg-[#F7F6F2]"
                 }`}
               >
-                <span>{link.label}</span>
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  className={`w-4 h-4 ${
-                    isActive ? "text-[#FF5000]" : "text-zinc-400"
-                  }`}
-                  aria-hidden="true"
-                >
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
+                <span className="flex items-center gap-3">
+                  <span className="font-mono text-xs text-[#57534E]">
+                    0{idx + 1}
+                  </span>
+                  <span>{link.label}</span>
+                </span>
+                <span className="font-mono text-xs">→</span>
               </Link>
             );
           })}
         </nav>
 
-        {/* Panel de Contacto Directo Inferior */}
-        <div className="p-6 bg-[#F8FAFC] border-t border-zinc-200 space-y-3">
-          <p className="text-[11px] font-mono uppercase tracking-widest text-zinc-500">
-            Atención Directa & Emergencias
+        <div
+          style={{ backgroundColor: "var(--color-surface-cream, #F7F6F2)" }}
+          className="p-6 tr-divider-t space-y-3"
+        >
+          <p
+            style={{ color: "var(--color-ink-mid, #57534E)" }}
+            className="text-[11px] font-mono uppercase tracking-wider"
+          >
+            Atención directa y urgencias 24/7
           </p>
 
           <Link
             href="/contacto"
             onClick={onClose}
-            className="w-full flex items-center justify-center gap-2 bg-[#FF5000] hover:bg-[#CC4000] text-white font-bold uppercase tracking-wider py-3.5 text-xs transition-colors duration-200"
+            style={{
+              backgroundColor: "var(--color-brand-orange, #E8490F)",
+              borderRadius: "var(--tr-btn-radius, 0px)",
+            }}
+            className="w-full flex items-center justify-center text-white font-semibold uppercase tracking-wider py-3.5 text-xs transition-opacity hover:opacity-90"
           >
-            <span>Cotizar Proyecto / Siniestro</span>
+            Solicitar presupuesto
           </Link>
 
           <div className="grid grid-cols-2 gap-2.5 pt-1">
             <a
-              href={`tel:${COMPANY.phoneClean}`}
-              className="flex items-center justify-center gap-2 bg-white border border-zinc-200 text-[#0F172A] py-2.5 text-xs font-mono uppercase hover:border-[#FF5000]"
+              href={`tel:${company.phoneClean}`}
+              className="flex items-center justify-center bg-white border border-[#D6D3CD] text-[#141413] py-2.5 text-xs font-mono uppercase"
             >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                className="w-3.5 h-3.5 text-[#FF5000]"
-                aria-hidden="true"
-              >
-                <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
-              </svg>
-              <span>Llamar</span>
+              Llamar
             </a>
 
             <a
-              href={COMPANY.whatsappUrl}
+              href={company.whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 bg-white border border-zinc-200 text-[#0F172A] py-2.5 text-xs font-mono uppercase hover:border-emerald-500"
+              className="flex items-center justify-center bg-white border border-[#D6D3CD] text-[#141413] py-2.5 text-xs font-mono uppercase hover:border-[#141413]"
             >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                className="w-3.5 h-3.5 text-emerald-600"
-                aria-hidden="true"
-              >
-                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
-              </svg>
-              <span>WhatsApp</span>
+              WhatsApp
             </a>
           </div>
         </div>

@@ -13,11 +13,16 @@ export function SectionLabel({
 }: SectionLabelProps) {
   const content = label ?? text ?? "";
   return (
-    <div className={`flex items-center gap-3 mb-4 ${className}`}>
-      <div className="w-6 h-[2px] bg-[#FF5000]" aria-hidden="true" />
+    <div className={`flex items-center gap-3 mb-3 ${className}`}>
       <span
-        className={`text-xs font-mono uppercase tracking-[0.2em] font-semibold ${
-          dark ? "text-zinc-300" : "text-zinc-500"
+        style={{ backgroundColor: "var(--color-brand-orange, #E8490F)" }}
+        className="w-5 h-[2px] inline-block shrink-0"
+        aria-hidden="true"
+      />
+      <span
+        style={!dark ? { color: "var(--color-ink-mid, #57534E)" } : undefined}
+        className={`text-xs font-mono uppercase tracking-[0.14em] ${
+          dark ? "text-zinc-300" : ""
         }`}
       >
         {content}
